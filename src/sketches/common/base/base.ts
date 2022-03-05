@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import Animator from "../components/animator";
+import { InteractionManager } from "three.interactive";
 
 class Base {
   camera: THREE.PerspectiveCamera;
@@ -7,6 +8,7 @@ class Base {
   renderer: THREE.WebGLRenderer;
   container: HTMLElement;
   animator: Animator;
+  interactionManager: InteractionManager;
   constructor(sel = "#sketch") {
     const camera = new THREE.PerspectiveCamera(
       70,
@@ -32,17 +34,29 @@ class Base {
     const animator = new Animator(this);
     this.animator = animator;
 
+    const interactionManager = new InteractionManager(
+      this.renderer,
+      this.camera,
+      this.renderer.domElement,
+      false
+    );
+    this.interactionManager = interactionManager;
+
     this.init();
 
     window.addEventListener("resize", () => {
       this.onResize();
     });
   }
-  init() {
-    this.animator.animate();
-  }
   animate(fn: any) {
     this.animator.add(fn);
+  }
+  init() {
+    this.animate(() => {
+      this.interactionManager.update();
+    });
+
+    this.animator.animate();
   }
   onResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;

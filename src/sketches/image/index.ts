@@ -5,6 +5,8 @@ import Base from "../common/base/base";
 import { Maku, MakuGroup, Scroller, getScreenFov } from "maku.js";
 import { preloadImages } from "../common/utils/dom";
 
+import gsap from "gsap";
+
 import vertexShader from "./shaders/vertex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
 
@@ -13,17 +15,17 @@ class Sketch extends Base {
     super(sel);
   }
   async create() {
+    // Create camera
     const cameraPosition = new THREE.Vector3(0, 0, 600);
     const fov = getScreenFov(cameraPosition.z);
     const container = this.container;
     const aspect = container.clientWidth / container.clientHeight;
-    this.camera.fov = fov;
-    this.camera.aspect = aspect;
-    this.camera.near = 100;
-    this.camera.far = 2000;
-    this.camera.updateProjectionMatrix();
-    this.camera.position.copy(cameraPosition);
+    const camera = new THREE.PerspectiveCamera(fov, aspect, 100, 2000);
+    camera.position.copy(cameraPosition);
+    this.camera = camera;
+    this.interactionManager.camera = camera;
 
+    // Load all the images
     await preloadImages();
 
     // Select all the images you want to render in WebGL
@@ -43,6 +45,9 @@ class Sketch extends Base {
         },
         uResolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+        },
+        uMouse: {
+          value: new THREE.Vector2(0, 0),
         },
       },
     });
@@ -68,6 +73,7 @@ class Sketch extends Base {
       makuGroup.makus.forEach((maku) => {
         const material = maku.mesh.material as THREE.ShaderMaterial;
         material.uniforms.uTime.value = time / 1000;
+        material.uniforms.uMouse.value = this.interactionManager.mouse;
       });
     });
   }

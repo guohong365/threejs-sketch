@@ -9,11 +9,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    id="sketch"
-    class="fixed z-0 w-screen h-screen pointer-events-none bg-black"
-  ></div>
-  <div class="relative z-1">
+  <div id="sketch" class="fixed z-0 w-screen h-screen bg-black"></div>
+  <div class="relative z-1 pointer-events-none">
     <div class="h-20"></div>
     <div class="gallery">
       <img class="gallery-item" src="@/sketches/image/assets/1.jpg" alt="" />
