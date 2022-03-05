@@ -5,10 +5,14 @@ import Base from "../common/base/base";
 import { Maku, MakuGroup, Scroller, getScreenFov } from "maku.js";
 import { preloadImages } from "../common/utils/dom";
 
+import { EffectComposer, RenderPass, ShaderPass } from "three-stdlib";
+
 import gsap from "gsap";
 
 import mainVertexShader from "./shaders/main/vertex.glsl";
 import mainFragmentShader from "./shaders/main/fragment.glsl";
+import postprocessingVertexShader from "./shaders/postprocessing/vertex.glsl";
+import postprocessingFragmentShader from "./shaders/postprocessing/fragment.glsl";
 
 class Sketch extends Base {
   constructor(sel = "#sketch") {
@@ -72,9 +76,37 @@ class Sketch extends Base {
 
       makuGroup.makus.forEach((maku) => {
         const material = maku.mesh.material as THREE.ShaderMaterial;
-        material.uniforms.uTime.value = time / 1000;
-        material.uniforms.uMouse.value = this.interactionManager.mouse;
+        const uniforms = material.uniforms;
+        uniforms.uTime.value = time / 1000;
+        uniforms.uMouse.value = this.interactionManager.mouse;
       });
+    });
+
+    // postprocessing
+    const composer = new EffectComposer(this.renderer);
+    this.composer = composer;
+
+    const renderPass = new RenderPass(this.scene, this.camera);
+    composer.addPass(renderPass);
+
+    const customPass = new ShaderPass({
+      vertexShader: postprocessingVertexShader,
+      fragmentShader: postprocessingFragmentShader,
+      uniforms: {
+        tDiffuse: {
+          value: null,
+        },
+        uTime: {
+          value: 0,
+        },
+      },
+    });
+    customPass.renderToScreen = true;
+    composer.addPass(customPass);
+
+    this.animate((time: number) => {
+      const uniforms = customPass.uniforms;
+      uniforms.uTime.value = time / 1000;
     });
   }
 }

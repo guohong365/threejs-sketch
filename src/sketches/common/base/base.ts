@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import Animator from "../components/animator";
 import { InteractionManager } from "three.interactive";
+import type { EffectComposer } from "three-stdlib";
 
 class Base {
   camera: THREE.PerspectiveCamera;
@@ -9,6 +10,7 @@ class Base {
   container: HTMLElement;
   animator: Animator;
   interactionManager: InteractionManager;
+  composer: EffectComposer | null;
   constructor(sel = "#sketch") {
     const camera = new THREE.PerspectiveCamera(
       70,
@@ -41,6 +43,8 @@ class Base {
       false
     );
     this.interactionManager = interactionManager;
+
+    this.composer = null;
 
     this.init();
 
