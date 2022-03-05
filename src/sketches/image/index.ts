@@ -7,8 +7,8 @@ import { preloadImages } from "../common/utils/dom";
 
 import gsap from "gsap";
 
-import vertexShader from "./shaders/vertex.glsl";
-import fragmentShader from "./shaders/fragment.glsl";
+import mainVertexShader from "./shaders/main/vertex.glsl";
+import mainFragmentShader from "./shaders/main/fragment.glsl";
 
 class Sketch extends Base {
   constructor(sel = "#sketch") {
@@ -33,8 +33,8 @@ class Sketch extends Base {
 
     // Create a ShaderMaterial
     const imagePlaneMaterial = new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
+      vertexShader: mainVertexShader,
+      fragmentShader: mainFragmentShader,
       side: THREE.DoubleSide,
       uniforms: {
         uTexture: {
