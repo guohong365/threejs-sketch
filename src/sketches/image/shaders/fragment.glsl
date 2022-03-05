@@ -1,3 +1,5 @@
+uniform float uTime;
+uniform vec2 uResolution;
 uniform sampler2D uTexture;
 
 varying vec2 vUv;

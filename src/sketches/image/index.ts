@@ -38,6 +38,12 @@ class Sketch extends Base {
         uTexture: {
           value: null,
         },
+        uTime: {
+          value: 0,
+        },
+        uResolution: {
+          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+        },
       },
     });
 
@@ -55,9 +61,14 @@ class Sketch extends Base {
     const scroller = new Scroller();
     scroller.listenForScroll();
 
-    this.animate(() => {
+    this.animate((time: number) => {
       scroller.syncScroll();
       makuGroup.setPositions(scroller.scroll.current);
+
+      makuGroup.makus.forEach((maku) => {
+        const material = maku.mesh.material as THREE.ShaderMaterial;
+        material.uniforms.uTime.value = time / 1000;
+      });
     });
   }
 }
