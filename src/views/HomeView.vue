@@ -11,7 +11,7 @@ import { RouterLink } from "vue-router";
       <router-link :to="{ name: 'Image' }">图片</router-link>
     </li>
     <li>
-      <router-link :to="{ name: 'RayMarching' }">光线步进</router-link>
+      <router-link :to="{ name: 'ScreenQuad' }">全屏幕</router-link>
     </li>
   </ul>
 </template>
