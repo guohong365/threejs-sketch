@@ -25,11 +25,11 @@ class Sketch extends Base {
     this.camera = camera;
     this.interactionManager.camera = camera;
 
-    // create gallery
+    // Create gallery
     const gallary = new Gallery(this);
     await gallary.create();
 
-    // postprocessing
+    // Create postprocessing
     const postprocessing = new Postprocessing(this);
   }
 }
