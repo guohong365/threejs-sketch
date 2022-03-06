@@ -33,7 +33,7 @@ class Postprocessing extends Component {
     customPass.renderToScreen = true;
     composer.addPass(customPass);
   }
-  animate(time: number) {
+  animate(time: number): void {
     const uniforms = this.customPass.uniforms;
     uniforms.uTime.value = time / 1000;
   }

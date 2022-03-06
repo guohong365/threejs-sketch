@@ -63,7 +63,7 @@ class Gallery extends Component {
     this.scroller = scroller;
     scroller.listenForScroll();
   }
-  animate(time: number) {
+  animate(time: number): void {
     const makuGroup = this.makuGroup;
     const scroller = this.scroller;
 

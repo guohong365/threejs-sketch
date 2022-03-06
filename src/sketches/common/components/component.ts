@@ -6,9 +6,8 @@ class Component {
     this.base = base;
     this.base.animate((time: number) => this.animate(time));
   }
-  animate(time: number) {
-    return true;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  animate(time: number) {}
 }
 
 export default Component;
