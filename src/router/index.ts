@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Template from "../views/Template.vue";
 import Image from "../views/Image.vue";
+import Component from "../views/Component.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,11 @@ const router = createRouter({
       path: "/template",
       name: "Template",
       component: Template,
+    },
+    {
+      path: "/component",
+      name: "Component",
+      component: Component,
     },
     {
       path: "/image",

@@ -8,6 +8,9 @@ import { RouterLink } from "vue-router";
       <router-link :to="{ name: 'Template' }">模板</router-link>
     </li>
     <li>
+      <router-link :to="{ name: 'Component' }">组件</router-link>
+    </li>
+    <li>
       <router-link :to="{ name: 'Image' }">图片</router-link>
     </li>
   </ul>
