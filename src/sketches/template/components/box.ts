@@ -32,9 +32,6 @@ class Box extends Component {
     const mesh = this.mesh;
     mesh.rotation.y = time / 1000;
   }
-  animate(time: number) {
-    this.spin(time);
-  }
 }
 
 export default Box;
