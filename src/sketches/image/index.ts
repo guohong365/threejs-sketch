@@ -1,9 +1,3 @@
-import * as THREE from "three";
-
-import gsap from "gsap";
-
-import ky from "kyouka";
-
 import * as kokomi from "../kokomi";
 
 import Gallery from "./components/gallary";

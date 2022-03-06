@@ -1,7 +1,3 @@
-import * as THREE from "three";
-
-import ky from "kyouka";
-
 import * as kokomi from "../kokomi";
 
 import Box from "./components/box";
