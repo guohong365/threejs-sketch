@@ -7,7 +7,7 @@ class Component {
     this.base.animate((time: number) => this.animate(time));
   }
   animate(time: number) {
-    console.log(time);
+    return true;
   }
 }
 
