@@ -2,16 +2,16 @@ import * as THREE from "three";
 
 import ky from "kyouka";
 
-import Base from "../common/base/base";
-import OrbitControls from "../common/controls/orbitControls";
+import * as kokomi from "../kokomi";
+
 import Box from "./components/box";
 
-class Sketch extends Base {
+class Sketch extends kokomi.Base {
   constructor(sel = "#sketch") {
     super(sel);
   }
   create() {
-    const orbitControls = new OrbitControls(this);
+    const orbitControls = new kokomi.OrbitControls(this);
 
     const box = new Box(this);
     box.addExisting();

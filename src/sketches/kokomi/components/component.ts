@@ -1,4 +1,4 @@
-import type Base from "../base/base";
+import type { Base } from "../base/base";
 
 class Component {
   base: Base;
@@ -16,4 +16,4 @@ class Component {
   }
 }
 
-export default Component;
+export { Component };

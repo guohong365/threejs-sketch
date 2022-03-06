@@ -1,11 +1,10 @@
 import * as THREE from "three";
 
-import type Base from "@/sketches/common/base/base";
-import Component from "../../common/components/component";
+import * as kokomi from "../../kokomi";
 
-class Box extends Component {
+class Box extends kokomi.Component {
   mesh: THREE.Mesh;
-  constructor(base: Base, config: any = {}) {
+  constructor(base: kokomi.Base, config: any = {}) {
     super(base);
 
     const {

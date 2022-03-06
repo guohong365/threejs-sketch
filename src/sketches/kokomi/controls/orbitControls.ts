@@ -1,5 +1,5 @@
-import type Base from "../base/base";
-import Component from "../components/component";
+import type { Base } from "../base/base";
+import { Component } from "../components/component";
 
 import { OrbitControls as OC } from "three-stdlib";
 
@@ -17,4 +17,4 @@ class OrbitControls extends Component {
   }
 }
 
-export default OrbitControls;
+export { OrbitControls };

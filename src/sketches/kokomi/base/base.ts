@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import Animator from "../components/animator";
+import { Animator } from "../components/animator";
 import { InteractionManager } from "three.interactive";
 import type { EffectComposer } from "three-stdlib";
 
@@ -70,4 +70,4 @@ class Base {
   }
 }
 
-export default Base;
+export { Base };

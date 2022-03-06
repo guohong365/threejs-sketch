@@ -2,18 +2,15 @@ import * as THREE from "three";
 
 import { Maku, MakuGroup, Scroller } from "maku.js";
 
-import type Base from "../../common/base/base";
-import Component from "../../common/components/component";
-
-import { preloadImages } from "../../common/utils/dom";
+import * as kokomi from "../../kokomi";
 
 import mainVertexShader from "../shaders/main/vertex.glsl";
 import mainFragmentShader from "../shaders/main/fragment.glsl";
 
-class Gallery extends Component {
+class Gallery extends kokomi.Component {
   makuGroup: MakuGroup | null;
   scroller: Scroller | null;
-  constructor(base: Base) {
+  constructor(base: kokomi.Base) {
     super(base);
 
     this.makuGroup = null;
@@ -21,7 +18,7 @@ class Gallery extends Component {
   }
   async addExisting(): Promise<void> {
     // Load all the images
-    await preloadImages();
+    await kokomi.preloadImages();
 
     // Select all the images you want to render in WebGL
     const images = [...document.querySelectorAll("img")];

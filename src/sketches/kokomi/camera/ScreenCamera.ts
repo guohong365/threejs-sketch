@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { getScreenFov } from "maku.js";
 
-import type Base from "../base/base";
-import Component from "../components/component";
+import type { Base } from "../base/base";
+import { Component } from "../components/component";
 
 class ScreenCamera extends Component {
   camera: THREE.PerspectiveCamera;
@@ -25,4 +25,4 @@ class ScreenCamera extends Component {
   }
 }
 
-export default ScreenCamera;
+export { ScreenCamera };

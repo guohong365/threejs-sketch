@@ -4,18 +4,17 @@ import gsap from "gsap";
 
 import ky from "kyouka";
 
-import Base from "../common/base/base";
-import ScreenCamera from "../common/camera/ScreenCamera";
+import * as kokomi from "../kokomi";
 
 import Gallery from "./components/gallary";
 import Postprocessing from "./components/postprocessing";
 
-class Sketch extends Base {
+class Sketch extends kokomi.Base {
   constructor(sel = "#sketch") {
     super(sel);
   }
   async create() {
-    const screenCamera = new ScreenCamera(this);
+    const screenCamera = new kokomi.ScreenCamera(this);
     screenCamera.addExisting();
 
     const gallary = new Gallery(this);

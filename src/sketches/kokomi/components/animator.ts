@@ -1,4 +1,4 @@
-import type Base from "../base/base";
+import type { Base } from "../base/base";
 
 class Animator {
   base: Base;
@@ -24,4 +24,4 @@ class Animator {
   }
 }
 
-export default Animator;
+export { Animator };
