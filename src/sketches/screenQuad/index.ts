@@ -1,20 +1,14 @@
 import * as kokomi from "../kokomi";
 
-import Box from "./components/box";
+import Plane from "./components/plane";
 
 class Sketch extends kokomi.Base {
   constructor(sel = "#sketch") {
     super(sel);
   }
   create() {
-    new kokomi.OrbitControls(this);
-
-    const box = new Box(this);
-    box.addExisting();
-
-    this.animate((time: number) => {
-      box.spin(time);
-    });
+    const plane = new Plane(this);
+    plane.addExisting();
   }
 }
 

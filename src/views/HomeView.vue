@@ -10,5 +10,8 @@ import { RouterLink } from "vue-router";
     <li>
       <router-link :to="{ name: 'Image' }">图片</router-link>
     </li>
+    <li>
+      <router-link :to="{ name: 'RayMarching' }">光线步进</router-link>
+    </li>
   </ul>
 </template>

@@ -9,5 +9,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="sketch" class="bg-black"></div>
+  <div id="sketch" class="bg-black w-screen h-screen overflow-hidden"></div>
 </template>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/component";
+import createSketch from "@/sketches/screenQuad";
 
 import { onMounted } from "vue";
 
@@ -9,5 +9,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="sketch" class="bg-black"></div>
+  <div id="sketch" class="bg-black w-screen h-screen overflow-hidden"></div>
 </template>
