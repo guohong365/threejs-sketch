@@ -1,9 +1,9 @@
 import * as THREE from "three";
-import { OrbitControls } from "three-stdlib";
 
 import ky from "kyouka";
 
 import Base from "../common/base/base";
+import OrbitControls from "../common/controls/orbitControls";
 import Box from "./components/box";
 
 class Sketch extends Base {
@@ -11,12 +11,7 @@ class Sketch extends Base {
     super(sel);
   }
   create() {
-    const controls = new OrbitControls(this.camera, this.renderer.domElement);
-    controls.enableDamping = true;
-
-    this.animate(() => {
-      controls.update();
-    });
+    const orbitControls = new OrbitControls(this);
 
     const box = new Box(this);
 

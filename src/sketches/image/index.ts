@@ -2,17 +2,13 @@ import * as THREE from "three";
 
 import { getScreenFov } from "maku.js";
 
-import { EffectComposer, RenderPass, ShaderPass } from "three-stdlib";
-
 import gsap from "gsap";
 
 import ky from "kyouka";
 
-import postprocessingVertexShader from "./shaders/postprocessing/vertex.glsl";
-import postprocessingFragmentShader from "./shaders/postprocessing/fragment.glsl";
-
 import Base from "../common/base/base";
 import Gallery from "./components/gallary";
+import Postprocessing from "./components/postprocessing";
 
 class Sketch extends Base {
   constructor(sel = "#sketch") {
@@ -34,31 +30,7 @@ class Sketch extends Base {
     await gallary.create();
 
     // postprocessing
-    const composer = new EffectComposer(this.renderer);
-    this.composer = composer;
-
-    const renderPass = new RenderPass(this.scene, this.camera);
-    composer.addPass(renderPass);
-
-    const customPass = new ShaderPass({
-      vertexShader: postprocessingVertexShader,
-      fragmentShader: postprocessingFragmentShader,
-      uniforms: {
-        tDiffuse: {
-          value: null,
-        },
-        uTime: {
-          value: 0,
-        },
-      },
-    });
-    customPass.renderToScreen = true;
-    composer.addPass(customPass);
-
-    this.animate((time: number) => {
-      const uniforms = customPass.uniforms;
-      uniforms.uTime.value = time / 1000;
-    });
+    const postprocessing = new Postprocessing(this);
   }
 }
 
