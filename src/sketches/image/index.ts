@@ -9,6 +9,8 @@ import { EffectComposer, RenderPass, ShaderPass } from "three-stdlib";
 
 import gsap from "gsap";
 
+import ky from "kyouka";
+
 import mainVertexShader from "./shaders/main/vertex.glsl";
 import mainFragmentShader from "./shaders/main/fragment.glsl";
 import postprocessingVertexShader from "./shaders/postprocessing/vertex.glsl";

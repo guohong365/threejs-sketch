@@ -1,4 +1,7 @@
 import * as THREE from "three";
+import { OrbitControls } from "three-stdlib";
+
+import ky from "kyouka";
 
 import Base from "../common/base/base";
 
@@ -21,8 +24,14 @@ class Sketch extends Base {
     this.scene.add(dirLight);
 
     this.animate((time: number) => {
-      mesh.rotation.x = time / 2000;
       mesh.rotation.y = time / 1000;
+    });
+
+    const controls = new OrbitControls(this.camera, this.renderer.domElement);
+    controls.enableDamping = true;
+
+    this.animate(() => {
+      controls.update();
     });
   }
 }
