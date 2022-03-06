@@ -19,7 +19,7 @@ class Gallery extends Component {
     this.makuGroup = null;
     this.scroller = null;
   }
-  async create() {
+  async addExisting(): Promise<void> {
     // Load all the images
     await preloadImages();
 

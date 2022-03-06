@@ -1,12 +1,12 @@
 import * as THREE from "three";
 
-import { getScreenFov } from "maku.js";
-
 import gsap from "gsap";
 
 import ky from "kyouka";
 
 import Base from "../common/base/base";
+import ScreenCamera from "../common/camera/ScreenCamera";
+
 import Gallery from "./components/gallary";
 import Postprocessing from "./components/postprocessing";
 
@@ -15,22 +15,14 @@ class Sketch extends Base {
     super(sel);
   }
   async create() {
-    // Create camera
-    const cameraPosition = new THREE.Vector3(0, 0, 600);
-    const fov = getScreenFov(cameraPosition.z);
-    const container = this.container;
-    const aspect = container.clientWidth / container.clientHeight;
-    const camera = new THREE.PerspectiveCamera(fov, aspect, 100, 2000);
-    camera.position.copy(cameraPosition);
-    this.camera = camera;
-    this.interactionManager.camera = camera;
+    const screenCamera = new ScreenCamera(this);
+    screenCamera.addExisting();
 
-    // Create gallery
     const gallary = new Gallery(this);
-    await gallary.create();
+    await gallary.addExisting();
 
-    // Create postprocessing
     const postprocessing = new Postprocessing(this);
+    postprocessing.addExisting();
   }
 }
 

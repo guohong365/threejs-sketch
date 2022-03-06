@@ -7,12 +7,13 @@ import type Base from "../../common/base/base";
 import Component from "../../common/components/component";
 
 class Postprocessing extends Component {
+  composer: EffectComposer;
   customPass: ShaderPass;
   constructor(base: Base) {
     super(base);
 
     const composer = new EffectComposer(base.renderer);
-    base.composer = composer;
+    this.composer = composer;
 
     const renderPass = new RenderPass(base.scene, base.camera);
     composer.addPass(renderPass);
@@ -32,6 +33,9 @@ class Postprocessing extends Component {
     this.customPass = customPass;
     customPass.renderToScreen = true;
     composer.addPass(customPass);
+  }
+  addExisting(): void {
+    this.base.composer = this.composer;
   }
   animate(time: number): void {
     const uniforms = this.customPass.uniforms;

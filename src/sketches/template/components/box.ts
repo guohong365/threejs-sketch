@@ -8,8 +8,6 @@ class Box extends Component {
   constructor(base: Base, config: any = {}) {
     super(base);
 
-    const scene = base.scene;
-
     const {
       width = 0.2,
       height = 0.2,
@@ -19,14 +17,16 @@ class Box extends Component {
     } = config;
 
     const geometry = new THREE.BoxGeometry(width, height, depth);
-    const material = new THREE.MeshPhongMaterial({
+    const material = new THREE.MeshBasicMaterial({
       color: new THREE.Color(color),
     });
 
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.copy(position);
-    scene.add(mesh);
     this.mesh = mesh;
+  }
+  addExisting(): void {
+    this.base.scene.add(this.mesh);
   }
   spin(time: number) {
     const mesh = this.mesh;

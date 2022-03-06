@@ -14,13 +14,7 @@ class Sketch extends Base {
     const orbitControls = new OrbitControls(this);
 
     const box = new Box(this);
-
-    const light = new THREE.AmbientLight(0xffffff, 0.5);
-    this.scene.add(light);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.position.set(1, 2, 3);
-    this.scene.add(dirLight);
+    box.addExisting();
 
     this.animate((time: number) => {
       box.spin(time);
