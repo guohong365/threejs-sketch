@@ -1,4 +1,4 @@
-import * as kokomi from "../kokomi";
+import * as kokomi from "kokomi.js";
 
 import Plane from "./components/plane";
 

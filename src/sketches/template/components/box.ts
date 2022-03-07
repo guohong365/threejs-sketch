@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import * as kokomi from "../../kokomi";
+import * as kokomi from "kokomi.js";
 
 class Box extends kokomi.Component {
   mesh: THREE.Mesh;
