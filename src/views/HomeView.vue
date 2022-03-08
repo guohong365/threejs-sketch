@@ -5,6 +5,14 @@ import { RouterLink } from "vue-router";
 <template>
   <main class="p-4 space-y-4">
     <section>
+      <h3>操场</h3>
+      <ul>
+        <li>
+          <router-link :to="{ name: 'Playground' }">操场</router-link>
+        </li>
+      </ul>
+    </section>
+    <section>
       <h3>模板</h3>
       <ul>
         <li>

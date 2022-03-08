@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import Playground from "../views/Playground.vue";
 import Basic from "../views/Basic.vue";
 import Image from "../views/Image.vue";
 import ScreenQuad from "../views/ScreenQuad.vue";
@@ -12,6 +13,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+    },
+    {
+      path: "/playground",
+      name: "Playground",
+      component: Playground,
     },
     {
       path: "/basic",
