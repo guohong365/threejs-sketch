@@ -16,6 +16,9 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'ScreenQuad' }">全屏幕</router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarching' }">光线步进</router-link>
+        </li>
       </ul>
     </section>
   </main>
