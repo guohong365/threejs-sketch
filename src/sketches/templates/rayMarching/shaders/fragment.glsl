@@ -10,11 +10,11 @@
 #pragma glslify:opI=require(glsl-sdf-ops/intersection)
 #pragma glslify:opS=require(glsl-sdf-ops/subtraction)
 #pragma glslify:opU=require(glsl-sdf-ops/union)
-#pragma glslify:centerUv=require(kokomijs/glsl/centerUv)
-#pragma glslify:getRayDirection=require(kokomijs/glsl/getRayDirection)
-#pragma glslify:sdRoundBox=require(kokomijs/glsl/sdRoundBox)
-#pragma glslify:opTwist=require(kokomijs/glsl/twist)
-#pragma glslify:diffuse=require(kokomijs/glsl/diffuse)
+#pragma glslify:centerUv=require(glsl-takara/glsl/centerUv)
+#pragma glslify:getRayDirection=require(glsl-takara/glsl/getRayDirection)
+#pragma glslify:sdRoundBox=require(glsl-takara/glsl/sdRoundBox)
+#pragma glslify:opTwist=require(glsl-takara/glsl/twist)
+#pragma glslify:diffuse=require(glsl-takara/glsl/diffuse)
 
 uniform float uTime;
 uniform vec2 uMouse;
