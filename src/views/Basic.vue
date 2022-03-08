@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/template";
+import createSketch from "@/sketches/templates/basic";
 
 import { onMounted } from "vue";
 

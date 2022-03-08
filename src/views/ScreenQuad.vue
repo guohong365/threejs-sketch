@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/screenQuad";
+import createSketch from "@/sketches/templates/screenQuad";
 
 import { onMounted } from "vue";
 

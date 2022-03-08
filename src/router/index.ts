@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import Template from "../views/Template.vue";
+import Basic from "../views/Basic.vue";
 import Image from "../views/Image.vue";
 import ScreenQuad from "../views/ScreenQuad.vue";
 
@@ -13,9 +13,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/template",
-      name: "Template",
-      component: Template,
+      path: "/basic",
+      name: "Basic",
+      component: Basic,
     },
     {
       path: "/image",

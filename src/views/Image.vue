@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/image";
+import createSketch from "@/sketches/templates/image";
 
 import { onMounted } from "vue";
 
@@ -16,15 +16,51 @@ onMounted(() => {
   <div class="relative z-1 pointer-events-none">
     <div class="h-20"></div>
     <div class="gallery">
-      <img class="gallery-item" src="@/sketches/image/assets/1.jpg" alt="" />
-      <img class="gallery-item" src="@/sketches/image/assets/2.jpg" alt="" />
-      <img class="gallery-item" src="@/sketches/image/assets/3.jpg" alt="" />
-      <img class="gallery-item" src="@/sketches/image/assets/4.jpg" alt="" />
-      <img class="gallery-item" src="@/sketches/image/assets/5.jpg" alt="" />
-      <img class="gallery-item" src="@/sketches/image/assets/6.jpg" alt="" />
-      <img class="gallery-item" src="@/sketches/image/assets/7.jpg" alt="" />
-      <img class="gallery-item" src="@/sketches/image/assets/8.jpg" alt="" />
-      <img class="gallery-item" src="@/sketches/image/assets/9.jpg" alt="" />
+      <img
+        class="gallery-item"
+        src="@/sketches/templates/image/assets/1.jpg"
+        alt=""
+      />
+      <img
+        class="gallery-item"
+        src="@/sketches/templates/image/assets/2.jpg"
+        alt=""
+      />
+      <img
+        class="gallery-item"
+        src="@/sketches/templates/image/assets/3.jpg"
+        alt=""
+      />
+      <img
+        class="gallery-item"
+        src="@/sketches/templates/image/assets/4.jpg"
+        alt=""
+      />
+      <img
+        class="gallery-item"
+        src="@/sketches/templates/image/assets/5.jpg"
+        alt=""
+      />
+      <img
+        class="gallery-item"
+        src="@/sketches/templates/image/assets/6.jpg"
+        alt=""
+      />
+      <img
+        class="gallery-item"
+        src="@/sketches/templates/image/assets/7.jpg"
+        alt=""
+      />
+      <img
+        class="gallery-item"
+        src="@/sketches/templates/image/assets/8.jpg"
+        alt=""
+      />
+      <img
+        class="gallery-item"
+        src="@/sketches/templates/image/assets/9.jpg"
+        alt=""
+      />
     </div>
     <div class="h-20"></div>
   </div>
