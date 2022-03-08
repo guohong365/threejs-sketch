@@ -86,9 +86,9 @@ vec2 sdf(vec3 p){
     // float result=sphere(p);
     // float result=box(p);
     // float result=roundBox(p);
-    // float result=torusAndPlaneUnion(p);
+    float result=torusAndPlaneUnion(p);
     // float result=boxAndTorusSubtraction(p);
-    float result=boxAndTorusAndCylinderSmin(p);
+    // float result=boxAndTorusAndCylinderSmin(p);
     
     float objType=1.;
     return vec2(result,objType);
