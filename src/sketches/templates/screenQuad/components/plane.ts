@@ -36,7 +36,7 @@ class Plane extends kokomi.Component {
   addExisting(): void {
     this.base.scene.add(this.mesh);
   }
-  animate(time: number): void {
+  update(time: number): void {
     const uniforms = this.material.uniforms;
     uniforms.uTime.value = time / 1000;
     uniforms.uMouse.value = this.base.interactionManager.mouse;

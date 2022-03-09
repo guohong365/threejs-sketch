@@ -60,7 +60,7 @@ class Gallery extends kokomi.Component {
     this.scroller = scroller;
     scroller.listenForScroll();
   }
-  animate(time: number): void {
+  update(time: number): void {
     const makuGroup = this.makuGroup;
     const scroller = this.scroller;
 

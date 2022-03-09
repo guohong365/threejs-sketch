@@ -36,7 +36,7 @@ class Postprocessing extends kokomi.Component {
   addExisting(): void {
     this.base.composer = this.composer;
   }
-  animate(time: number): void {
+  update(time: number): void {
     const uniforms = this.customPass.uniforms;
     uniforms.uTime.value = time / 1000;
   }

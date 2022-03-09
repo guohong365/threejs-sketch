@@ -10,7 +10,7 @@ class Sketch extends kokomi.Base {
     const box = new kokomi.Box(this);
     box.addExisting();
 
-    this.animate((time: number) => {
+    this.update((time: number) => {
       box.spin(time);
     });
   }
