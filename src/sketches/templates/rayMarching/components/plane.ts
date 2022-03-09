@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import * as kokomi from "kokomijs";
+import * as kokomi from "kokomi.js";
 
 import vertexShader from "../shaders/vertex.glsl";
 import fragmentShader from "../shaders/fragment.glsl";

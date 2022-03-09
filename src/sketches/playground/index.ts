@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import * as kokomi from "kokomijs";
+import * as kokomi from "kokomi.js";
 
 class Sketch extends kokomi.Base {
   constructor(sel = "#sketch") {

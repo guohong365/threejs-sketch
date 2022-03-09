@@ -3,7 +3,7 @@ import { EffectComposer, RenderPass, ShaderPass } from "three-stdlib";
 import postprocessingVertexShader from "../shaders/postprocessing/vertex.glsl";
 import postprocessingFragmentShader from "../shaders/postprocessing/fragment.glsl";
 
-import * as kokomi from "kokomijs";
+import * as kokomi from "kokomi.js";
 
 class Postprocessing extends kokomi.Component {
   composer: EffectComposer;

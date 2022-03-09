@@ -1,4 +1,4 @@
-import * as kokomi from "kokomijs";
+import * as kokomi from "kokomi.js";
 
 import Gallery from "./components/gallary";
 import Postprocessing from "./components/postprocessing";
