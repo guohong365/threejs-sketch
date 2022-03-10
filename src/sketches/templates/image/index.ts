@@ -1,4 +1,6 @@
+import * as THREE from "three";
 import * as kokomi from "kokomi.js";
+import * as STDLIB from "three-stdlib";
 
 import Gallery from "./components/gallary";
 import Postprocessing from "./components/postprocessing";

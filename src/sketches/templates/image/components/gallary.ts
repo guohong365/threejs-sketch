@@ -1,8 +1,8 @@
 import * as THREE from "three";
+import * as kokomi from "kokomi.js";
+import * as STDLIB from "three-stdlib";
 
 import { Maku, MakuGroup, Scroller } from "maku.js";
-
-import * as kokomi from "kokomi.js";
 
 import mainVertexShader from "../shaders/main/vertex.glsl";
 import mainFragmentShader from "../shaders/main/fragment.glsl";

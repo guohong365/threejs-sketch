@@ -1,23 +1,23 @@
-import { EffectComposer, RenderPass, ShaderPass } from "three-stdlib";
+import * as THREE from "three";
+import * as kokomi from "kokomi.js";
+import * as STDLIB from "three-stdlib";
 
 import postprocessingVertexShader from "../shaders/postprocessing/vertex.glsl";
 import postprocessingFragmentShader from "../shaders/postprocessing/fragment.glsl";
 
-import * as kokomi from "kokomi.js";
-
 class Postprocessing extends kokomi.Component {
-  composer: EffectComposer;
-  customPass: ShaderPass;
+  composer: STDLIB.EffectComposer;
+  customPass: STDLIB.ShaderPass;
   constructor(base: kokomi.Base) {
     super(base);
 
-    const composer = new EffectComposer(base.renderer);
+    const composer = new STDLIB.EffectComposer(base.renderer);
     this.composer = composer;
 
-    const renderPass = new RenderPass(base.scene, base.camera);
+    const renderPass = new STDLIB.RenderPass(base.scene, base.camera);
     composer.addPass(renderPass);
 
-    const customPass = new ShaderPass({
+    const customPass = new STDLIB.ShaderPass({
       vertexShader: postprocessingVertexShader,
       fragmentShader: postprocessingFragmentShader,
       uniforms: {
