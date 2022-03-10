@@ -27,8 +27,7 @@ class Sketch extends kokomi.Base {
     this.scene.add(dirLight);
 
     this.assetManager.emitter.on("ready", () => {
-      const foxModel = this.assetManager.items.foxModel;
-      const fox = new Fox(this, foxModel);
+      const fox = new Fox(this, this.assetManager.items.foxModel);
       fox.addExisting();
       fox.playAction("idle");
     });
