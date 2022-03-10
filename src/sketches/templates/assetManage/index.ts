@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 import * as STDLIB from "three-stdlib";
+import ky from "kyouka";
 
 import resourceList from "./resources";
 import Fox from "./components/fox";
@@ -29,8 +30,7 @@ class Sketch extends kokomi.Base {
       const foxModel = this.assetManager.items.foxModel;
       const fox = new Fox(this, foxModel);
       fox.addExisting();
-      fox.idle();
-      fox.onClickSwitchAction();
+      fox.playAction("idle");
     });
   }
 }
