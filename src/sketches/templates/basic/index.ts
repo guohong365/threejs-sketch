@@ -4,9 +4,6 @@ import * as STDLIB from "three-stdlib";
 import ky from "kyouka";
 
 class Sketch extends kokomi.Base {
-  constructor(sel = "#sketch") {
-    super(sel);
-  }
   create() {
     new kokomi.OrbitControls(this);
 

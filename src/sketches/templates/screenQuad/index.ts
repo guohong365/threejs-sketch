@@ -6,9 +6,6 @@ import ky from "kyouka";
 import Plane from "./components/plane";
 
 class Sketch extends kokomi.Base {
-  constructor(sel = "#sketch") {
-    super(sel);
-  }
   create() {
     const plane = new Plane(this);
     plane.addExisting();

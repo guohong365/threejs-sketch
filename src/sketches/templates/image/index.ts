@@ -7,9 +7,6 @@ import Gallery from "./components/gallary";
 import Postprocessing from "./components/postprocessing";
 
 class Sketch extends kokomi.Base {
-  constructor(sel = "#sketch") {
-    super(sel);
-  }
   async create() {
     const screenCamera = new kokomi.ScreenCamera(this);
     screenCamera.addExisting();
