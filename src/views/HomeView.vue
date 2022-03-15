@@ -24,5 +24,8 @@ import { RouterLink } from "vue-router";
         </li>
       </ul>
     </section>
+    <section>
+      <h3>Demos</h3>
+    </section>
   </main>
 </template>
