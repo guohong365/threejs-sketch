@@ -82,26 +82,29 @@ float boxAndTorusAndCylinderSmin(vec3 p){
     return result;
 }
 
-vec2 sdf(vec3 p){
+// main stage
+float sdf(vec3 p){
     // float result=sphere(p);
     // float result=box(p);
     // float result=roundBox(p);
     float result=torusAndPlaneUnion(p);
     // float result=boxAndTorusSubtraction(p);
     // float result=boxAndTorusAndCylinderSmin(p);
-    
-    float objType=1.;
-    return vec2(result,objType);
+    return result;
 }
 
-#pragma glslify:getNormal=require(glsl-sdf-normal,map=sdf)
-#pragma glslify:softshadow=require(glsl-sdf-ops/softshadow,map=sdf)
+vec2 sdfNormal(vec3 p){
+    return vec2(sdf(p),1.);
+}
+
+#pragma glslify:getNormal=require(glsl-sdf-normal,map=sdfNormal)
+#pragma glslify:softshadow=require(glsl-sdf-ops/softshadow,map=sdfNormal)
 
 float rayMarch(vec3 eye,vec3 ray,float end){
     float depth=0.;
     for(int i=0;i<256;i++){
         vec3 pos=eye+depth*ray;
-        float dist=sdf(pos).x;
+        float dist=sdf(pos);
         depth+=dist;
         if(dist<.0001||dist>=end){
             break;
@@ -125,6 +128,7 @@ void main(){
     if(depth<end){
         vec3 pos=ro+depth*rd;
         vec3 normal=getNormal(pos);
+        color=normal;
         
         // diffuse
         vec3 lightDir=vec3(-.5,.5,.5);
