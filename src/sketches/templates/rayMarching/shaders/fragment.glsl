@@ -17,9 +17,7 @@
 #pragma glslify:sdOctahedron=require(glsl-sdf-primitives-all/sdOctahedron)
 #pragma glslify:sdPyramid=require(glsl-sdf-primitives-all/sdPyramid)
 #pragma glslify:sdRhombus=require(glsl-sdf-primitives-all/sdRhombus)
-#pragma glslify:iBox=require(glsl-sdf-primitives-all/iBox)
 #pragma glslify:opU=require(glsl-sdf-ops/union)
-#pragma glslify:setCamera=require(glsl-takara/setCamera)
 #pragma glslify:getRayDirection=require(glsl-takara/getRayDirection)
 #pragma glslify:centerUv=require(glsl-takara/centerUv)
 #pragma glslify:diffuse=require(glsl-takara/diffuse)
@@ -82,9 +80,7 @@ vec2 raycast(in vec3 ro,in vec3 rd)
     return res;
 }
 
-#pragma glslify:calcSoftshadow=require(glsl-sdf-ops/softshadow,map=map)
 #pragma glslify:calcNormal=require(glsl-sdf-normal,map=map)
-#pragma glslify:calcAO=require(glsl-sdf-ops/ao,map=map)
 
 vec3 render(in vec3 ro,in vec3 rd)
 {
@@ -98,6 +94,10 @@ vec3 render(in vec3 ro,in vec3 rd)
     vec3 nor=calcNormal(pos);
     
     col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
+    
+    vec3 lightDir=vec3(-.5,.5,.5);
+    float dif=diffuse(lightDir,nor,2.);
+    col*=dif;
     
     return col;
 }
