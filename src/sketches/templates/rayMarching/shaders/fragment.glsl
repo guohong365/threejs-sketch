@@ -97,7 +97,7 @@ vec3 render(in vec3 ro,in vec3 rd)
     float m=res.y;
     
     vec3 pos=ro+t*rd;
-    vec3 nor=(m<1.5)?vec3(0.,1.,0.):calcNormal(pos);
+    vec3 nor=calcNormal(pos);
     
     // material
     col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
