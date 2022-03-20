@@ -88,10 +88,8 @@ vec2 raycast(in vec3 ro,in vec3 rd)
 
 vec3 render(in vec3 ro,in vec3 rd)
 {
-    // background
     vec3 col=vec3(0.);
     
-    // raycast scene
     vec2 res=raycast(ro,rd);
     float t=res.x;
     float m=res.y;
@@ -99,19 +97,7 @@ vec3 render(in vec3 ro,in vec3 rd)
     vec3 pos=ro+t*rd;
     vec3 nor=calcNormal(pos);
     
-    // material
-    col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
-    
-    // lighting
-    vec3 lin=vec3(0.);
-    
-    // sun
-    vec3 lig=normalize(vec3(-.5,.4,-.6));
-    float dif=diffuse(lig,nor,2.5);
-    dif*=calcSoftshadow(pos,lig,.02,2.5);
-    lin+=col*dif*2.2*vec3(1.30,1.,.70);
-    
-    col=lin;
+    col=nor;
     
     return col;
 }
