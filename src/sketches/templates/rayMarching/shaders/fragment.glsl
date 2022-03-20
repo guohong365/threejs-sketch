@@ -97,7 +97,7 @@ vec3 render(in vec3 ro,in vec3 rd)
     vec3 pos=ro+t*rd;
     vec3 nor=calcNormal(pos);
     
-    col=nor;
+    col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
     
     return col;
 }
