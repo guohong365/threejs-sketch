@@ -67,35 +67,16 @@ vec2 raycast(in vec3 ro,in vec3 rd)
 {
     vec2 res=vec2(-1.,-1.);
     
-    float tmin=1.;
-    float tmax=20.;
-    
-    // raytrace floor plane
-    float tp1=(0.-ro.y)/rd.y;
-    if(tp1>0.)
+    float t=1.;
+    for(int i=0;i<70;i++)
     {
-        tmax=min(tmax,tp1);
-        res=vec2(tp1,1.);
-    }
-    
-    // raymarch primitives
-    vec2 tb=iBox(ro-vec3(0.,.4,-.5),rd,vec3(2.5,.41,3.));
-    if(tb.x<tb.y&&tb.y>0.&&tb.x<tmax)
-    {
-        tmin=max(tb.x,tmin);
-        tmax=min(tb.y,tmax);
-        
-        float t=tmin;
-        for(int i=0;i<70&&t<tmax;i++)
+        vec2 h=map(ro+rd*t);
+        if(abs(h.x)<(.0001*t))
         {
-            vec2 h=map(ro+rd*t);
-            if(abs(h.x)<(.0001*t))
-            {
-                res=vec2(t,h.y);
-                break;
-            }
-            t+=h.x;
+            res=vec2(t,h.y);
+            break;
         }
+        t+=h.x;
     }
     
     return res;
@@ -108,7 +89,7 @@ vec2 raycast(in vec3 ro,in vec3 rd)
 vec3 render(in vec3 ro,in vec3 rd)
 {
     // background
-    vec3 col=vec3(.7,.7,.9);
+    vec3 col=vec3(0.);
     
     // raycast scene
     vec2 res=raycast(ro,rd);
@@ -147,7 +128,7 @@ void main()
     vec3 ta=vec3(1.,0.,0.);
     
     // focal length
-    const float fl=3.5;
+    const float fl=2.5;
     
     // ray direction
     vec3 rd=getRayDirection(p,ro,ta,fl);
