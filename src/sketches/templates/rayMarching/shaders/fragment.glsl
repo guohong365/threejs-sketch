@@ -109,7 +109,7 @@ vec3 render(in vec3 ro,in vec3 rd)
     vec3 lig=normalize(vec3(-.5,.4,-.6));
     float dif=diffuse(lig,nor,2.5);
     dif*=calcSoftshadow(pos,lig,.02,2.5);
-    lin+=col*2.20*dif*vec3(1.30,1.,.70);
+    lin+=col*dif*2.2*vec3(1.30,1.,.70);
     
     col=lin;
     
