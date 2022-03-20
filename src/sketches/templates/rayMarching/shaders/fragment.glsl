@@ -97,7 +97,7 @@ vec3 render(in vec3 ro,in vec3 rd)
     
     vec3 lightDir=vec3(-.5,.5,.5);
     float dif=diffuse(lightDir,nor,2.);
-    col*=dif;
+    col*=dif*2.;
     
     return col;
 }
