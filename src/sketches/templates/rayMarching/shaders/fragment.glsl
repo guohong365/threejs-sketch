@@ -90,14 +90,16 @@ vec3 render(in vec3 ro,in vec3 rd)
     float t=res.x;
     float m=res.y;
     
-    vec3 pos=ro+t*rd;
-    vec3 nor=calcNormal(pos);
-    
-    col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
-    
-    vec3 lightDir=vec3(-.5,.5,.5);
-    float dif=diffuse(lightDir,nor,2.);
-    col*=dif*2.;
+    if(m>-.5){
+        vec3 pos=ro+t*rd;
+        vec3 nor=calcNormal(pos);
+        
+        col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
+        
+        vec3 lightDir=vec3(-.5,.5,.5);
+        float dif=diffuse(lightDir,nor,2.);
+        col*=dif*2.;
+    }
     
     return col;
 }
