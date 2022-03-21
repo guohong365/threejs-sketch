@@ -120,12 +120,13 @@ vec3 render(in vec3 ro,in vec3 rd)
         }
         
         // diffuse
-        vec3 lightDir=normalize(vec3(-.5,.5,.5));
-        float dif=diffuse(lightDir,nor,2.);
+        // vec3 lig=normalize(vec3(-.5,.5,.5));
+        vec3 lig=normalize(vec3(sin(uTime)*1.,cos(uTime*.5)+.5,-.5));
+        float dif=diffuse(lig,nor,2.);
         col*=dif;
         
         // softshadow
-        float soft=calcSoftshadow(pos,lightDir,.02,2.5);
+        float soft=calcSoftshadow(pos,lig,.02,2.5);
         col*=soft;
         
         // gamma
