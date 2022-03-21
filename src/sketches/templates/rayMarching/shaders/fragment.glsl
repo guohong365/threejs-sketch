@@ -86,6 +86,7 @@ vec2 raycast(in vec3 ro,in vec3 rd)
 }
 
 #pragma glslify:calcNormal=require(glsl-sdf-normal,map=map)
+#pragma glslify:calcSoftshadow=require(glsl-sdf-ops/softshadow,map=map)
 
 vec3 render(in vec3 ro,in vec3 rd)
 {
@@ -112,9 +113,13 @@ vec3 render(in vec3 ro,in vec3 rd)
         }
         
         // diffuse
-        vec3 lightDir=vec3(-.5,.5,.5);
+        vec3 lightDir=normalize(vec3(-.5,.5,.5));
         float dif=diffuse(lightDir,nor,2.);
         col*=dif;
+        
+        // softshadow
+        float soft=calcSoftshadow(pos,lightDir,.02,2.5);
+        col*=soft;
         
         // gamma
         col=pow(col,vec3(.4545));
