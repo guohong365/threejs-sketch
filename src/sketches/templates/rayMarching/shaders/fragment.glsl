@@ -96,8 +96,13 @@ vec3 render(in vec3 ro,in vec3 rd)
         // normal
         vec3 nor=calcNormal(pos);
         
-        // material
+        // common material
         col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
+        
+        // give material by material ID
+        if(m==26.9){
+            col=vec3(0.,.4,.6);
+        }
         
         // diffuse
         vec3 lightDir=vec3(-.5,.5,.5);
