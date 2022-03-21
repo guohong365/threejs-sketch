@@ -136,10 +136,9 @@ vec3 render(in vec3 ro,in vec3 rd)
     return col;
 }
 
-void main()
-{
+vec3 getSceneColor(vec2 uv){
     // pixel coordinates
-    vec2 p=centerUv(vUv,uResolution);
+    vec2 p=centerUv(uv,uResolution);
     
     // camera
     // ray origin
@@ -155,6 +154,16 @@ void main()
     
     // render
     vec3 col=render(ro,rd);
+    
+    return col;
+}
+
+void main(){
+    vec3 tot=vec3(0.);
+    
+    vec3 col=getSceneColor(vUv);
+    
+    tot+=col;
     
     gl_FragColor=vec4(col,1.);
 }
