@@ -24,14 +24,13 @@
 #pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
 #pragma glslify:toGamma=require(glsl-gamma/out)
 #pragma glslify:triplanarMapping=require(glsl-takara/triplanarMapping)
+#pragma glslify:normalizeScreenCoords=require(glsl-takara/normalizeScreenCoords)
 
 uniform float uTime;
 uniform vec2 uResolution;
 uniform vec2 uMouse;
 
 uniform sampler2D uTexture;
-
-varying vec2 vUv;
 
 vec2 map(in vec3 pos)
 {
@@ -136,9 +135,9 @@ vec3 render(in vec3 ro,in vec3 rd)
     return col;
 }
 
-vec3 getSceneColor(vec2 uv){
+vec3 getSceneColor(vec2 fragCoord){
     // pixel coordinates
-    vec2 p=centerUv(uv,uResolution);
+    vec2 p=normalizeScreenCoords(fragCoord,uResolution);
     
     // camera
     // ray origin
@@ -159,7 +158,7 @@ vec3 getSceneColor(vec2 uv){
 }
 
 void main(){
-    vec3 col=getSceneColor(vUv);
+    vec3 col=getSceneColor(gl_FragCoord.xy);
     
     gl_FragColor=vec4(col,1.);
 }
