@@ -84,7 +84,8 @@ vec2 raycast(in vec3 ro,in vec3 rd)
 
 vec3 render(in vec3 ro,in vec3 rd)
 {
-    vec3 col=vec3(0.);
+    // skybox
+    vec3 col=vec3(.30,.36,.60)-(rd.y*.7);
     
     vec2 res=raycast(ro,rd);
     float t=res.x;
@@ -92,13 +93,19 @@ vec3 render(in vec3 ro,in vec3 rd)
     
     if(m>-.5){
         vec3 pos=ro+t*rd;
+        // normal
         vec3 nor=calcNormal(pos);
         
+        // material
         col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
         
+        // diffuse
         vec3 lightDir=vec3(-.5,.5,.5);
         float dif=diffuse(lightDir,nor,2.);
-        col*=dif*2.;
+        col*=dif;
+        
+        // gamma
+        col=pow(col,vec3(.4545));
     }
     
     return col;
