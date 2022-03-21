@@ -21,6 +21,7 @@
 #pragma glslify:getRayDirection=require(glsl-takara/getRayDirection)
 #pragma glslify:centerUv=require(glsl-takara/centerUv)
 #pragma glslify:diffuse=require(glsl-takara/diffuse)
+#pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
 
 uniform float uTime;
 uniform vec2 uResolution;
@@ -31,6 +32,8 @@ varying vec2 vUv;
 vec2 map(in vec3 pos)
 {
     vec2 res=vec2(1e10,0.);
+    
+    res=opU(res,vec2(sdPlane(pos,normalize(vec3(0.,1.,0.)),0.),114514.));
     
     res=opU(res,vec2(sdSphere(pos-vec3(-2.,.25,0.),.25),26.9));
     
@@ -66,7 +69,7 @@ vec2 raycast(in vec3 ro,in vec3 rd)
     vec2 res=vec2(-1.,-1.);
     
     float t=1.;
-    for(int i=0;i<70;i++)
+    for(int i=0;i<100;i++)
     {
         vec2 h=map(ro+rd*t);
         if(abs(h.x)<(.0001*t))
@@ -91,17 +94,19 @@ vec3 render(in vec3 ro,in vec3 rd)
     float t=res.x;
     float m=res.y;
     
+    vec3 pos=ro+t*rd;
+    // normal
+    vec3 nor=(m<1.5)?vec3(0.,1.,0.):calcNormal(pos);
+    
     if(m>-.5){
-        vec3 pos=ro+t*rd;
-        // normal
-        vec3 nor=calcNormal(pos);
         
         // common material
         col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
         
         // give material by material ID
-        if(m==26.9){
-            col=vec3(0.,.4,.6);
+        if(m==114514.){
+            float grid=checkersGradBox(pos.xz);
+            col=vec3(grid);
         }
         
         // diffuse
