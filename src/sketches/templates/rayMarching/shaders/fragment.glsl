@@ -23,6 +23,8 @@
 #pragma glslify:diffuse=require(glsl-takara/diffuse)
 #pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
 
+#define AA 2;
+
 uniform float uTime;
 uniform vec2 uResolution;
 uniform vec2 uMouse;
@@ -33,7 +35,7 @@ vec2 map(in vec3 pos)
 {
     vec2 res=vec2(1e10,0.);
     
-    res=opU(res,vec2(sdPlane(pos,normalize(vec3(0.,1.,0.)),0.),114514.));
+    res=opU(res,vec2(sdPlane(pos,vec3(0.,1.,0.),0.),114514.));
     
     res=opU(res,vec2(sdSphere(pos-vec3(-2.,.25,0.),.25),26.9));
     
