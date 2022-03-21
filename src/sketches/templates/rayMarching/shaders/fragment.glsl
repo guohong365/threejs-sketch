@@ -1,3 +1,9 @@
+uniform float iTime;
+uniform vec2 iResolution;
+uniform vec2 iMouse;
+
+uniform sampler2D iChannel1;
+
 #pragma glslify:sdPlane=require(glsl-sdf-primitives-all/sdPlane)
 #pragma glslify:sdSphere=require(glsl-sdf-primitives-all/sdSphere)
 #pragma glslify:sdBox=require(glsl-sdf-primitives-all/sdBox)
@@ -25,12 +31,6 @@
 #pragma glslify:toGamma=require(glsl-gamma/out)
 #pragma glslify:triplanarMapping=require(glsl-takara/triplanarMapping)
 #pragma glslify:normalizeScreenCoords=require(glsl-takara/normalizeScreenCoords)
-
-uniform float uTime;
-uniform vec2 uResolution;
-uniform vec2 uMouse;
-
-uniform sampler2D uTexture;
 
 vec2 map(in vec3 pos)
 {
@@ -114,13 +114,13 @@ vec3 render(in vec3 ro,in vec3 rd)
         }
         
         if(m==23.56){
-            vec3 triMap=triplanarMapping(uTexture,nor,pos);
+            vec3 triMap=triplanarMapping(iChannel1,nor,pos);
             col=triMap;
         }
         
         // diffuse
         // vec3 lig=normalize(vec3(-.5,.5,.5));
-        vec3 lig=normalize(vec3(sin(uTime)*1.,cos(uTime*.5)+.5,-.5));
+        vec3 lig=normalize(vec3(sin(iTime)*1.,cos(iTime*.5)+.5,-.5));
         float dif=diffuse(lig,nor,2.);
         col*=dif;
         
@@ -137,7 +137,7 @@ vec3 render(in vec3 ro,in vec3 rd)
 
 vec3 getSceneColor(vec2 fragCoord){
     // pixel coordinates
-    vec2 p=normalizeScreenCoords(fragCoord,uResolution.xy);
+    vec2 p=normalizeScreenCoords(fragCoord,iResolution.xy);
     
     // camera
     // ray origin
@@ -157,8 +157,14 @@ vec3 getSceneColor(vec2 fragCoord){
     return col;
 }
 
-void main(){
-    vec3 col=getSceneColor(gl_FragCoord.xy);
+void mainImage(out vec4 fragColor,in vec2 fragCoord){
+    vec3 col=getSceneColor(fragCoord);
     
-    gl_FragColor=vec4(col,1.);
+    fragColor=vec4(col,1.);
+}
+
+varying vec2 vUv;
+
+void main(){
+    mainImage(gl_FragColor,vUv*iResolution.xy);
 }

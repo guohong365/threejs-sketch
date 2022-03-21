@@ -14,7 +14,7 @@ class Sketch extends kokomi.Base {
       const screenQuad = new kokomi.ScreenQuad(this, {
         fragmentShader,
         uniforms: {
-          uTexture: {
+          iChannel1: {
             value: colorTexture,
           },
         },

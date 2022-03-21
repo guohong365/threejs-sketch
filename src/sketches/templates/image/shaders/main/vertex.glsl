@@ -1,6 +1,6 @@
-uniform float uTime;
-uniform vec2 uResolution;
-uniform vec2 uMouse;
+uniform float iTime;
+uniform vec2 iResolution;
+uniform vec2 iMouse;
 
 varying vec2 vUv;
 

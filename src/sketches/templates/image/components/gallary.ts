@@ -33,13 +33,13 @@ class Gallery extends kokomi.Component {
         uTexture: {
           value: null,
         },
-        uTime: {
+        iTime: {
           value: 0,
         },
-        uResolution: {
+        iResolution: {
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
-        uMouse: {
+        iMouse: {
           value: new THREE.Vector2(0, 0),
         },
       },
@@ -71,8 +71,8 @@ class Gallery extends kokomi.Component {
     makuGroup?.makus.forEach((maku) => {
       const material = maku.mesh.material as THREE.ShaderMaterial;
       const uniforms = material.uniforms;
-      uniforms.uTime.value = time / 1000;
-      uniforms.uMouse.value = this.base.interactionManager.mouse;
+      uniforms.iTime.value = time / 1000;
+      uniforms.iMouse.value = this.base.interactionManager.mouse;
     });
   }
 }

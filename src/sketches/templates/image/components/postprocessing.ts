@@ -25,7 +25,7 @@ class Postprocessing extends kokomi.Component {
         tDiffuse: {
           value: null,
         },
-        uTime: {
+        iTime: {
           value: 0,
         },
       },
@@ -39,7 +39,7 @@ class Postprocessing extends kokomi.Component {
   }
   update(time: number): void {
     const uniforms = this.customPass.uniforms;
-    uniforms.uTime.value = time / 1000;
+    uniforms.iTime.value = time / 1000;
   }
 }
 
