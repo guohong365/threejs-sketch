@@ -23,10 +23,13 @@
 #pragma glslify:diffuse=require(glsl-takara/diffuse)
 #pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
 #pragma glslify:toGamma=require(glsl-gamma/out)
+#pragma glslify:triplanarMapping=require(glsl-takara/triplanarMapping)
 
 uniform float uTime;
 uniform vec2 uResolution;
 uniform vec2 uMouse;
+
+uniform sampler2D uTexture;
 
 varying vec2 vUv;
 
@@ -109,6 +112,11 @@ vec3 render(in vec3 ro,in vec3 rd)
         if(m==114514.){
             float grid=checkersGradBox(pos.xz);
             col=vec3(grid);
+        }
+        
+        if(m==23.56){
+            vec3 triMap=triplanarMapping(uTexture,nor,pos);
+            col=triMap;
         }
         
         // diffuse
