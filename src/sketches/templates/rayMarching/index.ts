@@ -11,10 +11,12 @@ class Sketch extends kokomi.Base {
     const assetManager = new kokomi.AssetManager(this, resourceList);
     assetManager.emitter.on("ready", () => {
       const colorTexture = assetManager.items.colorTexture as THREE.Texture;
+
       const screenQuad = new kokomi.ScreenQuad(this, {
+        shadertoyMode: true,
         fragmentShader,
         uniforms: {
-          iChannel1: {
+          iChannel0: {
             value: colorTexture,
           },
         },

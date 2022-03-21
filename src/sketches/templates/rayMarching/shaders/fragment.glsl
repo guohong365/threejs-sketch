@@ -1,9 +1,3 @@
-uniform float iTime;
-uniform vec2 iResolution;
-uniform vec2 iMouse;
-
-uniform sampler2D iChannel1;
-
 #pragma glslify:sdPlane=require(glsl-sdf-primitives-all/sdPlane)
 #pragma glslify:sdSphere=require(glsl-sdf-primitives-all/sdSphere)
 #pragma glslify:sdBox=require(glsl-sdf-primitives-all/sdBox)
@@ -114,7 +108,7 @@ vec3 render(in vec3 ro,in vec3 rd)
         }
         
         if(m==23.56){
-            vec3 triMap=triplanarMapping(iChannel1,nor,pos);
+            vec3 triMap=triplanarMapping(iChannel0,nor,pos);
             col=triMap;
         }
         
@@ -161,10 +155,4 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord){
     vec3 col=getSceneColor(fragCoord);
     
     fragColor=vec4(col,1.);
-}
-
-varying vec2 vUv;
-
-void main(){
-    mainImage(gl_FragColor,vUv*iResolution.xy);
 }
