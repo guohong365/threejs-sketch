@@ -137,7 +137,7 @@ vec3 render(in vec3 ro,in vec3 rd)
 
 vec3 getSceneColor(vec2 fragCoord){
     // pixel coordinates
-    vec2 p=normalizeScreenCoords(fragCoord,uResolution);
+    vec2 p=normalizeScreenCoords(fragCoord,uResolution.xy);
     
     // camera
     // ray origin
