@@ -1,7 +1,7 @@
 #pragma glslify:sdPlane=require(glsl-sdf-primitives-all/sdPlane)
 #pragma glslify:sdSphere=require(glsl-sdf-primitives-all/sdSphere)
 #pragma glslify:sdBox=require(glsl-sdf-primitives-all/sdBox)
-#pragma glslify:sdBoundingBox=require(glsl-sdf-primitives-all/sdBoundingBox)
+#pragma glslify:sdBoxFrame=require(glsl-sdf-primitives-all/sdBoxFrame)
 #pragma glslify:sdEllipsoid=require(glsl-sdf-primitives-all/sdEllipsoid)
 #pragma glslify:sdTorus=require(glsl-sdf-primitives-all/sdTorus)
 #pragma glslify:sdCappedTorus=require(glsl-sdf-primitives-all/sdCappedTorus)
@@ -34,7 +34,7 @@ vec2 map(in vec3 pos)
     
     res=opU(res,vec2(sdSphere(pos-vec3(-2.,.25,0.),.25),26.9));
     
-    res=opU(res,vec2(sdBoundingBox(pos-vec3(0.,.25,0.),vec3(.3,.25,.2),.025),16.9));
+    res=opU(res,vec2(sdBoxFrame(pos-vec3(0.,.25,0.),vec3(.3,.25,.2),.025),16.9));
     res=opU(res,vec2(sdTorus((pos-vec3(0.,.30,1.)).xzy,vec2(.25,.05)),25.));
     res=opU(res,vec2(sdCone(pos-vec3(0.,.45,-1.),vec2(.6,.8),.45),55.));
     res=opU(res,vec2(sdCappedCone(pos-vec3(0.,.25,-2.),.25,.25,.1),13.67));

@@ -20,7 +20,7 @@
     "glsl-rotate": "^1.1.0",
     "glsl-sdf-normal": "^1.0.0",
     "glsl-sdf-ops": "^0.0.3",
-    "glsl-sdf-primitives-all": "^1.0.1",
+    "glsl-sdf-primitives-all": "^1.0.2",
     "glsl-smooth-min": "^1.0.0",
     "glsl-takara": "^1.0.3",
     "gsap": "^3.9.1",
