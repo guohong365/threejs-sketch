@@ -22,8 +22,7 @@
 #pragma glslify:centerUv=require(glsl-takara/centerUv)
 #pragma glslify:diffuse=require(glsl-takara/diffuse)
 #pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
-
-#define AA 2;
+#pragma glslify:toGamma=require(glsl-gamma/out)
 
 uniform float uTime;
 uniform vec2 uResolution;
@@ -122,7 +121,7 @@ vec3 render(in vec3 ro,in vec3 rd)
         col*=soft;
         
         // gamma
-        col=pow(col,vec3(.4545));
+        col=toGamma(col);
     }
     
     return col;
