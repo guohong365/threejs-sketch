@@ -159,11 +159,7 @@ vec3 getSceneColor(vec2 uv){
 }
 
 void main(){
-    vec3 tot=vec3(0.);
-    
     vec3 col=getSceneColor(vUv);
-    
-    tot+=col;
     
     gl_FragColor=vec4(col,1.);
 }
