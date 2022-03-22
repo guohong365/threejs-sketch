@@ -1,18 +1,28 @@
-import * as THREE from "three";
+import type * as THREE from "three";
+
 import * as kokomi from "kokomi.js";
-import * as STDLIB from "three-stdlib";
-import ky from "kyouka";
+
+import resourceList from "./resources";
 
 import fragmentShader from "./shaders/fragment.glsl";
 
 class Sketch extends kokomi.Base {
   create() {
-    const screenQuad = new kokomi.ScreenQuad(this, {
-      shadertoyMode: true,
-      fragmentShader,
-      uniforms: {},
+    const assetManager = new kokomi.AssetManager(this, resourceList);
+    assetManager.emitter.on("ready", () => {
+      const colorTexture = assetManager.items.colorTexture as THREE.Texture;
+
+      const screenQuad = new kokomi.ScreenQuad(this, {
+        shadertoyMode: true,
+        fragmentShader,
+        uniforms: {
+          iChannel0: {
+            value: colorTexture,
+          },
+        },
+      });
+      screenQuad.addExisting();
     });
-    screenQuad.addExisting();
   }
 }
 
