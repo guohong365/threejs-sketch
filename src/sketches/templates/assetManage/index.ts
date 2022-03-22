@@ -17,7 +17,7 @@ class Sketch extends kokomi.Base {
   create() {
     new kokomi.OrbitControls(this);
 
-    this.camera.position.copy(new THREE.Vector3(6, 4, 8));
+    this.camera.position.copy(new THREE.Vector3(6, 4, 3));
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     this.scene.add(ambientLight);
