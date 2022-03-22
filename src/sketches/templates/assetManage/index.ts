@@ -1,9 +1,9 @@
 import * as THREE from "three";
+
 import * as kokomi from "kokomi.js";
-import * as STDLIB from "three-stdlib";
-import ky from "kyouka";
 
 import resourceList from "./resources";
+
 import Fox from "./components/fox";
 
 class Sketch extends kokomi.Base {
