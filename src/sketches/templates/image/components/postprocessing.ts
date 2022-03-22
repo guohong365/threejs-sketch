@@ -1,7 +1,6 @@
-import * as THREE from "three";
 import * as kokomi from "kokomi.js";
+
 import * as STDLIB from "three-stdlib";
-import ky from "kyouka";
 
 import postprocessingVertexShader from "../shaders/postprocessing/vertex.glsl";
 import postprocessingFragmentShader from "../shaders/postprocessing/fragment.glsl";
