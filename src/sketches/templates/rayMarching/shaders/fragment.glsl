@@ -135,15 +135,15 @@ vec3 getSceneColor(vec2 fragCoord){
     vec2 p=normalizeScreenCoords(fragCoord,iResolution.xy);
     
     // mouse
-    vec2 m=iMouse.xy/iResolution.xy;
+    // vec2 mo=vec2(iResolution.x/2.,0.);
+    vec2 mo=iMouse.xy/iResolution.xy;
     
     // camera
-    // ray origin
-    // vec3 ro=vec3(-4.5,1.3,-4.5);
-    vec3 ro=4.*normalize(vec3(sin(3.*m.x),.8*m.y,cos(3.*m.x)))-vec3(0.,.1,0.);
-    
     // look-at target
-    vec3 ta=vec3(1.,0.,0.);
+    vec3 ta=vec3(.5,-.5,-.6);
+    
+    // ray origin
+    vec3 ro=ta+vec3(4.5*cos(7.*mo.x),1.3+2.*mo.y,4.5*sin(7.*mo.x));
     
     // focal length
     const float fl=2.5;
