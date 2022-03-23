@@ -21,7 +21,10 @@
 #pragma glslify:setCamera=require(glsl-takara/setCamera)
 #pragma glslify:getRayDirection=require(glsl-takara/getRayDirection)
 #pragma glslify:centerUv=require(glsl-takara/centerUv)
+#pragma glslify:saturate=require(glsl-takara/saturate)
 #pragma glslify:diffuse=require(glsl-takara/diffuse)
+#pragma glslify:specular=require(glsl-takara/specular)
+#pragma glslify:fresnel=require(glsl-takara/fresnel)
 #pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
 #pragma glslify:toGamma=require(glsl-gamma/out)
 #pragma glslify:triplanarMapping=require(glsl-takara/triplanarMapping)
@@ -88,17 +91,21 @@ vec2 raycast(in vec3 ro,in vec3 rd)
 vec3 render(in vec3 ro,in vec3 rd)
 {
     // skybox
-    vec3 col=vec3(.30,.36,.60)-(rd.y*.7);
+    vec3 col=vec3(.7,.7,.9)-max(rd.y,0.)*.3;
     
+    // raymarching
     vec2 res=raycast(ro,rd);
     float t=res.x;
     float m=res.y;
     
+    // position
     vec3 pos=ro+t*rd;
     // normal
-    vec3 nor=(m<1.5)?vec3(0.,1.,0.):calcNormal(pos);
+    vec3 nor=calcNormal(pos);
     // reflection
     vec3 ref=reflect(rd,nor);
+    // ao
+    float occ=calcAO(pos,nor);
     
     if(m>-.5){
         
@@ -111,27 +118,71 @@ vec3 render(in vec3 ro,in vec3 rd)
             col=vec3(grid);
         }
         
+        // triplanar mapping
         if(m==23.56){
             vec3 triMap=triplanarMapping(iChannel0,nor,pos);
             col=triMap;
         }
         
-        // diffuse
-        vec3 lig=normalize(vec3(-.5,.5,.5));
-        // vec3 lig=normalize(vec3(sin(iTime)*1.,cos(iTime*.5)+.5,-.5));
-        float dif=diffuse(lig,nor,2.);
-        col*=dif;
+        // lighting
+        vec3 lin=vec3(0.);
         
-        // softshadow
-        float soft=calcSoftshadow(pos,lig,.02,2.5);
-        col*=soft;
+        // sun
+        {
+            // pos
+            vec3 lig=normalize(vec3(-.5,.4,-.6));
+            // dir
+            vec3 hal=normalize(lig-rd);
+            // diffuse
+            float dif=diffuse(nor,lig);
+            // softshadow
+            dif*=calcSoftshadow(pos,lig,.02,2.5);
+            // specular
+            float spe=specular(nor,hal,16.);
+            spe*=dif;
+            // fresnel
+            spe*=fresnel(.04,.96,5.,-lig,hal);
+            // apply
+            lin+=col*2.20*dif*vec3(1.30,1.,.70);
+            lin+=5.*spe*vec3(1.30,1.,.70);
+        }
+        // sky
+        {
+            // diffuse
+            float dif=sqrt(saturate(.5+.5*nor.y));
+            // ao
+            dif*=occ;
+            // specular
+            float spe=smoothstep(-.2,.2,ref.y);
+            spe*=dif;
+            // fresnel
+            spe*=fresnel(.04,.96,5.,rd,nor);
+            // softshadow
+            spe*=calcSoftshadow(pos,ref,.02,2.5);
+            // apply
+            lin+=col*.60*dif*vec3(.40,.60,1.15);
+            lin+=2.*spe*vec3(.40,.60,1.30);
+        }
+        // back
+        {
+            // diff
+            float dif=diffuse(nor,normalize(vec3(.5,0.,.6)))*saturate(1.-pos.y);
+            // occ
+            dif*=occ;
+            // apply
+            lin+=col*.55*dif*vec3(.25,.25,.25);
+        }
+        // sss
+        {
+            // fresnel
+            float dif=fresnel(0.,1.,2.,rd,nor);
+            // occ
+            dif*=occ;
+            // apply
+            lin+=col*.25*dif*vec3(1.,1.,1.);
+        }
         
-        // ao
-        float occ=calcAO(pos,nor);
-        col*=occ;
-        
-        // gamma
-        col=toGamma(col);
+        col=lin;
     }
     
     return col;
@@ -160,6 +211,9 @@ vec3 getSceneColor(vec2 fragCoord){
     
     // render
     vec3 col=render(ro,rd);
+    
+    // gamma
+    col=toGamma(col);
     
     return col;
 }
