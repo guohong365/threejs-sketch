@@ -83,6 +83,7 @@ vec2 raycast(in vec3 ro,in vec3 rd)
 
 #pragma glslify:calcNormal=require(glsl-sdf-normal,map=map)
 #pragma glslify:calcSoftshadow=require(glsl-sdf-ops/softshadow,map=map)
+#pragma glslify:calcAO=require(glsl-sdf-ops/ao,map=map)
 
 vec3 render(in vec3 ro,in vec3 rd)
 {
@@ -122,6 +123,10 @@ vec3 render(in vec3 ro,in vec3 rd)
         // softshadow
         float soft=calcSoftshadow(pos,lig,.02,2.5);
         col*=soft;
+        
+        // ao
+        float occ=calcAO(pos,nor);
+        col*=occ;
         
         // gamma
         col=toGamma(col);
