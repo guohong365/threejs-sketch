@@ -114,8 +114,8 @@ vec3 render(in vec3 ro,in vec3 rd)
         }
         
         // diffuse
-        // vec3 lig=normalize(vec3(-.5,.5,.5));
-        vec3 lig=normalize(vec3(sin(iTime)*1.,cos(iTime*.5)+.5,-.5));
+        vec3 lig=normalize(vec3(-.5,.5,.5));
+        // vec3 lig=normalize(vec3(sin(iTime)*1.,cos(iTime*.5)+.5,-.5));
         float dif=diffuse(lig,nor,2.);
         col*=dif;
         
