@@ -193,15 +193,18 @@ vec3 getSceneColor(vec2 fragCoord){
     vec2 p=normalizeScreenCoords(fragCoord,iResolution.xy);
     
     // mouse
-    // vec2 mo=vec2(iResolution.x/2.,0.);
     vec2 mo=iMouse.xy/iResolution.xy;
+    
+    // time
+    float time=32.+iTime*1.5;
     
     // camera
     // look-at target
     vec3 ta=vec3(.5,-.5,-.6);
     
     // ray origin
-    vec3 ro=ta+vec3(4.5*cos(7.*mo.x),1.3+2.*mo.y,4.5*sin(7.*mo.x));
+    // vec3 ro=ta+vec3(4.5*cos(7.*mo.x),1.3+2.*mo.y,4.5*sin(7.*mo.x));
+    vec3 ro=ta+vec3(4.5*cos(.1*time+7.*mo.x),1.3+2.*mo.y,4.5*sin(.1*time+7.*mo.x));
     
     // focal length
     const float fl=2.5;
