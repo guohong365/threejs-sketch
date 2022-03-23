@@ -114,8 +114,8 @@ vec3 render(in vec3 ro,in vec3 rd)
         
         // give material by material ID
         if(m==114514.){
-            float grid=checkersGradBox(pos.xz);
-            col=vec3(grid);
+            float f=checkersGradBox(pos.xz*3.);
+            col=.15+f*vec3(.05);
         }
         
         // triplanar mapping
