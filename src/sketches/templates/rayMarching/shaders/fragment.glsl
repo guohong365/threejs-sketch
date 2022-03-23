@@ -97,6 +97,8 @@ vec3 render(in vec3 ro,in vec3 rd)
     vec3 pos=ro+t*rd;
     // normal
     vec3 nor=(m<1.5)?vec3(0.,1.,0.):calcNormal(pos);
+    // reflection
+    vec3 ref=reflect(rd,nor);
     
     if(m>-.5){
         
