@@ -18,6 +18,7 @@
 #pragma glslify:sdPyramid=require(glsl-sdf-primitives-all/sdPyramid)
 #pragma glslify:sdRhombus=require(glsl-sdf-primitives-all/sdRhombus)
 #pragma glslify:opU=require(glsl-sdf-ops/union)
+#pragma glslify:setCamera=require(glsl-takara/setCamera)
 #pragma glslify:getRayDirection=require(glsl-takara/getRayDirection)
 #pragma glslify:centerUv=require(glsl-takara/centerUv)
 #pragma glslify:diffuse=require(glsl-takara/diffuse)
@@ -133,9 +134,14 @@ vec3 getSceneColor(vec2 fragCoord){
     // pixel coordinates
     vec2 p=normalizeScreenCoords(fragCoord,iResolution.xy);
     
+    // mouse
+    vec2 m=iMouse.xy/iResolution.xy;
+    
     // camera
     // ray origin
-    vec3 ro=vec3(-4.5,1.3,-4.5);
+    // vec3 ro=vec3(-4.5,1.3,-4.5);
+    vec3 ro=4.*normalize(vec3(sin(3.*m.x),.8*m.y,cos(3.*m.x)))-vec3(0.,.1,0.);
+    
     // look-at target
     vec3 ta=vec3(1.,0.,0.);
     
