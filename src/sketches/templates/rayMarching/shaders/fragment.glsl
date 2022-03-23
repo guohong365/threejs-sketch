@@ -110,7 +110,7 @@ vec3 material(in vec3 col,in vec3 pos,in float m,in vec3 nor){
     // common material
     col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
     
-    // floor
+    // checkers
     if(m<1.5){
         float f=checkersGradBox(pos.xz*3.);
         col=.15+f*vec3(.05);
