@@ -18,6 +18,7 @@
 #pragma glslify:sdPyramid=require(glsl-sdf-primitives-all/sdPyramid)
 #pragma glslify:sdRhombus=require(glsl-sdf-primitives-all/sdRhombus)
 #pragma glslify:opU=require(glsl-sdf-ops/union)
+#pragma glslify:iBox=require(glsl-sdf-primitives-all/iBox)
 #pragma glslify:setCamera=require(glsl-takara/setCamera)
 #pragma glslify:getRayDirection=require(glsl-takara/getRayDirection)
 #pragma glslify:centerUv=require(glsl-takara/centerUv)
@@ -33,8 +34,6 @@
 vec2 map(in vec3 pos)
 {
     vec2 res=vec2(1e10,0.);
-    
-    res=opU(res,vec2(sdPlane(pos,vec3(0.,1.,0.),0.),114514.));
     
     res=opU(res,vec2(sdSphere(pos-vec3(-2.,.25,0.),.25),26.9));
     
@@ -69,16 +68,35 @@ vec2 raycast(in vec3 ro,in vec3 rd)
 {
     vec2 res=vec2(-1.,-1.);
     
-    float t=1.;
-    for(int i=0;i<70;i++)
+    float tmin=1.;
+    float tmax=20.;
+    
+    // raytrace floor plane
+    float tp1=(0.-ro.y)/rd.y;
+    if(tp1>0.)
     {
-        vec2 h=map(ro+rd*t);
-        if(abs(h.x)<(.0001*t))
+        tmax=min(tmax,tp1);
+        res=vec2(tp1,1.);
+    }
+    
+    // raymarch primitives
+    vec2 tb=iBox(ro-vec3(0.,.4,-.5),rd,vec3(2.5,.41,3.));
+    if(tb.x<tb.y&&tb.y>0.&&tb.x<tmax)
+    {
+        tmin=max(tb.x,tmin);
+        tmax=min(tb.y,tmax);
+        
+        float t=tmin;
+        for(int i=0;i<70&&t<tmax;i++)
         {
-            res=vec2(t,h.y);
-            break;
+            vec2 h=map(ro+rd*t);
+            if(abs(h.x)<(.0001*t))
+            {
+                res=vec2(t,h.y);
+                break;
+            }
+            t+=h.x;
         }
-        t+=h.x;
     }
     
     return res;
@@ -87,6 +105,92 @@ vec2 raycast(in vec3 ro,in vec3 rd)
 #pragma glslify:calcNormal=require(glsl-sdf-normal,map=map)
 #pragma glslify:calcSoftshadow=require(glsl-sdf-ops/softshadow,map=map)
 #pragma glslify:calcAO=require(glsl-sdf-ops/ao,map=map)
+
+vec3 material(in vec3 col,in vec3 pos,in float m,in vec3 nor){
+    // common material
+    col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
+    
+    // floor
+    if(m<1.5){
+        float f=checkersGradBox(pos.xz*3.);
+        col=.15+f*vec3(.05);
+    }
+    
+    // triplanar mapping
+    if(m==23.56){
+        vec3 triMap=triplanarMapping(iChannel0,nor,pos);
+        col=triMap;
+    }
+    
+    return col;
+}
+
+vec3 lighting(in vec3 col,in vec3 pos,in vec3 rd,in vec3 nor){
+    vec3 lin=vec3(0.);
+    
+    // reflection
+    vec3 ref=reflect(rd,nor);
+    
+    // ao
+    float occ=calcAO(pos,nor);
+    
+    // sun
+    {
+        // pos
+        vec3 lig=normalize(vec3(-.5,.4,-.6));
+        // dir
+        vec3 hal=normalize(lig-rd);
+        // diffuse
+        float dif=diffuse(nor,lig);
+        // softshadow
+        dif*=calcSoftshadow(pos,lig,.02,2.5);
+        // specular
+        float spe=specular(nor,hal,16.);
+        spe*=dif;
+        // fresnel
+        spe*=fresnel(.04,.96,5.,-lig,hal);
+        // apply
+        lin+=col*2.20*dif*vec3(1.30,1.,.70);
+        lin+=5.*spe*vec3(1.30,1.,.70);
+    }
+    // sky
+    {
+        // diffuse
+        float dif=sqrt(saturate(.5+.5*nor.y));
+        // ao
+        dif*=occ;
+        // specular
+        float spe=smoothstep(-.2,.2,ref.y);
+        spe*=dif;
+        // fresnel
+        spe*=fresnel(.04,.96,5.,rd,nor);
+        // softshadow
+        spe*=calcSoftshadow(pos,ref,.02,2.5);
+        // apply
+        lin+=col*.60*dif*vec3(.40,.60,1.15);
+        lin+=2.*spe*vec3(.40,.60,1.30);
+    }
+    // back
+    {
+        // diff
+        float dif=diffuse(nor,normalize(vec3(.5,0.,.6)))*saturate(1.-pos.y);
+        // ao
+        dif*=occ;
+        // apply
+        lin+=col*.55*dif*vec3(.25,.25,.25);
+    }
+    // sss
+    {
+        // fresnel
+        float dif=fresnel(0.,1.,2.,rd,nor);
+        // ao
+        dif*=occ;
+        // apply
+        lin+=col*.25*dif*vec3(1.,1.,1.);
+    }
+    
+    return lin;
+}
 
 vec3 render(in vec3 ro,in vec3 rd)
 {
@@ -98,91 +202,17 @@ vec3 render(in vec3 ro,in vec3 rd)
     float t=res.x;
     float m=res.y;
     
-    // position
-    vec3 pos=ro+t*rd;
-    // normal
-    vec3 nor=calcNormal(pos);
-    // reflection
-    vec3 ref=reflect(rd,nor);
-    // ao
-    float occ=calcAO(pos,nor);
-    
     if(m>-.5){
+        // position
+        vec3 pos=ro+t*rd;
+        // normal
+        vec3 nor=(m<1.5)?vec3(0.,1.,0.):calcNormal(pos);
         
-        // common material
-        col=.2+.2*sin(m*2.+vec3(0.,1.,2.));
-        
-        // give material by material ID
-        if(m==114514.){
-            float f=checkersGradBox(pos.xz*3.);
-            col=.15+f*vec3(.05);
-        }
-        
-        // triplanar mapping
-        if(m==23.56){
-            vec3 triMap=triplanarMapping(iChannel0,nor,pos);
-            col=triMap;
-        }
+        // material
+        col=material(col,pos,m,nor);
         
         // lighting
-        vec3 lin=vec3(0.);
-        
-        // sun
-        {
-            // pos
-            vec3 lig=normalize(vec3(-.5,.4,-.6));
-            // dir
-            vec3 hal=normalize(lig-rd);
-            // diffuse
-            float dif=diffuse(nor,lig);
-            // softshadow
-            dif*=calcSoftshadow(pos,lig,.02,2.5);
-            // specular
-            float spe=specular(nor,hal,16.);
-            spe*=dif;
-            // fresnel
-            spe*=fresnel(.04,.96,5.,-lig,hal);
-            // apply
-            lin+=col*2.20*dif*vec3(1.30,1.,.70);
-            lin+=5.*spe*vec3(1.30,1.,.70);
-        }
-        // sky
-        {
-            // diffuse
-            float dif=sqrt(saturate(.5+.5*nor.y));
-            // ao
-            dif*=occ;
-            // specular
-            float spe=smoothstep(-.2,.2,ref.y);
-            spe*=dif;
-            // fresnel
-            spe*=fresnel(.04,.96,5.,rd,nor);
-            // softshadow
-            spe*=calcSoftshadow(pos,ref,.02,2.5);
-            // apply
-            lin+=col*.60*dif*vec3(.40,.60,1.15);
-            lin+=2.*spe*vec3(.40,.60,1.30);
-        }
-        // back
-        {
-            // diff
-            float dif=diffuse(nor,normalize(vec3(.5,0.,.6)))*saturate(1.-pos.y);
-            // occ
-            dif*=occ;
-            // apply
-            lin+=col*.55*dif*vec3(.25,.25,.25);
-        }
-        // sss
-        {
-            // fresnel
-            float dif=fresnel(0.,1.,2.,rd,nor);
-            // occ
-            dif*=occ;
-            // apply
-            lin+=col*.25*dif*vec3(1.,1.,1.);
-        }
-        
-        col=lin;
+        col=lighting(col,pos,rd,nor);
     }
     
     return col;

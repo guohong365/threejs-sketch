@@ -8,6 +8,8 @@ import fragmentShader from "./shaders/fragment.glsl";
 
 class Sketch extends kokomi.Base {
   create() {
+    new kokomi.Stats(this);
+
     const assetManager = new kokomi.AssetManager(this, resourceList);
     assetManager.emitter.on("ready", () => {
       const colorTexture = assetManager.items.colorTexture as THREE.Texture;
