@@ -67,7 +67,7 @@ vec2 raycast(in vec3 ro,in vec3 rd)
     vec2 res=vec2(-1.,-1.);
     
     float t=1.;
-    for(int i=0;i<100;i++)
+    for(int i=0;i<70;i++)
     {
         vec2 h=map(ro+rd*t);
         if(abs(h.x)<(.0001*t))
