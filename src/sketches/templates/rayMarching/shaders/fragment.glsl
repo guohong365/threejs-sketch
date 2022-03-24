@@ -30,6 +30,7 @@
 #pragma glslify:toGamma=require(glsl-gamma/out)
 #pragma glslify:triplanarMapping=require(glsl-takara/triplanarMapping)
 #pragma glslify:normalizeScreenCoords=require(glsl-takara/normalizeScreenCoords)
+#pragma glslify:fog_exp=require(glsl-fog/exp)
 
 vec2 map(in vec3 pos)
 {
@@ -213,6 +214,9 @@ vec3 render(in vec3 ro,in vec3 rd)
         
         // lighting
         col=lighting(col,pos,rd,nor);
+        
+        // fog
+        col=mix(col,vec3(.7,.7,.9),fog_exp(t*t*t,.0001));
     }
     
     return col;

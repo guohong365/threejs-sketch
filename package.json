@@ -14,6 +14,7 @@
     "glsl-constants": "^1.0.0",
     "glsl-cos-palette": "^1.0.0",
     "glsl-easings": "^1.0.0",
+    "glsl-fog": "^0.0.1",
     "glsl-gamma": "^2.0.0",
     "glsl-map": "^1.0.1",
     "glsl-noise": "^0.0.0",
