@@ -1,3 +1,4 @@
+// all sdfs
 #pragma glslify:sdPlane=require(glsl-sdf-primitives-all/sdPlane)
 #pragma glslify:sdSphere=require(glsl-sdf-primitives-all/sdSphere)
 #pragma glslify:sdBox=require(glsl-sdf-primitives-all/sdBox)
@@ -18,20 +19,31 @@
 #pragma glslify:sdPyramid=require(glsl-sdf-primitives-all/sdPyramid)
 #pragma glslify:sdRhombus=require(glsl-sdf-primitives-all/sdRhombus)
 #pragma glslify:iBox=require(glsl-sdf-primitives-all/iBox)
+
+// sdf ops
 #pragma glslify:opU=require(glsl-sdf-ops/union)
-#pragma glslify:toGamma=require(glsl-gamma/out)
-#pragma glslify:fog_exp=require(glsl-fog/exp)
+
+// ray
+#pragma glslify:normalizeScreenCoords=require(glsl-takara/normalizeScreenCoords)
 #pragma glslify:getRayDirection=require(glsl-takara/getRayDirection)
+
+// gamma
+#pragma glslify:toGamma=require(glsl-gamma/out)
+
+// material
+#pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
+#pragma glslify:triplanarMapping=require(glsl-takara/triplanarMapping)
+
+// lighting
 #pragma glslify:saturate=require(glsl-takara/saturate)
 #pragma glslify:diffuse=require(glsl-takara/diffuse)
 #pragma glslify:specular=require(glsl-takara/specular)
 #pragma glslify:fresnel=require(glsl-takara/fresnel)
-#pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
-#pragma glslify:triplanarMapping=require(glsl-takara/triplanarMapping)
-#pragma glslify:normalizeScreenCoords=require(glsl-takara/normalizeScreenCoords)
 
-vec2 map(in vec3 pos)
-{
+// fog
+#pragma glslify:fog_exp=require(glsl-fog/exp)
+
+vec2 map(in vec3 pos){
     vec2 res=vec2(1e10,0.);
     
     res=opU(res,vec2(sdSphere(pos-vec3(-2.,.25,0.),.25),26.9));
@@ -63,8 +75,7 @@ vec2 map(in vec3 pos)
     return res;
 }
 
-vec2 raycast(in vec3 ro,in vec3 rd)
-{
+vec2 raycast(in vec3 ro,in vec3 rd){
     vec2 res=vec2(-1.,-1.);
     
     float tmin=1.;
@@ -191,8 +202,7 @@ vec3 lighting(in vec3 col,in vec3 pos,in vec3 rd,in vec3 nor){
     return lin;
 }
 
-vec3 render(in vec3 ro,in vec3 rd)
-{
+vec3 render(in vec3 ro,in vec3 rd){
     // skybox
     vec3 col=vec3(.7,.7,.9)-max(rd.y,0.)*.3;
     
