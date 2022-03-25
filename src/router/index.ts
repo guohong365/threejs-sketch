@@ -8,7 +8,7 @@ import Image from "../views/Image.vue";
 import ScreenQuad from "../views/ScreenQuad.vue";
 import RayMarching from "../views/RayMarching.vue";
 
-import SmashHit from "../views/SmashHit.vue";
+import Physics from "../views/Physics.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -49,9 +49,9 @@ const router = createRouter({
       component: RayMarching,
     },
     {
-      path: "/smash-hit",
-      name: "SmashHit",
-      component: SmashHit,
+      path: "/physics",
+      name: "Physics",
+      component: Physics,
     },
   ],
 });

@@ -1,8 +1,10 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
+import * as CANNON from "cannon-es";
 
 class Floor extends kokomi.Component {
   mesh: THREE.Mesh;
+  body: CANNON.Body;
   constructor(base: kokomi.Base) {
     super(base);
 
@@ -11,14 +13,26 @@ class Floor extends kokomi.Component {
       color: new THREE.Color("#777777"),
     });
     const mesh = new THREE.Mesh(geometry, material);
-
     mesh.rotation.x = THREE.MathUtils.degToRad(-90);
-
     this.mesh = mesh;
+
+    const shape = new CANNON.Plane();
+    const body = new CANNON.Body({
+      mass: 0,
+      shape,
+    });
+    body.quaternion.setFromAxisAngle(
+      new CANNON.Vec3(1, 0, 0),
+      THREE.MathUtils.degToRad(-90)
+    );
+    this.body = body;
   }
   addExisting(): void {
-    const scene = this.base.scene;
-    scene.add(this.mesh);
+    const { base, mesh, body } = this;
+    const { scene, physics } = base;
+
+    scene.add(mesh);
+    physics.add({ mesh, body });
   }
 }
 

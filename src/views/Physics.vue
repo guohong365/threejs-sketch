@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/entries/smash-hit";
+import createSketch from "@/sketches/templates/physics";
 
 import { onMounted } from "vue";
 

@@ -18,11 +18,9 @@ class Sketch extends kokomi.Base {
 
     const box = new Box(this);
     box.addExisting();
-    box.mesh.position.set(0, 1, 0);
 
     const ball = new Ball(this);
     ball.addExisting();
-    ball.mesh.position.set(0, 1, 2);
   }
 }
 

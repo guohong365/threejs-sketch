@@ -22,13 +22,8 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'RayMarching' }">RayMarching</router-link>
         </li>
-      </ul>
-    </section>
-    <section>
-      <h3>Demos</h3>
-      <ul>
         <li>
-          <router-link :to="{ name: 'SmashHit' }">SmashHit</router-link>
+          <router-link :to="{ name: 'Physics' }">Physics</router-link>
         </li>
       </ul>
     </section>
