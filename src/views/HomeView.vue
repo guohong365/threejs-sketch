@@ -5,6 +5,14 @@ import { RouterLink } from "vue-router";
 <template>
   <main class="p-4 space-y-4">
     <section>
+      <h3>Playground</h3>
+      <ul>
+        <li>
+          <router-link :to="{ name: 'Playground' }">Playground</router-link>
+        </li>
+      </ul>
+    </section>
+    <section>
       <h3>kokomi.js</h3>
       <ul>
         <li>
