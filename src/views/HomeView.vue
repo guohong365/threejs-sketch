@@ -26,6 +26,11 @@ import { RouterLink } from "vue-router";
     </section>
     <section>
       <h3>Demos</h3>
+      <ul>
+        <li>
+          <router-link :to="{ name: 'SmashHit' }">SmashHit</router-link>
+        </li>
+      </ul>
     </section>
   </main>
 </template>
