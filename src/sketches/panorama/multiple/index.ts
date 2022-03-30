@@ -15,12 +15,14 @@ class Sketch extends kokomi.Base {
       const panorama2 = new kokomi.ImagePanorama(this, panoramaImage2);
       viewer.add(panorama2);
 
+      viewer.setPanorama(panorama1, 0);
+
       window.addEventListener("keydown", (e) => {
         const key = e.key;
         if (key === "1") {
-          viewer.goto(panorama1);
+          viewer.setPanorama(panorama1);
         } else if (key === "2") {
-          viewer.goto(panorama2);
+          viewer.setPanorama(panorama2);
         }
       });
     });
