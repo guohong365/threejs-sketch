@@ -48,6 +48,11 @@ import { RouterLink } from "vue-router";
             Panorama Cube
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'PanoramaMultiple' }">
+            Panorama Multiple
+          </router-link>
+        </li>
       </ul>
     </section>
   </main>
