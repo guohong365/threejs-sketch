@@ -1,6 +1,6 @@
 import type * as kokomi from "kokomi.js";
 
-import colorTexture from "./assets/textures/color.jpg?url";
+import colorTexture from "./assets/textures/color.jpg";
 
 const resourceList: kokomi.ResourceItem[] = [
   {

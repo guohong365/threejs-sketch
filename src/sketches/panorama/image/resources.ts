@@ -1,6 +1,6 @@
 import type * as kokomi from "kokomi.js";
 
-import panoramaImage from "./assets/textures/field.jpg?url";
+import panoramaImage from "./assets/textures/field.jpg";
 
 const resourceList: kokomi.ResourceItem[] = [
   {

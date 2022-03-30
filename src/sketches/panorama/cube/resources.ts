@@ -1,11 +1,11 @@
 import type * as kokomi from "kokomi.js";
 
-import cubeNx from "./assets/textures/room/nx.jpg?url";
-import cubeNy from "./assets/textures/room/ny.jpg?url";
-import cubeNz from "./assets/textures/room/nz.jpg?url";
-import cubePx from "./assets/textures/room/px.jpg?url";
-import cubePy from "./assets/textures/room/py.jpg?url";
-import cubePz from "./assets/textures/room/pz.jpg?url";
+import cubeNx from "./assets/textures/room/nx.jpg";
+import cubeNy from "./assets/textures/room/ny.jpg";
+import cubeNz from "./assets/textures/room/nz.jpg";
+import cubePx from "./assets/textures/room/px.jpg";
+import cubePy from "./assets/textures/room/py.jpg";
+import cubePz from "./assets/textures/room/pz.jpg";
 
 const resourceList: kokomi.ResourceItem[] = [
   {
