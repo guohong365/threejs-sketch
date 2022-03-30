@@ -1,16 +1,17 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 import * as STDLIB from "three-stdlib";
+import resourceList from "./resources";
 
 class Sketch extends kokomi.Base {
   create() {
-    new kokomi.OrbitControls(this);
+    const viewer = new kokomi.Viewer(this);
 
-    const box = new kokomi.Box(this);
-    box.addExisting();
+    const assetManager = new kokomi.AssetManager(this, resourceList);
+    assetManager.emitter.on("ready", () => {
+      const cubeImage = assetManager.items.cubeImage;
 
-    this.update((time: number) => {
-      box.spin(time);
+      this.scene.background = cubeImage;
     });
   }
 }

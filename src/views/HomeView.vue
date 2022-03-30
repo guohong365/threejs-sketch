@@ -35,5 +35,20 @@ import { RouterLink } from "vue-router";
         </li>
       </ul>
     </section>
+    <section>
+      <h3>Panorama</h3>
+      <ul>
+        <li>
+          <router-link :to="{ name: 'PanoramaImage' }">
+            Panorama Image
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'PanoramaCube' }">
+            Panorama Cube
+          </router-link>
+        </li>
+      </ul>
+    </section>
   </main>
 </template>

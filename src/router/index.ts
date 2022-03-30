@@ -10,6 +10,9 @@ import RayMarching from "../views/RayMarching.vue";
 
 import Physics from "../views/Physics.vue";
 
+import PanoramaImage from "../views/PanoramaImage.vue";
+import PanoramaCube from "../views/PanoramaCube.vue";
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -52,6 +55,16 @@ const router = createRouter({
       path: "/physics",
       name: "Physics",
       component: Physics,
+    },
+    {
+      path: "/panorama-image",
+      name: "PanoramaImage",
+      component: PanoramaImage,
+    },
+    {
+      path: "/panorama-cube",
+      name: "PanoramaCube",
+      component: PanoramaCube,
     },
   ],
 });
