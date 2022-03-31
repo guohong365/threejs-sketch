@@ -23,27 +23,32 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .point {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
-}
-
-.point .label {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  text-align: center;
-  font-size: 14px;
-  border-radius: 50%;
-  background: #00000077;
-  border: 1px solid #ffffff77;
+  transform: translate(var(--x), var(--y));
   cursor: pointer;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  .label {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 50%;
+    background: #00000077;
+    border: 1px solid #ffffff77;
+  }
 }
 </style>
