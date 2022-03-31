@@ -14,6 +14,7 @@ import PanoramaImage from "../views/PanoramaImage.vue";
 import PanoramaCube from "../views/PanoramaCube.vue";
 import PanoramaMultiple from "../views/PanoramaMultiple.vue";
 import PanoramaInfoSpot from "../views/PanoramaInfoSpot.vue";
+import PanoramaMultipleSpot from "../views/PanoramaMultipleSpot.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -77,6 +78,11 @@ const router = createRouter({
       path: "/panorama-info-spot",
       name: "PanoramaInfoSpot",
       component: PanoramaInfoSpot,
+    },
+    {
+      path: "/panorama-multiple-spot",
+      name: "PanoramaMultipleSpot",
+      component: PanoramaMultipleSpot,
     },
   ],
 });

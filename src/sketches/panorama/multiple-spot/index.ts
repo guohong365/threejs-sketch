@@ -8,12 +8,17 @@ class Sketch extends kokomi.Base {
 
     const assetManager = new kokomi.AssetManager(this, resourceList);
     assetManager.emitter.on("ready", () => {
-      const panoramaImage = assetManager.items.panoramaImage;
-      const panorama = new kokomi.ImagePanorama(this, panoramaImage);
-      panorama.outputPosition();
-      viewer.add(panorama);
+      const panoramaImage1 = assetManager.items.panoramaImage1;
+      const panorama1 = new kokomi.ImagePanorama(this, panoramaImage1);
+      viewer.add(panorama1);
 
-      const points = [
+      const panoramaImage2 = assetManager.items.panoramaImage2;
+      const panorama2 = new kokomi.ImagePanorama(this, panoramaImage2);
+      viewer.add(panorama2);
+
+      viewer.setPanorama(panorama1, 0);
+
+      const points1 = [
         {
           position: new THREE.Vector3(15.04, 1696.49, -4698.64),
           element: document.querySelector(".point-1") as HTMLElement,
@@ -22,12 +27,24 @@ class Sketch extends kokomi.Base {
           position: new THREE.Vector3(-803.91, 25.22, -4927.06),
           element: document.querySelector(".point-2") as HTMLElement,
         },
+      ].map((item) => new kokomi.Html(this, item.element, item.position));
+      panorama1.addGroup(points1);
+
+      const points2 = [
         {
           position: new THREE.Vector3(1450.64, -189.35, -4772.9),
           element: document.querySelector(".point-3") as HTMLElement,
         },
       ].map((item) => new kokomi.Html(this, item.element, item.position));
-      panorama.addGroup(points);
+      panorama2.addGroup(points2);
+
+      points1[1].el.addEventListener("click", () => {
+        viewer.setPanorama(panorama2);
+      });
+
+      points2[0].el.addEventListener("click", () => {
+        viewer.setPanorama(panorama1);
+      });
     });
   }
 }
