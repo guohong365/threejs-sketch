@@ -53,6 +53,11 @@ import { RouterLink } from "vue-router";
             Panorama Multiple
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'PanoramaInfoSpot' }">
+            Panorama InfoSpot
+          </router-link>
+        </li>
       </ul>
     </section>
   </main>

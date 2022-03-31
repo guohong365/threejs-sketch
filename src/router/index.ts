@@ -13,6 +13,7 @@ import Physics from "../views/Physics.vue";
 import PanoramaImage from "../views/PanoramaImage.vue";
 import PanoramaCube from "../views/PanoramaCube.vue";
 import PanoramaMultiple from "../views/PanoramaMultiple.vue";
+import PanoramaInfoSpot from "../views/PanoramaInfoSpot.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -71,6 +72,11 @@ const router = createRouter({
       path: "/panorama-multiple",
       name: "PanoramaMultiple",
       component: PanoramaMultiple,
+    },
+    {
+      path: "/panorama-info-spot",
+      name: "PanoramaInfoSpot",
+      component: PanoramaInfoSpot,
     },
   ],
 });
