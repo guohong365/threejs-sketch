@@ -35,14 +35,14 @@ onMounted(() => {
   position: relative;
   width: 40px;
   height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
   border-radius: 50%;
   background: #00000077;
   border: 1px solid #ffffff77;
-  color: #ffffff;
-  font-family: Helvetica, Arial, sans-serif;
-  text-align: center;
-  line-height: 40px;
-  font-weight: 100;
-  font-size: 14px;
 }
 </style>
