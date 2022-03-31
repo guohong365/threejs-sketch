@@ -9,16 +9,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative overflow-hidden">
-    <div id="sketch" class="bg-black w-screen h-screen overflow-hidden"></div>
-    <div class="point point-1">
-      <div class="label">1</div>
-    </div>
-    <div class="point point-2">
-      <div class="label">2</div>
-    </div>
-    <div class="point point-3">
-      <div class="label">3</div>
+  <div id="sketch" class="bg-black w-screen h-screen overflow-hidden"></div>
+  <div class="absolute cover overflow-hidden pointer-events-none">
+    <div class="pointer-events-auto">
+      <div class="point point-1">
+        <div class="label">1</div>
+      </div>
+      <div class="point point-2">
+        <div class="label">2</div>
+      </div>
+      <div class="point point-3">
+        <div class="label">3</div>
+      </div>
     </div>
   </div>
 </template>

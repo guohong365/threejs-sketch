@@ -38,11 +38,11 @@ class Sketch extends kokomi.Base {
       ].map((item) => new kokomi.Html(this, item.element, item.position));
       panorama2.addGroup(points2);
 
-      points1[1].el.addEventListener("click", () => {
+      points1[1].el?.addEventListener("click", () => {
         viewer.setPanorama(panorama2);
       });
 
-      points2[0].el.addEventListener("click", () => {
+      points2[0].el?.addEventListener("click", () => {
         viewer.setPanorama(panorama1);
       });
     });
