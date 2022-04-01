@@ -32,6 +32,7 @@ onMounted(() => {
   left: 0;
   opacity: 0;
   transform: translate(var(--x), var(--y));
+  z-index: var(--z-index);
   cursor: pointer;
 
   &.visible {

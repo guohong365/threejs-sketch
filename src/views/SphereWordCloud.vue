@@ -26,6 +26,7 @@ onMounted(() => {
   left: 0;
   pointer-events: auto;
   transform: translate(var(--x), var(--y));
+  z-index: var(--z-index);
 
   .label {
     position: absolute;
