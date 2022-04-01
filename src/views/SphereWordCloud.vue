@@ -28,7 +28,9 @@ onMounted(() => {
   transform: translate(var(--x), var(--y));
 
   .label {
+    position: absolute;
     color: white;
+    transform: translate(-50%, -50%);
   }
 }
 </style>

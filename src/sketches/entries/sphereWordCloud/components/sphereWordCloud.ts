@@ -1,13 +1,21 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 
+export interface SphereWordCloudConfig {
+  segment: number;
+}
+
 class SphereWordCloud extends kokomi.Component {
   points: THREE.Points;
+  positions: THREE.Vector3[];
   htmls: kokomi.Html[];
-  constructor(base: kokomi.Base) {
+  lines: THREE.Line[];
+  constructor(base: kokomi.Base, config: Partial<SphereWordCloudConfig> = {}) {
     super(base);
 
-    const geometry = new THREE.SphereGeometry(0.5, 8, 8);
+    const { segment = 8 } = config;
+
+    const geometry = new THREE.SphereGeometry(0.5, segment, segment);
     const material = new THREE.PointsMaterial({
       size: 0.01,
       transparent: true,
@@ -16,7 +24,11 @@ class SphereWordCloud extends kokomi.Component {
     const points = new THREE.Points(geometry, material);
     this.points = points;
 
+    this.positions = [];
     this.htmls = [];
+    this.lines = [];
+
+    this.getPositions();
   }
   addExisting(): void {
     const { base, points } = this;
@@ -24,16 +36,39 @@ class SphereWordCloud extends kokomi.Component {
 
     scene.add(points);
   }
+  getPositions() {
+    const positionAttribute = this.points.geometry.attributes.position;
+    const positions = kokomi.convertBufferAttributeToVector(positionAttribute);
+    this.positions = positions;
+  }
+  randomizePositions() {
+    this.positions = this.positions.map((position) => {
+      const offset = THREE.MathUtils.randFloat(0.4, 1);
+      const offsetVector = new THREE.Vector3(offset, offset, offset);
+      const targetPosition = position.multiply(offsetVector);
+      return targetPosition;
+    });
+  }
   addHtmls() {
-    const bufferAttribute = this.points.geometry.attributes
-      .position as THREE.BufferAttribute;
-    const positions = kokomi.convertBufferAttributeToVector(bufferAttribute);
+    const { positions } = this;
     const htmls = positions.map((position, i) => {
       const el = document.querySelector(`.point-${i + 1}`) as HTMLElement;
       const html = new kokomi.Html(this.base, el, position);
       return html;
     });
     this.htmls = htmls;
+  }
+  addLines() {
+    const { positions } = this;
+    const material = new THREE.LineBasicMaterial();
+    const lines = positions.map((position) => {
+      const points = [this.points.position, position];
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      const line = new THREE.Line(geometry, material);
+      this.base.scene.add(line);
+      return line;
+    });
+    this.lines = lines;
   }
 }
 

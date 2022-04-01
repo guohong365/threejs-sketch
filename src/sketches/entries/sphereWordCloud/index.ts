@@ -1,14 +1,7 @@
 import * as kokomi from "kokomi.js";
-
 import SphereWordCloud from "./components/sphereWordCloud";
 
 class Sketch extends kokomi.Base {
-  buffer: ArrayLike<number>;
-  constructor(sel = "#sketch") {
-    super(sel);
-
-    this.buffer = [];
-  }
   create() {
     const controls = new kokomi.OrbitControls(this);
     controls.controls.autoRotate = true;
@@ -16,7 +9,7 @@ class Sketch extends kokomi.Base {
     const swc = new SphereWordCloud(this);
     swc.addExisting();
     swc.addHtmls();
-    console.log(swc);
+    swc.addLines();
   }
 }
 
