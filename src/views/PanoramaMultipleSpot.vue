@@ -25,7 +25,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .point {
   position: absolute;
   top: 0;

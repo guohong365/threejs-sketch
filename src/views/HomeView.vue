@@ -65,5 +65,15 @@ import { RouterLink } from "vue-router";
         </li>
       </ul>
     </section>
+    <section>
+      <h3>Entries</h3>
+      <ul>
+        <li>
+          <router-link :to="{ name: 'SphereWordCloud' }">
+            Sphere Word Cloud
+          </router-link>
+        </li>
+      </ul>
+    </section>
   </main>
 </template>

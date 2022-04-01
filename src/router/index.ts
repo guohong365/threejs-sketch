@@ -16,6 +16,8 @@ import PanoramaMultiple from "../views/PanoramaMultiple.vue";
 import PanoramaImfospot from "../views/PanoramaInfospot.vue";
 import PanoramaMultipleSpot from "../views/PanoramaMultipleSpot.vue";
 
+import SphereWordCloud from "../views/SphereWordCloud.vue";
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -83,6 +85,11 @@ const router = createRouter({
       path: "/panorama-multiple-spot",
       name: "PanoramaMultipleSpot",
       component: PanoramaMultipleSpot,
+    },
+    {
+      path: "/sphere-word-cloud",
+      name: "SphereWordCloud",
+      component: SphereWordCloud,
     },
   ],
 });
