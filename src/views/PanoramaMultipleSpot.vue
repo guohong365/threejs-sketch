@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/panorama/multiple-spot";
+import createSketch from "@/sketches/panorama/multipleSpot";
 
 import { onMounted } from "vue";
 

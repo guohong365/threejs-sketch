@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/panorama/info-spot";
+import createSketch from "@/sketches/panorama/infospot";
 
 import { onMounted } from "vue";
 
