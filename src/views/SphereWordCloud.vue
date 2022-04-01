@@ -31,6 +31,7 @@ onMounted(() => {
     position: absolute;
     color: white;
     transform: translate(-50%, -50%);
+    user-select: none;
   }
 }
 </style>
