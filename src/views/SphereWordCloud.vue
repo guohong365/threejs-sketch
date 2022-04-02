@@ -11,7 +11,7 @@ onMounted(() => {
 <template>
   <div id="sketch" class="bg-black w-screen h-screen overflow-hidden"></div>
   <div class="absolute cover overflow-hidden pointer-events-none">
-    <template v-for="n in 81" :key="n">
+    <template v-for="n in 18" :key="n">
       <div class="point" :class="`point-${n}`">
         <div class="label">114514</div>
       </div>

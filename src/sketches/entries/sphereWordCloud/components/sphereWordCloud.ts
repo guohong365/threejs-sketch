@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
+import _ from "lodash";
 
 export interface SphereWordCloudConfig {
   segment: number;
@@ -19,7 +20,6 @@ class SphereWordCloud extends kokomi.Component {
     const material = new THREE.PointsMaterial({
       size: 0.01,
       transparent: true,
-      opacity: 0,
     });
     const points = new THREE.Points(geometry, material);
     this.points = points;
@@ -39,7 +39,8 @@ class SphereWordCloud extends kokomi.Component {
   getPositions() {
     const positionAttribute = this.points.geometry.attributes.position;
     const positions = kokomi.convertBufferAttributeToVector(positionAttribute);
-    this.positions = positions;
+    const uniqPositions = _.uniqWith(positions, _.isEqual);
+    this.positions = uniqPositions;
   }
   randomizePositions() {
     this.positions = this.positions.map((position) => {
