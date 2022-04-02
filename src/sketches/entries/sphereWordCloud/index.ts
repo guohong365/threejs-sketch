@@ -6,7 +6,9 @@ class Sketch extends kokomi.Base {
     const controls = new kokomi.OrbitControls(this);
     controls.controls.autoRotate = true;
 
-    const swc = new SphereWordCloud(this, { segment: 5 });
+    const swc = new SphereWordCloud(this, {
+      segment: 5,
+    });
     swc.addExisting();
     swc.addHtmls();
     swc.addLines();

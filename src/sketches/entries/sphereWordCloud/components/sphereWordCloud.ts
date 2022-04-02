@@ -4,7 +4,11 @@ import _ from "lodash";
 import mitt, { type Emitter } from "mitt";
 
 export interface SphereWordCloudConfig {
+  radius: number;
   segment: number;
+  pointSize: number;
+  pointOpacity: number;
+  lineOpacity: number;
 }
 
 class SphereWordCloud extends kokomi.Component {
@@ -12,16 +16,28 @@ class SphereWordCloud extends kokomi.Component {
   positions: THREE.Vector3[];
   htmls: kokomi.Html[];
   lines: THREE.Line[];
+  lineOpacity: number;
   emitter: Emitter<any>;
   constructor(base: kokomi.Base, config: Partial<SphereWordCloudConfig> = {}) {
     super(base);
 
-    const { segment = 8 } = config;
+    const {
+      radius = 0.5,
+      segment = 8,
+      pointSize = 0.01,
+      pointOpacity = 1,
+      lineOpacity = 1,
+    } = config;
 
-    const geometry = new THREE.SphereGeometry(0.5, segment, segment);
+    this.lineOpacity = lineOpacity;
+
+    const geometry = new THREE.SphereGeometry(radius, segment, segment);
     const material = new THREE.PointsMaterial({
-      size: 0.01,
+      size: pointSize,
       transparent: true,
+      opacity: pointOpacity,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
     });
     const points = new THREE.Points(geometry, material);
     this.points = points;
@@ -65,7 +81,12 @@ class SphereWordCloud extends kokomi.Component {
   }
   addLines() {
     const { positions } = this;
-    const material = new THREE.LineBasicMaterial();
+    const material = new THREE.LineBasicMaterial({
+      transparent: true,
+      opacity: this.lineOpacity,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
     const lines = positions.map((position) => {
       const points = [this.points.position, position];
       const geometry = new THREE.BufferGeometry().setFromPoints(points);
