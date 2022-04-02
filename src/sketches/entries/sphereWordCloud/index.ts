@@ -10,6 +10,14 @@ class Sketch extends kokomi.Base {
     swc.addExisting();
     swc.addHtmls();
     swc.addLines();
+    swc.listenForHoverHtml(
+      (el: HTMLElement) => {
+        controls.controls.autoRotate = false;
+      },
+      (el: HTMLElement) => {
+        controls.controls.autoRotate = true;
+      }
+    );
   }
 }
 

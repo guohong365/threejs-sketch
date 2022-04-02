@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 import _ from "lodash";
+import mitt, { type Emitter } from "mitt";
 
 export interface SphereWordCloudConfig {
   segment: number;
@@ -11,6 +12,7 @@ class SphereWordCloud extends kokomi.Component {
   positions: THREE.Vector3[];
   htmls: kokomi.Html[];
   lines: THREE.Line[];
+  emitter: Emitter<any>;
   constructor(base: kokomi.Base, config: Partial<SphereWordCloudConfig> = {}) {
     super(base);
 
@@ -29,6 +31,8 @@ class SphereWordCloud extends kokomi.Component {
     this.lines = [];
 
     this.getPositions();
+
+    this.emitter = mitt();
   }
   addExisting(): void {
     const { base, points } = this;
@@ -70,6 +74,23 @@ class SphereWordCloud extends kokomi.Component {
       return line;
     });
     this.lines = lines;
+  }
+  listenForHoverHtml(onMouseOver: any, onMouseLeave: any) {
+    const { htmls } = this;
+    htmls.forEach((html) => {
+      html.el?.addEventListener("mouseover", () => {
+        this.emitter.emit("mouseover", html.el);
+      });
+      html.el?.addEventListener("mouseleave", () => {
+        this.emitter.emit("mouseleave", html.el);
+      });
+    });
+    this.emitter.on("mouseover", (el: HTMLElement) => {
+      onMouseOver(el);
+    });
+    this.emitter.on("mouseleave", (el: HTMLElement) => {
+      onMouseLeave(el);
+    });
   }
 }
 

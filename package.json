@@ -31,6 +31,7 @@
     "lodash": "^4.17.21",
     "maku.js": "^1.0.3",
     "matcap": "^0.0.2",
+    "mitt": "^3.0.0",
     "nice-color-palettes": "^3.0.0",
     "pinia": "^2.0.11",
     "simplex-noise": "^3.0.1",
