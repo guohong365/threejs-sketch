@@ -24,7 +24,7 @@ class Fox extends kokomi.Component {
     this.base.scene.add(this.gltf.scene);
   }
   update(time: number): void {
-    const delta = this.base.clock.getDelta();
+    const delta = this.base.clock.deltaTime;
     this.mixer.update(delta);
   }
   setActions() {
