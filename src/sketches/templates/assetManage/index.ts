@@ -4,6 +4,7 @@ import * as kokomi from "kokomi.js";
 
 import resourceList from "./resources";
 
+import Environment from "./components/environment";
 import Fox from "./components/fox";
 
 class Sketch extends kokomi.Base {
@@ -15,16 +16,14 @@ class Sketch extends kokomi.Base {
     this.assetManager = assetManager;
   }
   create() {
+    kokomi.enableRealisticRender(this.renderer);
+
     new kokomi.OrbitControls(this);
 
     this.camera.position.copy(new THREE.Vector3(6, 4, 3));
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    this.scene.add(ambientLight);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
-    dirLight.position.copy(new THREE.Vector3(1, 2, 3));
-    this.scene.add(dirLight);
+    const environment = new Environment(this);
+    environment.addExisting();
 
     this.assetManager.emitter.on("ready", () => {
       const fox = new Fox(this, this.assetManager.items.foxModel);

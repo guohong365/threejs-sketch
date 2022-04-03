@@ -1,18 +1,26 @@
 import * as kokomi from "kokomi.js";
 
-import Gallery from "./components/gallary";
-import Postprocessing from "./components/postprocessing";
+import mainVertexShader from "./shaders/main/vertex.glsl";
+import mainFragmentShader from "./shaders/main/fragment.glsl";
+import postprocessingVertexShader from "./shaders/postprocessing/vertex.glsl";
+import postprocessingFragmentShader from "./shaders/postprocessing/fragment.glsl";
 
 class Sketch extends kokomi.Base {
   async create() {
     const screenCamera = new kokomi.ScreenCamera(this);
     screenCamera.addExisting();
 
-    const gallary = new Gallery(this);
+    const gallary = new kokomi.Gallery(this, {
+      vertexShader: mainVertexShader,
+      fragmentShader: mainFragmentShader,
+    });
     await gallary.addExisting();
 
-    const postprocessing = new Postprocessing(this);
-    postprocessing.addExisting();
+    const customEffect = new kokomi.CustomEffect(this, {
+      vertexShader: postprocessingVertexShader,
+      fragmentShader: postprocessingFragmentShader,
+    });
+    customEffect.addExisting();
   }
 }
 
