@@ -26,13 +26,6 @@ class Sketch extends kokomi.Base {
 
     const shooter = new Shooter(this);
     shooter.addExisting();
-
-    const breaker = new Breaker(this);
-    shooter.emitter.on("shoot", (ball: Ball) => {
-      ball.body.addEventListener("collide", (e: any) => {
-        breaker.break(e.body);
-      });
-    });
   }
 }
 

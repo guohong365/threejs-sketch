@@ -15,6 +15,7 @@ class Shooter extends kokomi.Component {
       this.shootBall();
     });
   }
+  // 发射弹珠
   shootBall() {
     const ball = new Ball(this.base);
     ball.addExisting();
