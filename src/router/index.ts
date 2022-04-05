@@ -18,6 +18,8 @@ import PanoramaMultipleSpot from "../views/PanoramaMultipleSpot.vue";
 
 import SphereWordCloud from "../views/SphereWordCloud.vue";
 
+import SmashHit1 from "../views/SmashHit1.vue";
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -90,6 +92,11 @@ const router = createRouter({
       path: "/sphere-word-cloud",
       name: "SphereWordCloud",
       component: SphereWordCloud,
+    },
+    {
+      path: "/smash-hit/1",
+      name: "SmashHit1",
+      component: SmashHit1,
     },
   ],
 });

@@ -75,5 +75,13 @@ import { RouterLink } from "vue-router";
         </li>
       </ul>
     </section>
+    <section>
+      <h3>Smash Hit</h3>
+      <ul>
+        <li>
+          <router-link :to="{ name: 'SmashHit1' }"> 1 </router-link>
+        </li>
+      </ul>
+    </section>
   </main>
 </template>
