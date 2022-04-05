@@ -4,6 +4,7 @@ import Environment from "./components/environment";
 import Box from "./components/box";
 import Ball from "./components/ball";
 import Shooter from "./components/shooter";
+import Breaker from "./components/breaker";
 
 class Sketch extends kokomi.Base {
   create() {
@@ -25,6 +26,13 @@ class Sketch extends kokomi.Base {
 
     const shooter = new Shooter(this);
     shooter.addExisting();
+
+    const breaker = new Breaker(this);
+    shooter.emitter.on("shoot", (ball: Ball) => {
+      ball.body.addEventListener("collide", (e: any) => {
+        breaker.break(e.body);
+      });
+    });
   }
 }
 
