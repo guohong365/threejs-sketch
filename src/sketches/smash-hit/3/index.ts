@@ -48,9 +48,13 @@ class Sketch extends kokomi.Base {
       // 当弹珠发射时监听碰撞，如果触发碰撞则粉碎撞到的物体
       shooter.emitter.on("shoot", (ball: Ball) => {
         ball.body.addEventListener("collide", (e: any) => {
-          glassBreakAudio.play();
           breaker.onCollide(e);
         });
+      });
+
+      // 弹珠击中物体时
+      breaker.emitter.on("hit", () => {
+        glassBreakAudio.play();
       });
     });
   }
