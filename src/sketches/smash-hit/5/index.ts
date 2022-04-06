@@ -17,6 +17,10 @@ class Sketch extends kokomi.Base {
     this.assetManager = assetManager;
   }
   create() {
+    const camera = this.camera as THREE.PerspectiveCamera;
+    camera.fov = 90;
+    camera.updateProjectionMatrix();
+
     kokomi.enableRealisticRender(this.renderer);
 
     this.assetManager.emitter.on("ready", () => {
