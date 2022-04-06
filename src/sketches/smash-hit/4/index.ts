@@ -2,11 +2,11 @@ import * as kokomi from "kokomi.js";
 import * as THREE from "three";
 import Floor from "./components/floor";
 import Environment from "./components/environment";
-import Box from "./components/box";
-import Ball from "./components/ball";
 import Shooter from "./components/shooter";
 import Breaker from "./components/breaker";
 import resourceList from "./resources";
+import type Ball from "./components/ball";
+import Game from "./components/game";
 
 class Sketch extends kokomi.Base {
   create() {
@@ -18,9 +18,7 @@ class Sketch extends kokomi.Base {
       const glassBreakAudio = new THREE.Audio(listener);
       glassBreakAudio.setBuffer(assetManager.items.glassBreakAudio);
 
-      new kokomi.OrbitControls(this);
-
-      this.camera.position.set(-3, 3, 4);
+      this.camera.position.set(0, 1, 6);
 
       const environment = new Environment(this);
       environment.addExisting();
@@ -28,22 +26,18 @@ class Sketch extends kokomi.Base {
       const floor = new Floor(this);
       floor.addExisting();
 
-      const box = new Box(this);
-      box.addExisting();
-
-      const ball = new Ball(this);
-      ball.addExisting();
-
       const shooter = new Shooter(this);
       shooter.addExisting();
 
       const breaker = new Breaker(this);
 
-      // 定义好所有可粉碎的物体
-      const breakables = [box];
-      breakables.forEach((item) => {
-        breaker.add(item);
+      const game = new Game(this);
+
+      game.emitter.on("create", (obj: any) => {
+        breaker.add(obj);
       });
+
+      game.createBreakablesByInterval();
 
       // 当弹珠发射时监听碰撞，如果触发碰撞则粉碎撞到的物体
       shooter.emitter.on("shoot", (ball: Ball) => {
@@ -54,7 +48,13 @@ class Sketch extends kokomi.Base {
 
       // 弹珠击中物体时
       breaker.emitter.on("hit", () => {
+        game.incScore();
+        document.querySelector(".score")!.textContent = `${game.score}`;
         glassBreakAudio.play();
+      });
+
+      this.update(() => {
+        game.moveBreakables(breaker.objs);
       });
     });
   }

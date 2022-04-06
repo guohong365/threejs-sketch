@@ -8,7 +8,7 @@ class Floor extends kokomi.Component {
   constructor(base: kokomi.Base) {
     super(base);
 
-    const geometry = new THREE.PlaneGeometry(10, 10);
+    const geometry = new THREE.PlaneGeometry(10, 50);
     const material = new THREE.MeshStandardMaterial({
       color: new THREE.Color("#777777"),
     });
