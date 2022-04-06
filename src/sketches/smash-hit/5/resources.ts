@@ -1,7 +1,7 @@
 import type * as kokomi from "kokomi.js";
 
 import glassBreakAudio from "./assets/audios/glass-break.mp3";
-import matcapTexture from "./assets/textures/matcap-1.png";
+import normalTexture from "./assets/textures/normal.jpg";
 
 const resourceList: kokomi.ResourceItem[] = [
   {
@@ -10,9 +10,9 @@ const resourceList: kokomi.ResourceItem[] = [
     path: glassBreakAudio,
   },
   {
-    name: "matcapTexture",
+    name: "normalTexture",
     type: "texture",
-    path: matcapTexture,
+    path: normalTexture,
   },
 ];
 

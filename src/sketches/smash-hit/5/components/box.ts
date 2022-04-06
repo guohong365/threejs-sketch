@@ -17,10 +17,15 @@ class Box extends kokomi.Component {
     const { width = 2, height = 4, depth = 0.1 } = config;
 
     const geometry = new THREE.BoxGeometry(width, height, depth);
+
+    const normalMap = (this.base as any).assetManager.items.normalTexture;
     const material = new kokomi.GlassMaterial({
       color: "#c3cfe2",
       transmission: 0.5,
+      normalMap,
+      clearcoatMap: normalMap,
     });
+
     const mesh = new THREE.Mesh(geometry, material);
     this.mesh = mesh;
 

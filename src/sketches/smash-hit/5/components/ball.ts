@@ -9,15 +9,16 @@ class Ball extends kokomi.Component {
     super(base);
 
     const geometry = new THREE.SphereGeometry(0.25, 64, 64);
-    const material = new THREE.MeshMatcapMaterial({
-      matcap: (this.base as any).assetManager.items.matcapTexture,
+    const material = new kokomi.GlassMaterial({
+      color: "#333333",
+      transmission: 0.5,
     });
     const mesh = new THREE.Mesh(geometry, material);
     this.mesh = mesh;
 
     const shape = kokomi.convertGeometryToShape(geometry);
     const body = new CANNON.Body({
-      mass: 4,
+      mass: 8,
       shape,
       position: new CANNON.Vec3(0, 1, 2),
     });
