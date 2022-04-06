@@ -13,16 +13,13 @@ class Environment extends kokomi.Component {
     const ambiLight = new THREE.AmbientLight(0xffffff, 0.5);
     this.ambiLight = ambiLight;
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
     directionalLight.position.set(0, 5, -5);
     this.directionalLight = directionalLight;
 
     const spotLight = new THREE.SpotLight(new THREE.Color("#c3cfe2"));
     spotLight.position.set(20, 20, 25);
     this.spotLight = spotLight;
-
-    const fog = new THREE.Fog(new THREE.Color("#e6e9f0"), 1, 54);
-    this.base.scene.fog = fog;
   }
   addExisting(): void {
     const scene = this.base.scene;

@@ -14,7 +14,7 @@ onMounted(() => {
     class="bg-white-grad-1 w-screen h-screen overflow-hidden"
   ></div>
   <div class="fixed z-5 top-4 h-center">
-    <div class="score text-black text-3xl">0</div>
+    <div class="score text-black text-3xl select-none">0</div>
   </div>
 </template>
 

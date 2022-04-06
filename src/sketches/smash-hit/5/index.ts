@@ -17,7 +17,7 @@ class Sketch extends kokomi.Base {
     this.assetManager = assetManager;
   }
   create() {
-    // new kokomi.OrbitControls(this);
+    new kokomi.OrbitControls(this);
 
     this.assetManager.emitter.on("ready", () => {
       const listener = new THREE.AudioListener();

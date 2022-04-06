@@ -29,7 +29,7 @@ class Game extends kokomi.Component {
   // 移动可破碎物
   moveBreakables(objs: any) {
     objs.forEach((item: any) => {
-      item.body.position.z += 0.1;
+      item.body.position.z += 0.05;
 
       // 超过边界则移除
       if (item.body.position.z > 10) {
