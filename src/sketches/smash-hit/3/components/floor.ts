@@ -16,7 +16,7 @@ class Floor extends kokomi.Component {
     mesh.rotation.x = THREE.MathUtils.degToRad(-90);
     this.mesh = mesh;
 
-    const shape = new CANNON.Plane();
+    const shape = kokomi.convertGeometryToShape(geometry);
     const body = new CANNON.Body({
       mass: 0,
       shape,

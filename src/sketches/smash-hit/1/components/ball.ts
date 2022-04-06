@@ -13,7 +13,7 @@ class Ball extends kokomi.Component {
     const mesh = new THREE.Mesh(geometry, material);
     this.mesh = mesh;
 
-    const shape = new CANNON.Sphere(0.25);
+    const shape = kokomi.convertGeometryToShape(geometry);
     const body = new CANNON.Body({
       mass: 1,
       shape,

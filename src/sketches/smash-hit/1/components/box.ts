@@ -8,12 +8,12 @@ class Box extends kokomi.Component {
   constructor(base: kokomi.Base) {
     super(base);
 
-    const geometry = new THREE.BoxGeometry(2, 2, 0.5);
+    const geometry = new THREE.BoxGeometry(2, 2, 0.25);
     const material = new kokomi.GlassMaterial({});
     const mesh = new THREE.Mesh(geometry, material);
     this.mesh = mesh;
 
-    const shape = new CANNON.Box(new CANNON.Vec3(1, 1, 0.25));
+    const shape = kokomi.convertGeometryToShape(geometry);
     const body = new CANNON.Body({
       mass: 1,
       shape,

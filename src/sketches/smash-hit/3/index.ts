@@ -29,16 +29,16 @@ class Sketch extends kokomi.Base {
 
     const breaker = new Breaker(this);
 
-    // 定义好所有可分割的物体
+    // 定义好所有可粉碎的物体
     const breakables = [box];
     breakables.forEach((item) => {
-      breaker.add(item.body);
+      breaker.add(item);
     });
 
-    // 当弹珠发射时监听碰撞，如果触发碰撞则分割撞到的物体
+    // 当弹珠发射时监听碰撞，如果触发碰撞则粉碎撞到的物体
     shooter.emitter.on("shoot", (ball: Ball) => {
       ball.body.addEventListener("collide", (e: any) => {
-        breaker.break(e.body);
+        breaker.onCollide(e);
       });
     });
   }
