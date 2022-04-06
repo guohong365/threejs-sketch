@@ -17,7 +17,7 @@ class Sketch extends kokomi.Base {
     this.assetManager = assetManager;
   }
   create() {
-    new kokomi.OrbitControls(this);
+    kokomi.enableRealisticRender(this.renderer);
 
     this.assetManager.emitter.on("ready", () => {
       const listener = new THREE.AudioListener();
