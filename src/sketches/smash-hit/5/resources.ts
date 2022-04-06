@@ -2,6 +2,7 @@ import type * as kokomi from "kokomi.js";
 
 import glassBreakAudio from "./assets/audios/glass-break.mp3";
 import normalTexture from "./assets/textures/normal.jpg";
+import orbitaHdr from "./assets/textures/orbita.hdr?url";
 
 const resourceList: kokomi.ResourceItem[] = [
   {
@@ -13,6 +14,11 @@ const resourceList: kokomi.ResourceItem[] = [
     name: "normalTexture",
     type: "texture",
     path: normalTexture,
+  },
+  {
+    name: "orbitaHdr",
+    type: "hdrTexture",
+    path: orbitaHdr,
   },
 ];
 

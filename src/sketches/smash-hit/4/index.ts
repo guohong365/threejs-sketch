@@ -50,7 +50,12 @@ class Sketch extends kokomi.Base {
       breaker.emitter.on("hit", () => {
         game.incScore();
         document.querySelector(".score")!.textContent = `${game.score}`;
-        glassBreakAudio.play();
+        if (!glassBreakAudio.isPlaying) {
+          glassBreakAudio.play();
+        } else {
+          glassBreakAudio.stop();
+          glassBreakAudio.play();
+        }
       });
 
       this.update(() => {

@@ -1,9 +1,9 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 import * as CANNON from "cannon-es";
-import Box from "./box";
 import mitt, { type Emitter } from "mitt";
-
+import Box from "./box";
+import Cone from "./cone";
 class Game extends kokomi.Component {
   breakables: any[];
   emitter: Emitter<any>;
@@ -19,12 +19,31 @@ class Game extends kokomi.Component {
   }
   // 创建可破碎物
   createBreakables(x = 0) {
-    const box = new Box(this.base);
-    box.addExisting();
+    const p = Math.random();
+    if (p < 0.3) {
+      this.createCone(-2);
+      this.createCone(2);
+    } else {
+      this.createBox(x);
+    }
+  }
+  // 创建方块
+  createBox(x = 0) {
+    const obj = new Box(this.base);
+    obj.addExisting();
     const position = new CANNON.Vec3(x, 2, -10);
-    box.body.position.copy(position);
-    this.breakables.push(box);
-    this.emitter.emit("create", box);
+    obj.body.position.copy(position);
+    this.breakables.push(obj);
+    this.emitter.emit("create", obj);
+  }
+  // 创建圆锥
+  createCone(x = 0) {
+    const obj = new Cone(this.base);
+    obj.addExisting();
+    const position = new CANNON.Vec3(x, 2, -10);
+    obj.body.position.copy(position);
+    this.breakables.push(obj);
+    this.emitter.emit("create", obj);
   }
   // 移动可破碎物
   moveBreakables(objs: any) {

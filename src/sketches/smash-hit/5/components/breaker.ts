@@ -62,8 +62,8 @@ class Breaker extends kokomi.Component {
       mesh,
       new THREE.Vector3(poi.x, poi.y, poi.z),
       nor,
-      1,
-      2
+      2,
+      1
     ); // 将网格分割成碎片
 
     // 移除已经破碎的物体
@@ -85,6 +85,12 @@ class Breaker extends kokomi.Component {
           mesh.position.y,
           mesh.position.z
         ), // 这里别忘了同步碎片的位置，不然碎片会飞出去
+        quaternion: new CANNON.Quaternion(
+          mesh.quaternion.x,
+          mesh.quaternion.y,
+          mesh.quaternion.z,
+          mesh.quaternion.w
+        ), // 旋转方向也要同步
       });
       this.base.scene.add(mesh);
       this.base.physics.add({ mesh, body });
