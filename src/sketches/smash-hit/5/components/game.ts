@@ -36,7 +36,7 @@ class Game extends kokomi.Component {
     this.breakables.push(obj);
     this.emitter.emit("create", obj);
   }
-  // 创建圆锥
+  // 创建锥体
   createCone(x = 0) {
     const obj = new Cone(this.base);
     obj.addExisting();
