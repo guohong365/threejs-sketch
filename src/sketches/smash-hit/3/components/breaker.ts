@@ -37,7 +37,7 @@ class Breaker extends kokomi.Component {
   // 碰撞时
   onCollide(e: any) {
     const obj = this.getObjById(e.body.userData?.meshId);
-    if (obj && obj.body.userData.splitCount < 3) {
+    if (obj && obj.body.userData.splitCount < 2) {
       this.splitObj(e);
     }
   }
@@ -58,7 +58,7 @@ class Breaker extends kokomi.Component {
       new THREE.Vector3(poi.x, poi.y, poi.z),
       nor,
       1,
-      0
+      1
     ); // 将网格分割成碎片
 
     // 移除已经破碎的物体
