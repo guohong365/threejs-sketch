@@ -34,6 +34,7 @@
     "mitt": "^3.0.0",
     "nice-color-palettes": "^3.0.0",
     "pinia": "^2.0.11",
+    "postprocessing": "^6.26.3",
     "simplex-noise": "^3.0.1",
     "three": "^0.139.0",
     "three-stdlib": "^2.8.11",

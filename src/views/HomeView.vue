@@ -90,6 +90,9 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'SmashHit4' }"> 4 </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'SmashHit5' }"> 5 </router-link>
+        </li>
       </ul>
     </section>
   </main>

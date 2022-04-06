@@ -63,7 +63,7 @@ class Breaker extends kokomi.Component {
       new THREE.Vector3(poi.x, poi.y, poi.z),
       nor,
       1,
-      1
+      2
     ); // 将网格分割成碎片
 
     // 移除已经破碎的物体

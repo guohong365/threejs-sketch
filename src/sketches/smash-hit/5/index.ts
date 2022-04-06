@@ -9,14 +9,22 @@ import type Ball from "./components/ball";
 import Game from "./components/game";
 
 class Sketch extends kokomi.Base {
-  create() {
+  assetManager: kokomi.AssetManager;
+  constructor(sel = "#sketch") {
+    super(sel);
+
     const assetManager = new kokomi.AssetManager(this, resourceList);
-    assetManager.emitter.on("ready", () => {
+    this.assetManager = assetManager;
+  }
+  create() {
+    // new kokomi.OrbitControls(this);
+
+    this.assetManager.emitter.on("ready", () => {
       const listener = new THREE.AudioListener();
       this.camera.add(listener);
 
       const glassBreakAudio = new THREE.Audio(listener);
-      glassBreakAudio.setBuffer(assetManager.items.glassBreakAudio);
+      glassBreakAudio.setBuffer(this.assetManager.items.glassBreakAudio);
 
       this.camera.position.set(0, 1, 6);
 

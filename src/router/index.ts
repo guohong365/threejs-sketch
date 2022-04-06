@@ -22,6 +22,7 @@ import SmashHit1 from "../views/SmashHit1.vue";
 import SmashHit2 from "../views/SmashHit2.vue";
 import SmashHit3 from "../views/SmashHit3.vue";
 import SmashHit4 from "../views/SmashHit4.vue";
+import SmashHit5 from "../views/SmashHit5.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -115,6 +116,11 @@ const router = createRouter({
       path: "/smash-hit/4",
       name: "SmashHit4",
       component: SmashHit4,
+    },
+    {
+      path: "/smash-hit/5",
+      name: "SmashHit5",
+      component: SmashHit5,
     },
   ],
 });

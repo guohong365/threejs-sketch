@@ -9,13 +9,15 @@ class Ball extends kokomi.Component {
     super(base);
 
     const geometry = new THREE.SphereGeometry(0.25, 64, 64);
-    const material = new kokomi.GlassMaterial({});
+    const material = new THREE.MeshMatcapMaterial({
+      matcap: (this.base as any).assetManager.items.matcapTexture,
+    });
     const mesh = new THREE.Mesh(geometry, material);
     this.mesh = mesh;
 
     const shape = kokomi.convertGeometryToShape(geometry);
     const body = new CANNON.Body({
-      mass: 1,
+      mass: 4,
       shape,
       position: new CANNON.Vec3(0, 1, 2),
     });
@@ -27,6 +29,15 @@ class Ball extends kokomi.Component {
 
     scene.add(mesh);
     physics.add({ mesh, body });
+  }
+  update(time: number): void {
+    if (
+      Math.abs(this.mesh.position.x) > 5 ||
+      Math.abs(this.mesh.position.z) > 20
+    ) {
+      this.base.scene.remove(this.mesh);
+      this.base.physics.world.removeBody(this.body);
+    }
   }
 }
 

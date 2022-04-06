@@ -10,7 +10,7 @@ class Floor extends kokomi.Component {
 
     const geometry = new THREE.PlaneGeometry(10, 50);
     const material = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#777777"),
+      color: new THREE.Color("#eef1f5"),
     });
     const mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = THREE.MathUtils.degToRad(-90);

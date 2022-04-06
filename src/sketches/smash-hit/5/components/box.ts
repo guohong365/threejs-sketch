@@ -2,14 +2,25 @@ import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 import * as CANNON from "cannon-es";
 
+export interface BoxConfig {
+  width: number;
+  height: number;
+  depth: number;
+}
+
 class Box extends kokomi.Component {
   mesh: THREE.Mesh;
   body: CANNON.Body;
-  constructor(base: kokomi.Base) {
+  constructor(base: kokomi.Base, config: Partial<BoxConfig> = {}) {
     super(base);
 
-    const geometry = new THREE.BoxGeometry(2, 2, 0.25);
-    const material = new kokomi.GlassMaterial({});
+    const { width = 2, height = 4, depth = 0.1 } = config;
+
+    const geometry = new THREE.BoxGeometry(width, height, depth);
+    const material = new kokomi.GlassMaterial({
+      color: "#c3cfe2",
+      transmission: 0.5,
+    });
     const mesh = new THREE.Mesh(geometry, material);
     this.mesh = mesh;
 
@@ -17,7 +28,6 @@ class Box extends kokomi.Component {
     const body = new CANNON.Body({
       mass: 1,
       shape,
-      position: new CANNON.Vec3(0, 1, 0),
     });
     this.body = body;
   }

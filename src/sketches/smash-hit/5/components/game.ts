@@ -21,7 +21,7 @@ class Game extends kokomi.Component {
   createBreakables(x = 0) {
     const box = new Box(this.base);
     box.addExisting();
-    const position = new CANNON.Vec3(x, 1, -10);
+    const position = new CANNON.Vec3(x, 2, -10);
     box.body.position.copy(position);
     this.breakables.push(box);
     this.emitter.emit("create", box);
