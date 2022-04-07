@@ -8,7 +8,9 @@ export interface SphereWordCloudConfig {
   segment: number;
   pointSize: number;
   pointOpacity: number;
+  pointColor: string;
   lineOpacity: number;
+  lineColor: string;
 }
 
 class SphereWordCloud extends kokomi.Component {
@@ -17,6 +19,7 @@ class SphereWordCloud extends kokomi.Component {
   htmls: kokomi.Html[];
   lines: THREE.Line[];
   lineOpacity: number;
+  lineColor: string;
   emitter: Emitter<any>;
   constructor(base: kokomi.Base, config: Partial<SphereWordCloudConfig> = {}) {
     super(base);
@@ -26,18 +29,21 @@ class SphereWordCloud extends kokomi.Component {
       segment = 8,
       pointSize = 0.01,
       pointOpacity = 1,
+      pointColor = "white",
       lineOpacity = 1,
+      lineColor = "white",
     } = config;
 
     this.lineOpacity = lineOpacity;
+    this.lineColor = lineColor;
 
     const geometry = new THREE.SphereGeometry(radius, segment, segment);
     const material = new THREE.PointsMaterial({
+      color: pointColor,
       size: pointSize,
       transparent: true,
       opacity: pointOpacity,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
     });
     const points = new THREE.Points(geometry, material);
     this.points = points;
@@ -82,10 +88,10 @@ class SphereWordCloud extends kokomi.Component {
   addLines() {
     const { positions } = this;
     const material = new THREE.LineBasicMaterial({
+      color: this.lineColor,
       transparent: true,
       opacity: this.lineOpacity,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
     });
     const lines = positions.map((position) => {
       const points = [this.points.position, position];
