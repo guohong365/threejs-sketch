@@ -38,18 +38,28 @@ const state = reactive({});
               <div class="flex flex-col space-y-3">
                 <div>当前选中点：</div>
                 <div>名称：{{ panoramaScene.currentInfospot.name }}</div>
+                <div>位置：</div>
                 <div>
-                  位置：({{
-                    panoramaScene.currentInfospot.point.x.toFixed(2)
-                  }},{{ panoramaScene.currentInfospot.point.y.toFixed(2) }},{{
-                    panoramaScene.currentInfospot.point.z.toFixed(2)
-                  }})
+                  x: {{ panoramaScene.currentInfospot.point.x.toFixed(2) }}
                 </div>
-                <template v-if="panoramaScene.currentInfospot.jump">
-                  <div>跳转场景：{{ panoramaScene.currentInfospot.jump }}</div>
-                </template>
                 <div>
-                  <div class="btn btn-danger btn-round text-center">删除</div>
+                  y: {{ panoramaScene.currentInfospot.point.y.toFixed(2) }}
+                </div>
+                <div>
+                  z: {{ panoramaScene.currentInfospot.point.z.toFixed(2) }}
+                </div>
+                <div>跳转场景：{{ panoramaScene.currentInfospot.jump }}</div>
+                <div>
+                  <div
+                    class="btn btn-danger btn-round text-center"
+                    @click="
+                      panoramaScene?.onDeletePoint(
+                        panoramaScene.currentInfospot!
+                      )
+                    "
+                  >
+                    删除
+                  </div>
                 </div>
               </div>
             </div>

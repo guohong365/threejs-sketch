@@ -89,6 +89,20 @@ const getCurrentSceneConfig = () => {
   return sceneConfig;
 };
 
+// 更新配置
+const updateConfig = (config: kokomi.PanoramaConfig) => {
+  const generator = sketch?.generator;
+  if (!generator) {
+    return;
+  }
+
+  generator.setConfig(config);
+  state.infospotsConfig = generator.allInfospotConfig;
+  nextTick(() => {
+    sketch?.generator.generateInfospotsWithSceneJump();
+  });
+};
+
 // 添加点
 const addPoint = (point: THREE.Vector3) => {
   const generator = sketch?.generator;
@@ -102,16 +116,14 @@ const addPoint = (point: THREE.Vector3) => {
 
   const currentSceneConfig = getCurrentSceneConfig();
   const infospot = {
-    id: `${generator.allInfospotConfig.length}`,
+    id: `${generator.allInfospotConfig.length}${(
+      Math.random() * 1000000
+    ).toFixed(0)}`,
     point,
     name: `点${generator.allInfospotConfig.length}`,
   };
   currentSceneConfig?.infospots?.push(infospot);
-  sketch?.generator.setConfig(props.panoramaConfig);
-  state.infospotsConfig = generator.allInfospotConfig;
-  nextTick(() => {
-    sketch?.generator.generateInfospotsWithSceneJump();
-  });
+  updateConfig(props.panoramaConfig);
 };
 
 // 开启编辑
@@ -146,6 +158,26 @@ const onSelectPoint = (item: kokomi.InfospotConfig) => {
   state.currentInfospot = item;
 };
 
+// 删除点时
+const onDeletePoint = (item: kokomi.InfospotConfig) => {
+  if (!state.isEditEnabled) {
+    return;
+  }
+
+  if (!props.panoramaConfig) {
+    return null;
+  }
+
+  state.currentInfospot = null;
+  const currentSceneConfig = getCurrentSceneConfig();
+  if (currentSceneConfig && currentSceneConfig.infospots) {
+    currentSceneConfig.infospots = currentSceneConfig.infospots.filter(
+      (e) => e.id !== item.id
+    );
+    updateConfig(props.panoramaConfig);
+  }
+};
+
 watch(
   () => state.isEditEnabled,
   (newVal) => {
@@ -162,6 +194,7 @@ defineExpose({
   enableEdit,
   disableEdit,
   currentInfospot,
+  onDeletePoint,
 });
 
 onMounted(async () => {
@@ -198,10 +231,12 @@ onMounted(async () => {
   opacity: 0;
   transform: translate(var(--x), var(--y));
   z-index: var(--z-index);
+  pointer-events: none;
 
   &.visible {
     opacity: 1;
     cursor: pointer;
+    pointer-events: auto;
   }
 
   &.active {
