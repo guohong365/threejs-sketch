@@ -5,6 +5,7 @@ import { nextTick, onMounted, reactive, type PropType } from "vue";
 
 import type * as THREE from "three";
 import type * as kokomi from "kokomi.js";
+import { computed } from "@vue/reactivity";
 
 const props = defineProps({
   panoramaConfig: {
@@ -15,14 +16,20 @@ const props = defineProps({
 interface State {
   infospotsConfig: kokomi.InfospotConfig[];
   isEditEnabled: boolean;
+  currentInfospot: kokomi.InfospotConfig | null;
 }
 
 const state: State = reactive({
   infospotsConfig: [],
   isEditEnabled: false,
+  currentInfospot: null,
 });
 
 let sketch: ReturnType<typeof createSketch> | null = null;
+
+const currentInfospot = computed(() => {
+  return state.currentInfospot;
+});
 
 // 初始化
 const init = () => {
@@ -117,9 +124,15 @@ const disableEdit = () => {
   state.isEditEnabled = false;
 };
 
+// 选择点时
+const onSelectPoint = (item: kokomi.InfospotConfig) => {
+  state.currentInfospot = item;
+};
+
 defineExpose({
   enableEdit,
   disableEdit,
+  currentInfospot,
 });
 
 onMounted(async () => {
@@ -133,7 +146,14 @@ onMounted(async () => {
   <div class="absolute cover overflow-hidden pointer-events-none">
     <div class="pointer-events-auto">
       <template v-for="(item, i) in state.infospotsConfig" :key="i">
-        <div class="point" :class="`point-${item.id}`">
+        <div
+          class="point"
+          :class="[
+            `point-${item.id}`,
+            { active: state.currentInfospot === item },
+          ]"
+          @click="onSelectPoint(item)"
+        >
           <div class="label">{{ item.name }}</div>
         </div>
       </template>
@@ -153,6 +173,12 @@ onMounted(async () => {
   &.visible {
     opacity: 1;
     cursor: pointer;
+  }
+
+  &.active {
+    .label {
+      box-shadow: 0 0 0 2px white;
+    }
   }
 
   .label {
