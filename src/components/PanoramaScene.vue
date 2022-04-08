@@ -116,16 +116,33 @@ const addPoint = (point: THREE.Vector3) => {
 
 // 开启编辑
 const enableEdit = () => {
+  const generator = sketch?.generator;
+  if (!generator) {
+    return;
+  }
+
+  generator.disableSceneJump();
   state.isEditEnabled = true;
 };
 
 // 禁用编辑
 const disableEdit = () => {
+  const generator = sketch?.generator;
+  if (!generator) {
+    return;
+  }
+
+  generator.enableSceneJump();
   state.isEditEnabled = false;
+  state.currentInfospot = null;
 };
 
 // 选择点时
 const onSelectPoint = (item: kokomi.InfospotConfig) => {
+  if (!state.isEditEnabled) {
+    return;
+  }
+
   state.currentInfospot = item;
 };
 
