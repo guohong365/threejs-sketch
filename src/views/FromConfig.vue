@@ -10,57 +10,90 @@ import type * as kokomi from "kokomi.js";
 interface State {
   panoramaConfig: kokomi.PanoramaConfig;
   infospotsConfig: kokomi.InfospotConfig[];
+  mode: "view" | "edit";
 }
 
 const state: State = reactive({
   panoramaConfig: [],
   infospotsConfig: [],
+  mode: "view",
 });
 
 let sketch: ReturnType<typeof createSketch> | null = null;
 
+// 初始化
 const init = () => {
-  sketch = createSketch();
+  return new Promise((resolve) => {
+    sketch = createSketch();
 
-  const generator = sketch.generator;
-  generator.generateByConfig(state.panoramaConfig);
-  generator.emitter.on("generate", (generator: kokomi.PanoramaGenerator) => {
-    state.infospotsConfig = generator.allInfospotConfig;
-    nextTick(() => {
-      generator.generateInfospotsWithSceneJump();
-
-      enablePointAdd();
+    const generator = sketch.generator;
+    generator.generateByConfig(state.panoramaConfig);
+    generator.emitter.on("generate", (generator: kokomi.PanoramaGenerator) => {
+      state.infospotsConfig = generator.allInfospotConfig;
+      nextTick(() => {
+        generator.generateInfospotsWithSceneJump();
+        resolve(true);
+      });
     });
   });
 };
 
-const enablePointAdd = () => {
+// 开启编辑点功能
+const enablePointEdit = () => {
   const generator = sketch?.generator;
-  if (generator) {
-    generator.outputCurrentScenePosition();
-    generator.emitter.on("click-scene", (point: THREE.Vector3) => {
-      const currentSceneConfig = state.panoramaConfig.find(
-        (scene: kokomi.SceneConfig) =>
-          scene.id === generator.viewer?.currentPanorama?.id
-      );
-      const infospot = {
-        id: `${generator.allInfospotConfig.length}`,
-        point,
-        name: `${generator.allInfospotConfig.length}`,
-      };
-      currentSceneConfig?.infospots?.push(infospot);
-      sketch?.generator.setConfig(state.panoramaConfig);
-      state.infospotsConfig = generator.allInfospotConfig;
-      nextTick(() => {
-        sketch?.generator.generateInfospotsWithSceneJump();
-      });
-    });
+  if (!generator) {
+    return;
   }
+
+  generator.outputCurrentScenePosition();
+  generator.emitter.on("click-scene", (point: THREE.Vector3) => {
+    if (state.mode !== "edit") {
+      return;
+    }
+
+    addPoint(point);
+  });
 };
 
-onMounted(() => {
+// 获取当前场景配置
+const getCurrentSceneConfig = () => {
+  const generator = sketch?.generator;
+  if (!generator) {
+    return null;
+  }
+
+  const sceneConfig = state.panoramaConfig.find(
+    (scene: kokomi.SceneConfig) =>
+      scene.id === generator.viewer?.currentPanorama?.id
+  );
+  return sceneConfig;
+};
+
+// 添加点
+const addPoint = (point: THREE.Vector3) => {
+  const generator = sketch?.generator;
+  if (!generator) {
+    return;
+  }
+
+  const currentSceneConfig = getCurrentSceneConfig();
+  const infospot = {
+    id: `${generator.allInfospotConfig.length}`,
+    point,
+    name: `${generator.allInfospotConfig.length}`,
+  };
+  currentSceneConfig?.infospots?.push(infospot);
+  sketch?.generator.setConfig(state.panoramaConfig);
+  state.infospotsConfig = generator.allInfospotConfig;
+  nextTick(() => {
+    sketch?.generator.generateInfospotsWithSceneJump();
+  });
+};
+
+onMounted(async () => {
   state.panoramaConfig = dummyConfig;
-  init();
+  await init();
+  enablePointEdit();
 });
 </script>
 
