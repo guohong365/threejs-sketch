@@ -178,6 +178,27 @@ const onDeletePoint = (item: kokomi.InfospotConfig) => {
   }
 };
 
+// 修改点时
+const onEditPoint = (item: kokomi.InfospotConfig) => {
+  if (!state.isEditEnabled) {
+    return;
+  }
+
+  if (!props.panoramaConfig) {
+    return null;
+  }
+
+  const currentSceneConfig = getCurrentSceneConfig();
+  if (currentSceneConfig && currentSceneConfig.infospots) {
+    let target = currentSceneConfig.infospots.find((e) => e.id === item.id);
+    if (target) {
+      target.name = item.name;
+      target.jump = item.jump;
+      updateConfig(props.panoramaConfig);
+    }
+  }
+};
+
 watch(
   () => state.isEditEnabled,
   (newVal) => {
@@ -195,6 +216,7 @@ defineExpose({
   disableEdit,
   currentInfospot,
   onDeletePoint,
+  onEditPoint,
 });
 
 onMounted(async () => {
@@ -247,17 +269,19 @@ onMounted(async () => {
 
   .label {
     position: relative;
-    width: 40px;
-    height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #ffffff;
     text-align: center;
     font-size: 14px;
-    border-radius: 50%;
     background: #00000077;
     border: 1px solid #ffffff77;
+    border-radius: 1rem;
   }
 }
 </style>

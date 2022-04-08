@@ -37,7 +37,21 @@ const state = reactive({});
             <div class="card shadow">
               <div class="flex flex-col space-y-3">
                 <div>当前选中点：</div>
-                <div>名称：{{ panoramaScene.currentInfospot.name }}</div>
+                <div>
+                  <div class="form-group">
+                    <div>名称：</div>
+                    <div class="flex-1">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="panoramaScene.currentInfospot.name"
+                        @input="panoramaScene?.onEditPoint(
+                        panoramaScene.currentInfospot!
+                      )"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <div>位置：</div>
                 <div>
                   x: {{ panoramaScene.currentInfospot.point.x.toFixed(2) }}
@@ -48,7 +62,21 @@ const state = reactive({});
                 <div>
                   z: {{ panoramaScene.currentInfospot.point.z.toFixed(2) }}
                 </div>
-                <div>跳转场景：{{ panoramaScene.currentInfospot.jump }}</div>
+                <div>
+                  <div class="form-group">
+                    <div>跳转场景：</div>
+                    <div class="flex-1">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="panoramaScene.currentInfospot.jump"
+                        @input="panoramaScene?.onEditPoint(
+                        panoramaScene.currentInfospot!
+                      )"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <div>
                   <div
                     class="btn btn-danger btn-round text-center"
