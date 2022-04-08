@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import createSketch from "@/sketches/panorama/fromConfig";
 
-import { nextTick, onMounted, reactive, type PropType } from "vue";
+import { nextTick, onMounted, reactive, watch, type PropType } from "vue";
 
 import type * as THREE from "three";
 import type * as kokomi from "kokomi.js";
@@ -146,7 +146,19 @@ const onSelectPoint = (item: kokomi.InfospotConfig) => {
   state.currentInfospot = item;
 };
 
+watch(
+  () => state.isEditEnabled,
+  (newVal) => {
+    if (newVal) {
+      enableEdit();
+    } else {
+      disableEdit();
+    }
+  }
+);
+
 defineExpose({
+  state,
   enableEdit,
   disableEdit,
   currentInfospot,
