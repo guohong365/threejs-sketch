@@ -63,6 +63,9 @@ import { RouterLink } from "vue-router";
             Panorama Multiple Spot
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'FromConfig' }"> From Config </router-link>
+        </li>
       </ul>
     </section>
     <section>

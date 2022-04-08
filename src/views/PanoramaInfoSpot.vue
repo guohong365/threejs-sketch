@@ -33,10 +33,10 @@ onMounted(() => {
   opacity: 0;
   transform: translate(var(--x), var(--y));
   z-index: var(--z-index);
-  cursor: pointer;
 
   &.visible {
     opacity: 1;
+    cursor: pointer;
   }
 
   .label {
