@@ -12,9 +12,6 @@ class Sketch extends kokomi.Base {
   create() {
     this.generator.generate();
   }
-  generateByConfig(config: kokomi.PanoramaConfig) {
-    this.generator.generateByConfig(config);
-  }
 }
 
 const createSketch = () => {

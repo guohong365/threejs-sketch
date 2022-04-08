@@ -2,31 +2,58 @@
 import createSketch from "@/sketches/panorama/fromConfig";
 import dummyConfig from "@/sketches/panorama/fromConfig/config";
 
-import { onMounted, computed } from "vue";
+import { nextTick, onMounted, reactive } from "vue";
 
-// 获取所有点位配置
-const getPointConfig = (config: any) => {
-  const points = config
-    .map((item: any) => {
-      const infospots = item.infospots.map((infospot: any) => {
-        return {
-          id: infospot.id,
-          name: infospot.name || infospot.id,
-        };
-      });
-      return infospots;
-    })
-    .flat();
-  return points;
-};
+import type * as THREE from "three";
+import type * as kokomi from "kokomi.js";
 
-const pointsConfig = computed(() => getPointConfig(dummyConfig));
+interface State {
+  panoramaConfig: kokomi.PanoramaConfig;
+  infospotsConfig: kokomi.InfospotConfig[];
+}
+
+const state: State = reactive({
+  panoramaConfig: [],
+  infospotsConfig: [],
+});
 
 let sketch: ReturnType<typeof createSketch> | null = null;
 
-onMounted(() => {
+const init = () => {
   sketch = createSketch();
-  sketch.generateByConfig(dummyConfig);
+  sketch.generator.generateByConfig(state.panoramaConfig);
+  sketch.generator.emitter.on(
+    "generate",
+    (generator: kokomi.PanoramaGenerator) => {
+      state.infospotsConfig = generator.allInfospotConfig;
+      nextTick(() => {
+        generator.generateInfospotsWithSceneJump();
+        generator.outputCurrentScenePosition();
+        generator.emitter.on("click-scene", (point: THREE.Vector3) => {
+          const currentSceneConfig = state.panoramaConfig.find(
+            (scene: kokomi.SceneConfig) =>
+              scene.id === generator.viewer?.currentPanorama?.id
+          );
+          const infospot = {
+            id: `${generator.allInfospotConfig.length}`,
+            point,
+            name: `${generator.allInfospotConfig.length}`,
+          };
+          currentSceneConfig?.infospots?.push(infospot);
+          sketch?.generator.setConfig(state.panoramaConfig);
+          state.infospotsConfig = generator.allInfospotConfig;
+          nextTick(() => {
+            sketch?.generator.generateInfospotsWithSceneJump();
+          });
+        });
+      });
+    }
+  );
+};
+
+onMounted(() => {
+  state.panoramaConfig = dummyConfig;
+  init();
 });
 </script>
 
@@ -34,7 +61,7 @@ onMounted(() => {
   <div id="sketch" class="bg-black w-screen h-screen overflow-hidden"></div>
   <div class="absolute cover overflow-hidden pointer-events-none">
     <div class="pointer-events-auto">
-      <template v-for="(item, i) in pointsConfig" :key="i">
+      <template v-for="(item, i) in state.infospotsConfig" :key="i">
         <div class="point" :class="`point-${item.id}`">
           <div class="label">{{ item.name }}</div>
         </div>
