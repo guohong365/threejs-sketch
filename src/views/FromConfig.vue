@@ -21,34 +21,41 @@ let sketch: ReturnType<typeof createSketch> | null = null;
 
 const init = () => {
   sketch = createSketch();
-  sketch.generator.generateByConfig(state.panoramaConfig);
-  sketch.generator.emitter.on(
-    "generate",
-    (generator: kokomi.PanoramaGenerator) => {
+
+  const generator = sketch.generator;
+  generator.generateByConfig(state.panoramaConfig);
+  generator.emitter.on("generate", (generator: kokomi.PanoramaGenerator) => {
+    state.infospotsConfig = generator.allInfospotConfig;
+    nextTick(() => {
+      generator.generateInfospotsWithSceneJump();
+
+      enablePointAdd();
+    });
+  });
+};
+
+const enablePointAdd = () => {
+  const generator = sketch?.generator;
+  if (generator) {
+    generator.outputCurrentScenePosition();
+    generator.emitter.on("click-scene", (point: THREE.Vector3) => {
+      const currentSceneConfig = state.panoramaConfig.find(
+        (scene: kokomi.SceneConfig) =>
+          scene.id === generator.viewer?.currentPanorama?.id
+      );
+      const infospot = {
+        id: `${generator.allInfospotConfig.length}`,
+        point,
+        name: `${generator.allInfospotConfig.length}`,
+      };
+      currentSceneConfig?.infospots?.push(infospot);
+      sketch?.generator.setConfig(state.panoramaConfig);
       state.infospotsConfig = generator.allInfospotConfig;
       nextTick(() => {
-        generator.generateInfospotsWithSceneJump();
-        generator.outputCurrentScenePosition();
-        generator.emitter.on("click-scene", (point: THREE.Vector3) => {
-          const currentSceneConfig = state.panoramaConfig.find(
-            (scene: kokomi.SceneConfig) =>
-              scene.id === generator.viewer?.currentPanorama?.id
-          );
-          const infospot = {
-            id: `${generator.allInfospotConfig.length}`,
-            point,
-            name: `${generator.allInfospotConfig.length}`,
-          };
-          currentSceneConfig?.infospots?.push(infospot);
-          sketch?.generator.setConfig(state.panoramaConfig);
-          state.infospotsConfig = generator.allInfospotConfig;
-          nextTick(() => {
-            sketch?.generator.generateInfospotsWithSceneJump();
-          });
-        });
+        sketch?.generator.generateInfospotsWithSceneJump();
       });
-    }
-  );
+    });
+  }
 };
 
 onMounted(() => {
