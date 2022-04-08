@@ -1,22 +1,25 @@
 <script lang="ts" setup>
 import createSketch from "@/sketches/panorama/fromConfig";
-import dummyConfig from "@/sketches/panorama/fromConfig/config";
 
-import { nextTick, onMounted, reactive } from "vue";
+import { nextTick, onMounted, reactive, type PropType } from "vue";
 
 import type * as THREE from "three";
 import type * as kokomi from "kokomi.js";
 
+const props = defineProps({
+  panoramaConfig: {
+    type: Object as PropType<kokomi.PanoramaConfig>,
+  },
+});
+
 interface State {
-  panoramaConfig: kokomi.PanoramaConfig;
   infospotsConfig: kokomi.InfospotConfig[];
-  mode: "view" | "edit";
+  isEditEnabled: boolean;
 }
 
 const state: State = reactive({
-  panoramaConfig: [],
   infospotsConfig: [],
-  mode: "view",
+  isEditEnabled: false,
 });
 
 let sketch: ReturnType<typeof createSketch> | null = null;
@@ -27,19 +30,25 @@ const init = () => {
     sketch = createSketch();
 
     const generator = sketch.generator;
-    generator.generateByConfig(state.panoramaConfig);
-    generator.emitter.on("generate", (generator: kokomi.PanoramaGenerator) => {
-      state.infospotsConfig = generator.allInfospotConfig;
-      nextTick(() => {
-        generator.generateInfospotsWithSceneJump();
-        resolve(true);
-      });
-    });
+    const panoramaConfig = props.panoramaConfig;
+    if (panoramaConfig) {
+      generator.generateByConfig(panoramaConfig);
+      generator.emitter.on(
+        "generate",
+        (generator: kokomi.PanoramaGenerator) => {
+          state.infospotsConfig = generator.allInfospotConfig;
+          nextTick(() => {
+            generator.generateInfospotsWithSceneJump();
+            resolve(true);
+          });
+        }
+      );
+    }
   });
 };
 
-// 开启编辑点功能
-const enablePointEdit = () => {
+// 监听编辑点事件
+const listenForPointEditEvent = () => {
   const generator = sketch?.generator;
   if (!generator) {
     return;
@@ -47,7 +56,7 @@ const enablePointEdit = () => {
 
   generator.outputCurrentScenePosition();
   generator.emitter.on("click-scene", (point: THREE.Vector3) => {
-    if (state.mode !== "edit") {
+    if (!state.isEditEnabled) {
       return;
     }
 
@@ -62,7 +71,11 @@ const getCurrentSceneConfig = () => {
     return null;
   }
 
-  const sceneConfig = state.panoramaConfig.find(
+  if (!props.panoramaConfig) {
+    return null;
+  }
+
+  const sceneConfig = props.panoramaConfig.find(
     (scene: kokomi.SceneConfig) =>
       scene.id === generator.viewer?.currentPanorama?.id
   );
@@ -76,24 +89,42 @@ const addPoint = (point: THREE.Vector3) => {
     return;
   }
 
+  if (!props.panoramaConfig) {
+    return null;
+  }
+
   const currentSceneConfig = getCurrentSceneConfig();
   const infospot = {
     id: `${generator.allInfospotConfig.length}`,
     point,
-    name: `${generator.allInfospotConfig.length}`,
+    name: `点${generator.allInfospotConfig.length}`,
   };
   currentSceneConfig?.infospots?.push(infospot);
-  sketch?.generator.setConfig(state.panoramaConfig);
+  sketch?.generator.setConfig(props.panoramaConfig);
   state.infospotsConfig = generator.allInfospotConfig;
   nextTick(() => {
     sketch?.generator.generateInfospotsWithSceneJump();
   });
 };
 
+// 开启编辑
+const enableEdit = () => {
+  state.isEditEnabled = true;
+};
+
+// 禁用编辑
+const disableEdit = () => {
+  state.isEditEnabled = false;
+};
+
+defineExpose({
+  enableEdit,
+  disableEdit,
+});
+
 onMounted(async () => {
-  state.panoramaConfig = dummyConfig;
   await init();
-  enablePointEdit();
+  listenForPointEditEvent();
 });
 </script>
 

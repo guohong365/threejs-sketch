@@ -12,11 +12,13 @@ const dummyConfig: kokomi.PanoramaConfig = [
       {
         id: "0",
         point: { x: 15.04, y: 1696.49, z: -4698.64 },
+        name: "点0",
       },
       {
         id: "1",
         point: { x: -803.91, y: 25.22, z: -4927.06 },
         jump: "1",
+        name: "点1",
       },
     ],
   },
@@ -29,6 +31,7 @@ const dummyConfig: kokomi.PanoramaConfig = [
         id: "2",
         point: { x: 1450.64, y: -189.35, z: -4772.9 },
         jump: "0",
+        name: "点2",
       },
     ],
   },
