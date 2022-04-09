@@ -13,7 +13,7 @@ import Physics from "../views/Physics.vue";
 import PanoramaImage from "../views/PanoramaImage.vue";
 import PanoramaCube from "../views/PanoramaCube.vue";
 import PanoramaMultiple from "../views/PanoramaMultiple.vue";
-import PanoramaImfospot from "../views/PanoramaInfospot.vue";
+import PanoramaInfospot from "../views/PanoramaInfospot.vue";
 import PanoramaMultipleSpot from "../views/PanoramaMultipleSpot.vue";
 import FromConfig from "../views/FromConfig.vue";
 
@@ -85,8 +85,8 @@ const router = createRouter({
     },
     {
       path: "/panorama-info-spot",
-      name: "PanoramaImfospot",
-      component: PanoramaImfospot,
+      name: "PanoramaInfospot",
+      component: PanoramaInfospot,
     },
     {
       path: "/panorama-multiple-spot",
