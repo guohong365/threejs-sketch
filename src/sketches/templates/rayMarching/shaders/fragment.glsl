@@ -18,30 +18,30 @@
 #pragma glslify:sdOctahedron=require(glsl-sdf/3d/primitives/sdOctahedron)
 #pragma glslify:sdPyramid=require(glsl-sdf/3d/primitives/sdPyramid)
 #pragma glslify:sdRhombus=require(glsl-sdf/3d/primitives/sdRhombus)
-#pragma glslify:iBox=require(glsl-sdf/misc/box/iBox)
+#pragma glslify:iBox=require(glsl-sdf/utils/iBox)
 
 // sdf ops
 #pragma glslify:opU=require(glsl-sdf/3d/combinations/opUnion)
 
 // ray
-#pragma glslify:normalizeScreenCoords=require(glsl-takara/normalizeScreenCoords)
-#pragma glslify:getRayDirection=require(glsl-takara/getRayDirection)
+#pragma glslify:normalizeScreenCoords=require(glsl-takara/misc/normalizeScreenCoords)
+#pragma glslify:getRayDirection=require(glsl-takara/misc/getRayDirection)
 
 // gamma
-#pragma glslify:toGamma=require(glsl-sdf/misc/gamma/out)
+#pragma glslify:toGamma=require(glsl-takara/gamma/out)
 
 // material
-#pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
-#pragma glslify:triplanarMapping=require(glsl-takara/triplanarMapping)
+#pragma glslify:checkersGradBox=require(glsl-takara/material/checkersGradBox)
+#pragma glslify:triplanarMapping=require(glsl-takara/material/triplanarMapping)
 
 // lighting
-#pragma glslify:saturate=require(glsl-takara/saturate)
-#pragma glslify:diffuse=require(glsl-takara/diffuse)
-#pragma glslify:specular=require(glsl-takara/specular)
-#pragma glslify:fresnel=require(glsl-takara/fresnel)
+#pragma glslify:saturate=require(glsl-takara/light/saturate)
+#pragma glslify:diffuse=require(glsl-takara/light/diffuse)
+#pragma glslify:specular=require(glsl-takara/light/specular)
+#pragma glslify:fresnel=require(glsl-takara/light/fresnel)
 
 // fog
-#pragma glslify:fog_exp=require(glsl-sdf/misc/fog/exp)
+#pragma glslify:fog_exp=require(glsl-takara/fog/exp)
 
 vec2 map(in vec3 pos){
     vec2 res=vec2(1e10,0.);
