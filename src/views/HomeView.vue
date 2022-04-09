@@ -28,10 +28,10 @@ import { RouterLink } from "vue-router";
           <router-link :to="{ name: 'ScreenQuad' }">Full Screen</router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'RayMarching' }">RayMarching</router-link>
+          <router-link :to="{ name: 'Physics' }">Physics</router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'Physics' }">Physics</router-link>
+          <router-link :to="{ name: 'RayMarching' }"> RayMarching </router-link>
         </li>
       </ul>
     </section>
@@ -74,6 +74,11 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'SphereWordCloud' }">
             Sphere Word Cloud
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingPrimitives' }">
+            RayMarching Primitives
           </router-link>
         </li>
       </ul>

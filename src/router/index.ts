@@ -18,6 +18,7 @@ import PanoramaMultipleSpot from "../views/PanoramaMultipleSpot.vue";
 import FromConfig from "../views/FromConfig.vue";
 
 import SphereWordCloud from "../views/SphereWordCloud.vue";
+import RayMarchingPrimitives from "../views/RayMarchingPrimitives.vue";
 
 import SmashHit1 from "../views/SmashHit1.vue";
 import SmashHit2 from "../views/SmashHit2.vue";
@@ -59,14 +60,14 @@ const router = createRouter({
       component: ScreenQuad,
     },
     {
-      path: "/ray-marching",
-      name: "RayMarching",
-      component: RayMarching,
-    },
-    {
       path: "/physics",
       name: "Physics",
       component: Physics,
+    },
+    {
+      path: "/ray-marching",
+      name: "RayMarching",
+      component: RayMarching,
     },
     {
       path: "/panorama-image",
@@ -102,6 +103,11 @@ const router = createRouter({
       path: "/sphere-word-cloud",
       name: "SphereWordCloud",
       component: SphereWordCloud,
+    },
+    {
+      path: "/ray-marching-primitives",
+      name: "RayMarchingPrimitives",
+      component: RayMarchingPrimitives,
     },
     {
       path: "/smash-hit/1",
