@@ -1,34 +1,34 @@
 // all sdfs
-#pragma glslify:sdPlane=require(glsl-sdf-primitives-all/sdPlane)
-#pragma glslify:sdSphere=require(glsl-sdf-primitives-all/sdSphere)
-#pragma glslify:sdBox=require(glsl-sdf-primitives-all/sdBox)
-#pragma glslify:sdBoxFrame=require(glsl-sdf-primitives-all/sdBoxFrame)
-#pragma glslify:sdEllipsoid=require(glsl-sdf-primitives-all/sdEllipsoid)
-#pragma glslify:sdTorus=require(glsl-sdf-primitives-all/sdTorus)
-#pragma glslify:sdCappedTorus=require(glsl-sdf-primitives-all/sdCappedTorus)
-#pragma glslify:sdHexPrism=require(glsl-sdf-primitives-all/sdHexPrism)
-#pragma glslify:sdOctogonPrism=require(glsl-sdf-primitives-all/sdOctogonPrism)
-#pragma glslify:sdCapsule=require(glsl-sdf-primitives-all/sdCapsule)
-#pragma glslify:sdRoundCone=require(glsl-sdf-primitives-all/sdRoundCone)
-#pragma glslify:sdTriPrism=require(glsl-sdf-primitives-all/sdTriPrism)
-#pragma glslify:sdCylinder=require(glsl-sdf-primitives-all/sdCylinder)
-#pragma glslify:sdCone=require(glsl-sdf-primitives-all/sdCone)
-#pragma glslify:sdCappedCone=require(glsl-sdf-primitives-all/sdCappedCone)
-#pragma glslify:sdSolidAngle=require(glsl-sdf-primitives-all/sdSolidAngle)
-#pragma glslify:sdOctahedron=require(glsl-sdf-primitives-all/sdOctahedron)
-#pragma glslify:sdPyramid=require(glsl-sdf-primitives-all/sdPyramid)
-#pragma glslify:sdRhombus=require(glsl-sdf-primitives-all/sdRhombus)
-#pragma glslify:iBox=require(glsl-sdf-primitives-all/iBox)
+#pragma glslify:sdPlane=require(glsl-sdf/3d/primitives/sdPlane)
+#pragma glslify:sdSphere=require(glsl-sdf/3d/primitives/sdSphere)
+#pragma glslify:sdBox=require(glsl-sdf/3d/primitives/sdBox)
+#pragma glslify:sdBoxFrame=require(glsl-sdf/3d/primitives/sdBoxFrame)
+#pragma glslify:sdEllipsoid=require(glsl-sdf/3d/primitives/sdEllipsoid)
+#pragma glslify:sdTorus=require(glsl-sdf/3d/primitives/sdTorus)
+#pragma glslify:sdCappedTorus=require(glsl-sdf/3d/primitives/sdCappedTorus)
+#pragma glslify:sdHexPrism=require(glsl-sdf/3d/primitives/sdHexPrism)
+#pragma glslify:sdOctogonPrism=require(glsl-sdf/3d/primitives/sdOctogonPrism)
+#pragma glslify:sdCapsule=require(glsl-sdf/3d/primitives/sdCapsule)
+#pragma glslify:sdRoundCone=require(glsl-sdf/3d/primitives/sdRoundCone)
+#pragma glslify:sdTriPrism=require(glsl-sdf/3d/primitives/sdTriPrism)
+#pragma glslify:sdCylinder=require(glsl-sdf/3d/primitives/sdCylinder)
+#pragma glslify:sdCone=require(glsl-sdf/3d/primitives/sdCone)
+#pragma glslify:sdCappedCone=require(glsl-sdf/3d/primitives/sdCappedCone)
+#pragma glslify:sdSolidAngle=require(glsl-sdf/3d/primitives/sdSolidAngle)
+#pragma glslify:sdOctahedron=require(glsl-sdf/3d/primitives/sdOctahedron)
+#pragma glslify:sdPyramid=require(glsl-sdf/3d/primitives/sdPyramid)
+#pragma glslify:sdRhombus=require(glsl-sdf/3d/primitives/sdRhombus)
+#pragma glslify:iBox=require(glsl-sdf/misc/box/iBox)
 
 // sdf ops
-#pragma glslify:opU=require(glsl-sdf-ops/union)
+#pragma glslify:opU=require(glsl-sdf/3d/combinations/opUnion)
 
 // ray
 #pragma glslify:normalizeScreenCoords=require(glsl-takara/normalizeScreenCoords)
 #pragma glslify:getRayDirection=require(glsl-takara/getRayDirection)
 
 // gamma
-#pragma glslify:toGamma=require(glsl-gamma/out)
+#pragma glslify:toGamma=require(glsl-sdf/misc/gamma/out)
 
 // material
 #pragma glslify:checkersGradBox=require(glsl-takara/checkersGradBox)
@@ -41,7 +41,7 @@
 #pragma glslify:fresnel=require(glsl-takara/fresnel)
 
 // fog
-#pragma glslify:fog_exp=require(glsl-fog/exp)
+#pragma glslify:fog_exp=require(glsl-sdf/misc/fog/exp)
 
 vec2 map(in vec3 pos){
     vec2 res=vec2(1e10,0.);
@@ -112,9 +112,9 @@ vec2 raycast(in vec3 ro,in vec3 rd){
     return res;
 }
 
-#pragma glslify:calcNormal=require(glsl-sdf-normal,map=map)
-#pragma glslify:calcSoftshadow=require(glsl-sdf-ops/softshadow,map=map)
-#pragma glslify:calcAO=require(glsl-sdf-ops/ao,map=map)
+#pragma glslify:calcNormal=require(glsl-sdf/utils/normal,map=map)
+#pragma glslify:calcSoftshadow=require(glsl-sdf/utils/softshadow,map=map)
+#pragma glslify:calcAO=require(glsl-sdf/utils/ao,map=map)
 
 vec3 material(in vec3 col,in vec3 pos,in float m,in vec3 nor){
     // common material
