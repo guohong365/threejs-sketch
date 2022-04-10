@@ -1,9 +1,11 @@
 // all sdfs
 #pragma glslify:sdBox=require(glsl-sdf/3d/primitives/sdBox)
+#pragma glslify:sdSphere=require(glsl-sdf/3d/primitives/sdSphere)
 
 // sdf ops
 #pragma glslify:opUnion=require(glsl-sdf/3d/combinations/opUnion)
 #pragma glslify:opRound=require(glsl-sdf/3d/alterations/opRound)
+#pragma glslify:opSmoothUnion=require(glsl-sdf/3d/combinations/opSmoothUnion)
 
 // ray
 #pragma glslify:normalizeScreenCoords=require(glsl-takara/vector/normalizeScreenCoords)
@@ -21,6 +23,8 @@
 vec2 map(in vec3 pos)
 {
     vec2 res=vec2(1e10,0.);
+    
+    float an=sin(iTime);
     
     {
         vec3 q=pos;
