@@ -24,8 +24,8 @@
 #pragma glslify:opU=require(glsl-sdf/3d/combinations/opUnion)
 
 // ray
-#pragma glslify:normalizeScreenCoords=require(glsl-takara/misc/normalizeScreenCoords)
-#pragma glslify:getRayDirection=require(glsl-takara/misc/getRayDirection)
+#pragma glslify:normalizeScreenCoords=require(glsl-takara/vector/normalizeScreenCoords)
+#pragma glslify:getRayDirection=require(glsl-takara/vector/getRayDirection)
 
 // gamma
 #pragma glslify:toGamma=require(glsl-takara/gamma/out)
