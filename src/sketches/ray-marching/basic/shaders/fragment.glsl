@@ -17,6 +17,9 @@
 #pragma glslify:specular=require(glsl-takara/light/specular)
 #pragma glslify:fresnel=require(glsl-takara/light/fresnel)
 
+// rotate
+#pragma glslify:rotate=require(glsl-takara/rotate/rotate)
+
 // gamma
 #pragma glslify:toGamma=require(glsl-takara/gamma/out)
 
