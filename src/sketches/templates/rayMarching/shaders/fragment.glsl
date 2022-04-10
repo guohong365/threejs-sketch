@@ -49,7 +49,6 @@ vec2 raycast(in vec3 ro,in vec3 rd){
 
 #pragma glslify:calcNormal=require(glsl-sdf/utils/normal,map=map)
 #pragma glslify:calcSoftshadow=require(glsl-sdf/utils/softshadow,map=map)
-#pragma glslify:calcAO=require(glsl-sdf/utils/ao,map=map)
 
 vec3 material(in vec3 col,in vec3 pos,in float m,in vec3 nor){
     // common material
@@ -64,67 +63,19 @@ vec3 material(in vec3 col,in vec3 pos,in float m,in vec3 nor){
 }
 
 vec3 lighting(in vec3 col,in vec3 pos,in vec3 rd,in vec3 nor){
-    vec3 lin=vec3(0.);
-    
-    // reflection
-    vec3 ref=reflect(rd,nor);
-    
-    // ao
-    float occ=calcAO(pos,nor);
+    vec3 lin=col;
     
     // sun
     {
-        // pos
-        vec3 lig=normalize(vec3(-.5,.4,-.6));
-        // dir
-        vec3 hal=normalize(lig-rd);
-        // diffuse
+        vec3 lig=normalize(vec3(1.,1.,1.));
         float dif=diffuse(nor,lig);
-        // softshadow
-        dif*=calcSoftshadow(pos,lig,.02,2.5);
-        // specular
-        float spe=specular(nor,hal,16.);
-        spe*=dif;
-        // fresnel
-        spe*=fresnel(.04,.96,5.,-lig,hal);
-        // apply
-        lin+=col*2.20*dif*vec3(1.30,1.,.70);
-        lin+=5.*spe*vec3(1.30,1.,.70);
+        float spe=specular(nor,lig,3.);
+        lin+=col*dif*spe;
     }
+    
     // sky
     {
-        // diffuse
-        float dif=sqrt(saturate(.5+.5*nor.y));
-        // ao
-        dif*=occ;
-        // specular
-        float spe=smoothstep(-.2,.2,ref.y);
-        spe*=dif;
-        // fresnel
-        spe*=fresnel(.04,.96,5.,rd,nor);
-        // softshadow
-        spe*=calcSoftshadow(pos,ref,.02,2.5);
-        // apply
-        lin+=col*.60*dif*vec3(.40,.60,1.15);
-        lin+=2.*spe*vec3(.40,.60,1.30);
-    }
-    // back
-    {
-        // diff
-        float dif=diffuse(nor,normalize(vec3(.5,0.,.6)))*saturate(1.-pos.y);
-        // ao
-        dif*=occ;
-        // apply
-        lin+=col*.55*dif*vec3(.25,.25,.25);
-    }
-    // sss
-    {
-        // fresnel
-        float dif=fresnel(0.,1.,2.,rd,nor);
-        // ao
-        dif*=occ;
-        // apply
-        lin+=col*.25*dif*vec3(1.,1.,1.);
+        lin*=col*.7;
     }
     
     return lin;
@@ -132,7 +83,7 @@ vec3 lighting(in vec3 col,in vec3 pos,in vec3 rd,in vec3 nor){
 
 vec3 render(in vec3 ro,in vec3 rd){
     // skybox
-    vec3 col=vec3(.7,.7,.9)-max(rd.y,0.)*.3;
+    vec3 col=vec3(10.,10.,10.)/255.;
     
     // raymarching
     vec2 res=raycast(ro,rd);
