@@ -1,8 +1,9 @@
 // all sdfs
-#pragma glslify:sdSphere=require(glsl-sdf/3d/primitives/sdSphere)
+#pragma glslify:sdBox=require(glsl-sdf/3d/primitives/sdBox)
 
 // sdf ops
 #pragma glslify:opUnion=require(glsl-sdf/3d/combinations/opUnion)
+#pragma glslify:opRound=require(glsl-sdf/3d/alterations/opRound)
 
 // ray
 #pragma glslify:normalizeScreenCoords=require(glsl-takara/vector/normalizeScreenCoords)
@@ -20,7 +21,8 @@ vec2 map(in vec3 pos)
     
     {
         vec3 q=pos;
-        float dt=sdSphere(q,.55);
+        float dt=sdBox(q,vec3(.5,.5,.5));
+        dt=opRound(dt,.1);
         res=opUnion(res,vec2(dt,26.9));
     }
     

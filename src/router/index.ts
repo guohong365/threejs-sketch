@@ -26,6 +26,8 @@ import SmashHit3 from "../views/SmashHit3.vue";
 import SmashHit4 from "../views/SmashHit4.vue";
 import SmashHit5 from "../views/SmashHit5.vue";
 
+import RayMarchingBasic from "../views/RayMarchingBasic.vue";
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -133,6 +135,11 @@ const router = createRouter({
       path: "/smash-hit/5",
       name: "SmashHit5",
       component: SmashHit5,
+    },
+    {
+      path: "/ray-marching/basic",
+      name: "RayMarchingBasic",
+      component: RayMarchingBasic,
     },
   ],
 });
