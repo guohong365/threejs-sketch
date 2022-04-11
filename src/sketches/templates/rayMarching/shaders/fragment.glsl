@@ -32,6 +32,9 @@
 
 // rotate
 #pragma glslify:rotate=require(glsl-takara/rotate/rotate)
+#pragma glslify:rotateX=require(glsl-takara/rotate/rotateX)
+#pragma glslify:rotateY=require(glsl-takara/rotate/rotateY)
+#pragma glslify:rotateZ=require(glsl-takara/rotate/rotateZ)
 
 // gamma
 #pragma glslify:toGamma=require(glsl-takara/gamma/out)

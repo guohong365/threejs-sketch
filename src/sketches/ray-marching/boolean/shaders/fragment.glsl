@@ -32,6 +32,9 @@
 
 // rotate
 #pragma glslify:rotate=require(glsl-takara/rotate/rotate)
+#pragma glslify:rotateX=require(glsl-takara/rotate/rotateX)
+#pragma glslify:rotateY=require(glsl-takara/rotate/rotateY)
+#pragma glslify:rotateZ=require(glsl-takara/rotate/rotateZ)
 
 // gamma
 #pragma glslify:toGamma=require(glsl-takara/gamma/out)
@@ -47,8 +50,8 @@ vec2 map(in vec3 pos)
         float d1=sdBox(q,vec3(.5,.5,.5));
         d1=opRound(d1,.1);
         float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opUnion(d1,d2);
-        res=opUnion(res,vec2(dt,26.9));
+        d2=opUnion(d1,d2);
+        res=opUnion(res,vec2(d2,26.9));
     }
     
     // intersection
@@ -58,8 +61,8 @@ vec2 map(in vec3 pos)
         float d1=sdBox(q,vec3(.5,.5,.5));
         d1=opRound(d1,.1);
         float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opIntersection(d1,d2);
-        res=opUnion(res,vec2(dt,26.9));
+        d2=opIntersection(d1,d2);
+        res=opUnion(res,vec2(d2,26.9));
     }
     
     // subtraction
@@ -69,8 +72,8 @@ vec2 map(in vec3 pos)
         float d1=sdBox(q,vec3(.5,.5,.5));
         d1=opRound(d1,.1);
         float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opSubtraction(d2,d1);
-        res=opUnion(res,vec2(dt,26.9));
+        d2=opSubtraction(d2,d1);
+        res=opUnion(res,vec2(d2,26.9));
     }
     
     // union blend
@@ -80,8 +83,8 @@ vec2 map(in vec3 pos)
         float d1=sdBox(q,vec3(.5,.5,.5));
         d1=opRound(d1,.1);
         float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opSmoothUnion(d1,d2,.25);
-        res=opUnion(res,vec2(dt,26.9));
+        d2=opSmoothUnion(d1,d2,.25);
+        res=opUnion(res,vec2(d2,26.9));
     }
     
     // intersection blend
@@ -91,8 +94,8 @@ vec2 map(in vec3 pos)
         float d1=sdBox(q,vec3(.5,.5,.5));
         d1=opRound(d1,.1);
         float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opSmoothIntersection(d1,d2,.25);
-        res=opUnion(res,vec2(dt,26.9));
+        d2=opSmoothIntersection(d1,d2,.25);
+        res=opUnion(res,vec2(d2,26.9));
     }
     
     // subtraction blend
@@ -102,8 +105,8 @@ vec2 map(in vec3 pos)
         float d1=sdBox(q,vec3(.5,.5,.5));
         d1=opRound(d1,.1);
         float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opSmoothSubtraction(d2,d1,.25);
-        res=opUnion(res,vec2(dt,26.9));
+        d2=opSmoothSubtraction(d2,d1,.25);
+        res=opUnion(res,vec2(d2,26.9));
     }
     
     return res;
