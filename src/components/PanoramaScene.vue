@@ -210,15 +210,6 @@ watch(
   }
 );
 
-defineExpose({
-  state,
-  enableEdit,
-  disableEdit,
-  currentInfospot,
-  onDeletePoint,
-  onEditPoint,
-});
-
 onMounted(async () => {
   await init();
   listenForPointEditEvent();
@@ -239,6 +230,78 @@ onMounted(async () => {
           @click="onSelectPoint(item)"
         >
           <div class="label">{{ item.name }}</div>
+        </div>
+      </template>
+    </div>
+  </div>
+  <div class="absolute top-4 left-4" style="z-index: 999999999">
+    <div class="flex flex-col space-y-3">
+      <div class="card shadow">
+        <div class="flex flex-col space-y-3">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-switch"
+              id="is-edit-enabled"
+              v-model="state.isEditEnabled"
+            />
+            <label class="form-check-label" for="is-edit-enabled">
+              开启编辑
+            </label>
+          </div>
+        </div>
+      </div>
+      <template v-if="currentInfospot">
+        <div class="card shadow">
+          <div class="flex flex-col space-y-3">
+            <div>当前选中点：</div>
+            <div>
+              <div class="form-group">
+                <div>名称：</div>
+                <div class="flex-1">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="currentInfospot.name"
+                    @input="onEditPoint(
+                        currentInfospot!
+                      )"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>位置：</div>
+            <div>x: {{ currentInfospot.point.x.toFixed(2) }}</div>
+            <div>y: {{ currentInfospot.point.y.toFixed(2) }}</div>
+            <div>z: {{ currentInfospot.point.z.toFixed(2) }}</div>
+            <div>
+              <div class="form-group">
+                <div>跳转场景：</div>
+                <div class="flex-1">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="currentInfospot.jump"
+                    @input="onEditPoint(
+                        currentInfospot!
+                      )"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                class="btn btn-danger btn-round text-center"
+                @click="
+                      onDeletePoint(
+                        currentInfospot!
+                      )
+                    "
+              >
+                删除
+              </div>
+            </div>
+          </div>
         </div>
       </template>
     </div>

@@ -1,99 +1,10 @@
 <script lang="ts" setup>
 import PanoramaScene from "@/components/PanoramaScene.vue";
 import dummyConfig from "@/sketches/panorama/fromConfig/config";
-
-import { reactive, ref } from "vue";
-
-const panoramaScene = ref<InstanceType<typeof PanoramaScene> | null>(null);
-
-const state = reactive({});
 </script>
 
 <template>
   <div class="relative">
-    <panorama-scene
-      ref="panoramaScene"
-      :panorama-config="dummyConfig"
-    ></panorama-scene>
-    <template v-if="panoramaScene">
-      <div class="absolute top-4 left-4" style="z-index: 999999999">
-        <div class="flex flex-col space-y-3">
-          <div class="card shadow">
-            <div class="flex flex-col space-y-3">
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  class="form-switch"
-                  id="is-edit-enabled"
-                  v-model="panoramaScene.state.isEditEnabled"
-                />
-                <label class="form-check-label" for="is-edit-enabled">
-                  开启编辑
-                </label>
-              </div>
-            </div>
-          </div>
-          <template v-if="panoramaScene.currentInfospot">
-            <div class="card shadow">
-              <div class="flex flex-col space-y-3">
-                <div>当前选中点：</div>
-                <div>
-                  <div class="form-group">
-                    <div>名称：</div>
-                    <div class="flex-1">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="panoramaScene.currentInfospot.name"
-                        @input="panoramaScene?.onEditPoint(
-                        panoramaScene.currentInfospot!
-                      )"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div>位置：</div>
-                <div>
-                  x: {{ panoramaScene.currentInfospot.point.x.toFixed(2) }}
-                </div>
-                <div>
-                  y: {{ panoramaScene.currentInfospot.point.y.toFixed(2) }}
-                </div>
-                <div>
-                  z: {{ panoramaScene.currentInfospot.point.z.toFixed(2) }}
-                </div>
-                <div>
-                  <div class="form-group">
-                    <div>跳转场景：</div>
-                    <div class="flex-1">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="panoramaScene.currentInfospot.jump"
-                        @input="panoramaScene?.onEditPoint(
-                        panoramaScene.currentInfospot!
-                      )"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div
-                    class="btn btn-danger btn-round text-center"
-                    @click="
-                      panoramaScene?.onDeletePoint(
-                        panoramaScene.currentInfospot!
-                      )
-                    "
-                  >
-                    删除
-                  </div>
-                </div>
-              </div>
-            </div>
-          </template>
-        </div>
-      </div>
-    </template>
+    <panorama-scene :panorama-config="dummyConfig"></panorama-scene>
   </div>
 </template>
