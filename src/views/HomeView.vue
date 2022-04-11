@@ -112,8 +112,8 @@ import { RouterLink } from "vue-router";
           </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'RayMarchingBlend' }">
-            RayMarching Blend
+          <router-link :to="{ name: 'RayMarchingBoolean' }">
+            RayMarching Boolean
           </router-link>
         </li>
       </ul>

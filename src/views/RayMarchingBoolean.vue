@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/ray-marching/blend";
+import createSketch from "@/sketches/ray-marching/boolean";
 
 import { onMounted } from "vue";
 

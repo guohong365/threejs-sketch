@@ -27,7 +27,7 @@ import SmashHit4 from "../views/SmashHit4.vue";
 import SmashHit5 from "../views/SmashHit5.vue";
 
 import RayMarchingBasic from "../views/RayMarchingBasic.vue";
-import RayMarchingBlend from "../views/RayMarchingBlend.vue";
+import RayMarchingBoolean from "../views/RayMarchingBoolean.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -143,9 +143,9 @@ const router = createRouter({
       component: RayMarchingBasic,
     },
     {
-      path: "/ray-marching/blend",
-      name: "RayMarchingBlend",
-      component: RayMarchingBlend,
+      path: "/ray-marching/boolean",
+      name: "RayMarchingBoolean",
+      component: RayMarchingBoolean,
     },
   ],
 });

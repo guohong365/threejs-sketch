@@ -3,8 +3,8 @@
 #pragma glslify:sdSphere=require(glsl-sdf/3d/primitives/sdSphere)
 
 // sdf ops
-#pragma glslify:opUnion=require(glsl-sdf/3d/combinations/opUnion)
 #pragma glslify:opRound=require(glsl-sdf/3d/alterations/opRound)
+#pragma glslify:opUnion=require(glsl-sdf/3d/combinations/opUnion)
 #pragma glslify:opSmoothUnion=require(glsl-sdf/3d/combinations/opSmoothUnion)
 
 // ray
@@ -118,7 +118,7 @@ vec3 render(in vec3 ro,in vec3 rd){
 vec3 getSceneColor(vec2 fragCoord){
     vec2 p=normalizeScreenCoords(fragCoord,iResolution.xy);
     
-    vec3 ro=vec3(3.,3.,3.);
+    vec3 ro=vec3(0.,4.,8.);
     vec3 ta=vec3(0.,0.,0.);
     const float fl=2.5;
     vec3 rd=getRayDirection(p,ro,ta,fl);

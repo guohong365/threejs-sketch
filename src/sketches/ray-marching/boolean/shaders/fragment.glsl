@@ -3,9 +3,13 @@
 #pragma glslify:sdSphere=require(glsl-sdf/3d/primitives/sdSphere)
 
 // sdf ops
-#pragma glslify:opUnion=require(glsl-sdf/3d/combinations/opUnion)
 #pragma glslify:opRound=require(glsl-sdf/3d/alterations/opRound)
+#pragma glslify:opUnion=require(glsl-sdf/3d/combinations/opUnion)
+#pragma glslify:opIntersection=require(glsl-sdf/3d/combinations/opIntersection)
+#pragma glslify:opSubtraction=require(glsl-sdf/3d/combinations/opSubtraction)
 #pragma glslify:opSmoothUnion=require(glsl-sdf/3d/combinations/opSmoothUnion)
+#pragma glslify:opSmoothIntersection=require(glsl-sdf/3d/combinations/opSmoothIntersection)
+#pragma glslify:opSmoothSubtraction=require(glsl-sdf/3d/combinations/opSmoothSubtraction)
 
 // ray
 #pragma glslify:normalizeScreenCoords=require(glsl-takara/vector/normalizeScreenCoords)
@@ -27,12 +31,69 @@ vec2 map(in vec3 pos)
 {
     vec2 res=vec2(1e10,0.);
     
+    // union
     {
         vec3 q=pos;
+        q+=vec3(3.,0.,2.);
+        float d1=sdBox(q,vec3(.5,.5,.5));
+        d1=opRound(d1,.1);
+        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
+        float dt=opUnion(d1,d2);
+        res=opUnion(res,vec2(dt,26.9));
+    }
+    
+    // intersection
+    {
+        vec3 q=pos;
+        q+=vec3(0.,0.,2.);
+        float d1=sdBox(q,vec3(.5,.5,.5));
+        d1=opRound(d1,.1);
+        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
+        float dt=opIntersection(d1,d2);
+        res=opUnion(res,vec2(dt,26.9));
+    }
+    
+    // subtraction
+    {
+        vec3 q=pos;
+        q+=vec3(-3.,0.,2.);
+        float d1=sdBox(q,vec3(.5,.5,.5));
+        d1=opRound(d1,.1);
+        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
+        float dt=opSubtraction(d1,d2);
+        res=opUnion(res,vec2(dt,26.9));
+    }
+    
+    // union blend
+    {
+        vec3 q=pos;
+        q+=vec3(3.,0.,-2.);
         float d1=sdBox(q,vec3(.5,.5,.5));
         d1=opRound(d1,.1);
         float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
         float dt=opSmoothUnion(d1,d2,.25);
+        res=opUnion(res,vec2(dt,26.9));
+    }
+    
+    // intersection blend
+    {
+        vec3 q=pos;
+        q+=vec3(0.,0.,-2.);
+        float d1=sdBox(q,vec3(.5,.5,.5));
+        d1=opRound(d1,.1);
+        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
+        float dt=opSmoothIntersection(d1,d2,.25);
+        res=opUnion(res,vec2(dt,26.9));
+    }
+    
+    // subtraction blend
+    {
+        vec3 q=pos;
+        q+=vec3(-3.,0.,-2.);
+        float d1=sdBox(q,vec3(.5,.5,.5));
+        d1=opRound(d1,.1);
+        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
+        float dt=opSmoothSubtraction(d1,d2,.25);
         res=opUnion(res,vec2(dt,26.9));
     }
     
@@ -118,7 +179,7 @@ vec3 render(in vec3 ro,in vec3 rd){
 vec3 getSceneColor(vec2 fragCoord){
     vec2 p=normalizeScreenCoords(fragCoord,iResolution.xy);
     
-    vec3 ro=vec3(3.,3.,3.);
+    vec3 ro=vec3(0.,4.,8.);
     vec3 ta=vec3(0.,0.,0.);
     const float fl=2.5;
     vec3 rd=getRayDirection(p,ro,ta,fl);
