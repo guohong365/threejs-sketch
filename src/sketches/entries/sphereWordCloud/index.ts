@@ -3,6 +3,8 @@ import SphereWordCloud from "./components/sphereWordCloud";
 
 class Sketch extends kokomi.Base {
   create() {
+    this.camera.position.z = 1.2;
+
     const controls = new kokomi.OrbitControls(this);
     controls.controls.autoRotate = true;
 

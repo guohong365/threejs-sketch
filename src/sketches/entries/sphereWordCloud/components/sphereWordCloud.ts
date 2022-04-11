@@ -68,6 +68,15 @@ class SphereWordCloud extends kokomi.Component {
     const uniqPositions = _.uniqWith(positions, _.isEqual);
     this.positions = uniqPositions;
   }
+  removeSomePositions() {
+    this.positions = this.positions.filter((item) => {
+      return !(
+        Math.abs(item.x) === 0 ||
+        item.z === 0 ||
+        Math.abs(item.y) === 0.5
+      );
+    });
+  }
   randomizePositions() {
     this.positions = this.positions.map((position) => {
       const offset = THREE.MathUtils.randFloat(0.4, 1);
@@ -79,7 +88,8 @@ class SphereWordCloud extends kokomi.Component {
   addHtmls() {
     const { positions } = this;
     const htmls = positions.map((position, i) => {
-      const el = document.querySelector(`.point-${i + 1}`) as HTMLElement;
+      const pointId = i + 1;
+      const el = document.querySelector(`.point-${pointId}`) as HTMLElement;
       const html = new kokomi.Html(this.base, el, position);
       return html;
     });
