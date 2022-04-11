@@ -10,7 +10,15 @@
 // sdf ops
 #pragma glslify:opRound=require(glsl-sdf/3d/alterations/opRound)
 #pragma glslify:opUnion=require(glsl-sdf/3d/combinations/opUnion)
+#pragma glslify:opIntersection=require(glsl-sdf/3d/combinations/opIntersection)
+#pragma glslify:opSubtraction=require(glsl-sdf/3d/combinations/opSubtraction)
 #pragma glslify:opSmoothUnion=require(glsl-sdf/3d/combinations/opSmoothUnion)
+#pragma glslify:opSmoothIntersection=require(glsl-sdf/3d/combinations/opSmoothIntersection)
+#pragma glslify:opSmoothSubtraction=require(glsl-sdf/3d/combinations/opSmoothSubtraction)
+#pragma glslify:opRepLim=require(glsl-sdf/3d/positioning/opRepLim)
+#pragma glslify:opSymX=require(glsl-sdf/3d/positioning/opSymX)
+#pragma glslify:opSymY=require(glsl-sdf/3d/positioning/opSymY)
+#pragma glslify:opSymZ=require(glsl-sdf/3d/positioning/opSymZ)
 
 // ray
 #pragma glslify:normalizeScreenCoords=require(glsl-takara/vector/normalizeScreenCoords)
