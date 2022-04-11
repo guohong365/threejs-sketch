@@ -19,6 +19,7 @@ import FromConfig from "../views/FromConfig.vue";
 
 import SphereWordCloud from "../views/SphereWordCloud.vue";
 import RayMarchingPrimitives from "../views/RayMarchingPrimitives.vue";
+import House from "../views/House.vue";
 
 import SmashHit1 from "../views/SmashHit1.vue";
 import SmashHit2 from "../views/SmashHit2.vue";
@@ -112,6 +113,11 @@ const router = createRouter({
       path: "/ray-marching-primitives",
       name: "RayMarchingPrimitives",
       component: RayMarchingPrimitives,
+    },
+    {
+      path: "/house",
+      name: "House",
+      component: House,
     },
     {
       path: "/smash-hit/1",

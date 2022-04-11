@@ -81,6 +81,9 @@ import { RouterLink } from "vue-router";
             RayMarching Primitives
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'House' }"> House </router-link>
+        </li>
       </ul>
     </section>
     <section>
