@@ -27,13 +27,11 @@ vec2 map(in vec3 pos)
 {
     vec2 res=vec2(1e10,0.);
     
-    float an=sin(iTime);
-    
     {
         vec3 q=pos;
         float d1=sdBox(q,vec3(.5,.5,.5));
         d1=opRound(d1,.1);
-        float d2=sdSphere(q+vec3(0.,-1.+.3*an,0.),.5);
+        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
         float dt=opSmoothUnion(d1,d2,.25);
         res=opUnion(res,vec2(dt,26.9));
     }
