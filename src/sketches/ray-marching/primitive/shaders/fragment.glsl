@@ -1,15 +1,16 @@
 // all sdfs
 #pragma glslify:sdBox=require(glsl-sdf/3d/primitives/sdBox)
 #pragma glslify:sdSphere=require(glsl-sdf/3d/primitives/sdSphere)
+#pragma glslify:sdCylinder=require(glsl-sdf/3d/primitives/sdCylinder)
+#pragma glslify:sdHexPrism=require(glsl-sdf/3d/primitives/sdHexPrism)
+#pragma glslify:sdOctogonPrism=require(glsl-sdf/3d/primitives/sdOctogonPrism)
+#pragma glslify:sdTriPrism=require(glsl-sdf/3d/primitives/sdTriPrism)
+#pragma glslify:sdCapsule=require(glsl-sdf/3d/primitives/sdCapsule)
 
 // sdf ops
 #pragma glslify:opRound=require(glsl-sdf/3d/alterations/opRound)
 #pragma glslify:opUnion=require(glsl-sdf/3d/combinations/opUnion)
-#pragma glslify:opIntersection=require(glsl-sdf/3d/combinations/opIntersection)
-#pragma glslify:opSubtraction=require(glsl-sdf/3d/combinations/opSubtraction)
 #pragma glslify:opSmoothUnion=require(glsl-sdf/3d/combinations/opSmoothUnion)
-#pragma glslify:opSmoothIntersection=require(glsl-sdf/3d/combinations/opSmoothIntersection)
-#pragma glslify:opSmoothSubtraction=require(glsl-sdf/3d/combinations/opSmoothSubtraction)
 
 // ray
 #pragma glslify:normalizeScreenCoords=require(glsl-takara/vector/normalizeScreenCoords)
@@ -31,69 +32,69 @@ vec2 map(in vec3 pos)
 {
     vec2 res=vec2(1e10,0.);
     
-    // union
+    float an=sin(iTime);
+    
+    // cube
     {
         vec3 q=pos;
-        q+=vec3(3.,0.,2.);
-        float d1=sdBox(q,vec3(.5,.5,.5));
-        d1=opRound(d1,.1);
-        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opUnion(d1,d2);
+        q+=vec3(6.,0.,3.);
+        float dt=sdBox(q,vec3(.5,.5,.5));
+        dt=opRound(dt,.1);
         res=opUnion(res,vec2(dt,26.9));
     }
     
-    // intersection
+    // sphere
     {
         vec3 q=pos;
-        q+=vec3(0.,0.,2.);
-        float d1=sdBox(q,vec3(.5,.5,.5));
-        d1=opRound(d1,.1);
-        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opIntersection(d1,d2);
+        q+=vec3(4.,0.,3.);
+        float dt=sdSphere(q,.5);
+        dt=opRound(dt,.1);
         res=opUnion(res,vec2(dt,26.9));
     }
     
-    // subtraction
+    // cylinder
     {
         vec3 q=pos;
-        q+=vec3(-3.,0.,2.);
-        float d1=sdBox(q,vec3(.5,.5,.5));
-        d1=opRound(d1,.1);
-        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opSubtraction(d2,d1);
+        q+=vec3(2.,0.,3.);
+        float dt=sdCylinder(q,vec2(.5,.5));
+        dt=opRound(dt,.1);
         res=opUnion(res,vec2(dt,26.9));
     }
     
-    // union blend
+    // polygon
+    // 6 - hex
     {
         vec3 q=pos;
-        q+=vec3(3.,0.,-2.);
-        float d1=sdBox(q,vec3(.5,.5,.5));
-        d1=opRound(d1,.1);
-        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opSmoothUnion(d1,d2,.25);
+        q+=vec3(0.,0.,3.);
+        float dt=sdHexPrism(q,vec2(.5,.5));
+        dt=opRound(dt,.1);
         res=opUnion(res,vec2(dt,26.9));
     }
     
-    // intersection blend
+    // 8 - oct
     {
         vec3 q=pos;
-        q+=vec3(0.,0.,-2.);
-        float d1=sdBox(q,vec3(.5,.5,.5));
-        d1=opRound(d1,.1);
-        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opSmoothIntersection(d1,d2,.25);
+        q+=vec3(0.,0.,0.);
+        float dt=sdOctogonPrism(q,.5,.5);
+        dt=opRound(dt,.1);
         res=opUnion(res,vec2(dt,26.9));
     }
     
-    // subtraction blend
+    // triangle
     {
         vec3 q=pos;
-        q+=vec3(-3.,0.,-2.);
-        float d1=sdBox(q,vec3(.5,.5,.5));
-        d1=opRound(d1,.1);
-        float d2=sdSphere(q+vec3(0.,-.75,0.),.5);
-        float dt=opSmoothSubtraction(d2,d1,.25);
+        q+=vec3(-2.,0.,3.);
+        float dt=sdTriPrism(q,vec2(.5,.5));
+        dt=opRound(dt,.1);
+        res=opUnion(res,vec2(dt,26.9));
+    }
+    
+    // joint
+    {
+        vec3 q=pos;
+        q+=vec3(-4.,0.,3.);
+        float dt=sdCapsule(q,vec3(0.,-.5,0.),vec3(0.,.5,0.),.25);
+        dt=opRound(dt,.1);
         res=opUnion(res,vec2(dt,26.9));
     }
     
