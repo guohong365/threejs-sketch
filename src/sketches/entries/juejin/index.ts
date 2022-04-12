@@ -13,6 +13,8 @@ class Sketch extends kokomi.Base {
     const map = new marcher.SDFMapFunction();
 
     const layer1 = new marcher.SDFLayer();
+    map.addLayer(layer1);
+
     const box1 = new marcher.BoxSDF({
       sdfVarName: "d1",
       width: 1,
@@ -22,9 +24,7 @@ class Sketch extends kokomi.Base {
     box1.round(0.1);
     box1.rotate(45, "y");
     layer1.addPrimitive(box1);
-    map.addLayer(layer1);
 
-    const layer2 = new marcher.SDFLayer();
     const box2 = new marcher.BoxSDF({
       sdfVarName: "d2",
       width: 0.6,
@@ -34,10 +34,8 @@ class Sketch extends kokomi.Base {
     box2.round(0.1);
     box2.translate(0, -0.4, 0);
     box2.rotate(45, "y");
-    layer2.addPrimitive(box2);
-    map.addLayer(layer2);
+    layer1.addPrimitive(box2);
 
-    const layer3 = new marcher.SDFLayer();
     const box3 = new marcher.BoxSDF({
       sdfVarName: "d3",
       width: 0.2,
@@ -47,8 +45,7 @@ class Sketch extends kokomi.Base {
     box3.round(0.1);
     box3.translate(0, -0.8, 0);
     box3.rotate(45, "y");
-    layer3.addPrimitive(box3);
-    map.addLayer(layer3);
+    layer1.addPrimitive(box3);
 
     mar.setMapFunction(map);
 
