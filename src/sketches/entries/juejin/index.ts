@@ -10,7 +10,12 @@ class Sketch extends kokomi.Base {
       antialias: true,
     });
 
+    const mat = new marcher.SDFMaterial();
+    mat.addColorMaterial(marcher.DEFAULT_MATERIAL_ID, 30, 128, 255);
+    mar.setMaterial(mat);
+
     const map = new marcher.SDFMapFunction();
+    mar.setMapFunction(map);
 
     const layer1 = new marcher.SDFLayer();
     map.addLayer(layer1);
@@ -46,12 +51,6 @@ class Sketch extends kokomi.Base {
     box3.translate(0, -0.8, 0);
     box3.rotate(45, "y");
     layer1.addPrimitive(box3);
-
-    mar.setMapFunction(map);
-
-    const mat = new marcher.SDFMaterial();
-    mat.addColorMaterial(marcher.DEFAULT_MATERIAL_ID, 30, 128, 255);
-    mar.setMaterial(mat);
 
     const rayMarchingQuad = new kokomi.RayMarchingQuad(this, mar);
     rayMarchingQuad.render();
