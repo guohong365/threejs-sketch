@@ -6,7 +6,9 @@ class Sketch extends kokomi.Base {
   create() {
     new kokomi.OrbitControls(this);
 
-    const mar = new marcher.Marcher();
+    const mar = new marcher.Marcher({
+      antialias: true,
+    });
 
     const sdfMapFunction = new marcher.SDFMapFunction();
 
