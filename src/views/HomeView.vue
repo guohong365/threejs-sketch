@@ -84,6 +84,9 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'House' }"> House </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'Juejin' }">Juejin</router-link>
+        </li>
       </ul>
     </section>
     <section>
