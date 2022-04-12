@@ -55,7 +55,6 @@ class Sketch extends kokomi.Base {
     const mat = new marcher.SDFMaterial();
     mat.addColorMaterial(marcher.DEFAULT_MATERIAL_ID, 30, 128, 255);
     mar.setMaterial(mat);
-    console.log(map.shader);
 
     const rayMarchingQuad = new kokomi.RayMarchingQuad(this, mar);
     rayMarchingQuad.render();
