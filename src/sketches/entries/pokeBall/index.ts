@@ -240,8 +240,6 @@ class Sketch extends kokomi.Base {
 
     mar.setLighting(lin);
 
-    console.log(mar.fragmentShader);
-
     // 渲染
     const rayMarchingQuad = new kokomi.RayMarchingQuad(this, mar);
     rayMarchingQuad.render();
