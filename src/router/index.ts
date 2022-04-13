@@ -21,6 +21,7 @@ import SphereWordCloud from "../views/SphereWordCloud.vue";
 import RayMarchingPrimitives from "../views/RayMarchingPrimitives.vue";
 import House from "../views/House.vue";
 import Juejin from "../views/Juejin.vue";
+import PokeBall from "../views/PokeBall.vue";
 
 import SmashHit1 from "../views/SmashHit1.vue";
 import SmashHit2 from "../views/SmashHit2.vue";
@@ -128,6 +129,11 @@ const router = createRouter({
       path: "/juejin",
       name: "Juejin",
       component: Juejin,
+    },
+    {
+      path: "/poke-ball",
+      name: "PokeBall",
+      component: PokeBall,
     },
     {
       path: "/smash-hit/1",
