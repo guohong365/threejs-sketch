@@ -12,59 +12,61 @@ class Sketch extends kokomi.Base {
 
     const map = new marcher.SDFMapFunction();
 
-    const layer1 = new marcher.SDFLayer();
+    {
+      const layer = new marcher.SDFLayer();
 
-    const box1 = new marcher.BoxSDF({
-      sdfVarName: "d1",
-    });
-    box1.round(0.1);
-    box1.translate(6, 0, 3);
-    layer1.addPrimitive(box1);
+      const box = new marcher.BoxSDF({
+        sdfVarName: "d1",
+      });
+      box.round(0.1);
+      box.translate(6, 0, 3);
+      layer.addPrimitive(box);
 
-    const sphere1 = new marcher.SphereSDF({
-      sdfVarName: "d2",
-    });
-    sphere1.round(0.1);
-    sphere1.translate(4, 0, 3);
-    layer1.addPrimitive(sphere1);
+      const sphere = new marcher.SphereSDF({
+        sdfVarName: "d2",
+      });
+      sphere.round(0.1);
+      sphere.translate(4, 0, 3);
+      layer.addPrimitive(sphere);
 
-    const cylinder1 = new marcher.CylinderSDF({
-      sdfVarName: "d3",
-    });
-    cylinder1.round(0.1);
-    cylinder1.translate(2, 0, 3);
-    layer1.addPrimitive(cylinder1);
+      const cylinder = new marcher.CylinderSDF({
+        sdfVarName: "d3",
+      });
+      cylinder.round(0.1);
+      cylinder.translate(2, 0, 3);
+      layer.addPrimitive(cylinder);
 
-    const polygonHex1 = new marcher.PolygonSDF({
-      sdfVarName: "d4",
-    });
-    polygonHex1.round(0.1);
-    polygonHex1.translate(0, 0, 3);
-    layer1.addPrimitive(polygonHex1);
+      const polygonHex = new marcher.PolygonSDF({
+        sdfVarName: "d4",
+      });
+      polygonHex.round(0.1);
+      polygonHex.translate(0, 0, 3);
+      layer.addPrimitive(polygonHex);
 
-    const polygonOct1 = new marcher.PolygonSDF({
-      sdfVarName: "d5",
-      edgeCount: 8,
-    });
-    polygonOct1.round(0.1);
-    polygonOct1.translate(0, 0, 0);
-    layer1.addPrimitive(polygonOct1);
+      const polygonOct = new marcher.PolygonSDF({
+        sdfVarName: "d5",
+        edgeCount: 8,
+      });
+      polygonOct.round(0.1);
+      polygonOct.translate(0, 0, 0);
+      layer.addPrimitive(polygonOct);
 
-    const triangle1 = new marcher.TriangleSDF({
-      sdfVarName: "d6",
-    });
-    triangle1.round(0.1);
-    triangle1.translate(-2, 0, 3);
-    layer1.addPrimitive(triangle1);
+      const triangle = new marcher.TriangleSDF({
+        sdfVarName: "d6",
+      });
+      triangle.round(0.1);
+      triangle.translate(-2, 0, 3);
+      layer.addPrimitive(triangle);
 
-    const joint1 = new marcher.JointSDF({
-      sdfVarName: "d7",
-    });
-    joint1.round(0.1);
-    joint1.translate(-4, 0, 3);
-    layer1.addPrimitive(joint1);
+      const joint = new marcher.JointSDF({
+        sdfVarName: "d7",
+      });
+      joint.round(0.1);
+      joint.translate(-4, 0, 3);
+      layer.addPrimitive(joint);
 
-    map.addLayer(layer1);
+      map.addLayer(layer);
+    }
 
     mar.setMapFunction(map);
 
