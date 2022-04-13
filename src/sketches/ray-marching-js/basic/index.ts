@@ -7,22 +7,22 @@ class Sketch extends kokomi.Base {
     new kokomi.OrbitControls(this);
 
     const mar = new marcher.Marcher({
-      antialias: true,
+      antialias: false,
     });
 
-    const sdfMapFunction = new marcher.SDFMapFunction();
+    const map = new marcher.SDFMapFunction();
 
-    const sdfLayer1 = new marcher.SDFLayer();
+    const layer1 = new marcher.SDFLayer();
 
-    const boxSDF = new marcher.BoxSDF({
+    const box1 = new marcher.BoxSDF({
       sdfVarName: "d1",
     });
-    boxSDF.round(0.1);
-    sdfLayer1.addPrimitive(boxSDF);
+    box1.round(0.1);
+    layer1.addPrimitive(box1);
 
-    sdfMapFunction.addLayer(sdfLayer1);
+    map.addLayer(layer1);
 
-    mar.setMapFunction(sdfMapFunction);
+    mar.setMapFunction(map);
 
     const rayMarchingQuad = new kokomi.RayMarchingQuad(this, mar);
     rayMarchingQuad.render();

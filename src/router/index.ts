@@ -33,6 +33,7 @@ import RayMarchingPrimitive from "../views/RayMarchingPrimitive.vue";
 import RayMarchingBoolean from "../views/RayMarchingBoolean.vue";
 
 import RayMarchingJsBasic from "../views/RayMarchingJsBasic.vue";
+import RayMarchingJsPrimitive from "../views/RayMarchingJsPrimitive.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -171,6 +172,11 @@ const router = createRouter({
       path: "/ray-marching/js/basic",
       name: "RayMarchingJsBasic",
       component: RayMarchingJsBasic,
+    },
+    {
+      path: "/ray-marching/js/primitive",
+      name: "RayMarchingJsPrimitive",
+      component: RayMarchingJsPrimitive,
     },
   ],
 });
