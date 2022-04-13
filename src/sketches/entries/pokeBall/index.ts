@@ -10,17 +10,22 @@ class Sketch extends kokomi.Base {
       antialias: false,
     });
 
+    const mat = new marcher.SDFMaterial();
+    mat.addColorMaterial("1.0", 0, 0, 0);
+    mar.setMaterial(mat);
+
     const map = new marcher.SDFMapFunction();
 
-    const layer1 = new marcher.SDFLayer();
+    {
+      const layer = new marcher.SDFLayer();
 
-    const box1 = new marcher.BoxSDF({
-      sdfVarName: "d1",
-    });
-    box1.round(0.1);
-    layer1.addPrimitive(box1);
+      const sphere = new marcher.SphereSDF({
+        sdfVarName: "d1",
+      });
+      layer.addPrimitive(sphere);
 
-    map.addLayer(layer1);
+      map.addLayer(layer);
+    }
 
     mar.setMapFunction(map);
 
