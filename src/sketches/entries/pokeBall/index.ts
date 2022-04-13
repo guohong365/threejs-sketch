@@ -28,12 +28,20 @@ class Sketch extends kokomi.Base {
       // 图层
       const layer = new marcher.SDFLayer();
 
+      // 组
+      const group = new marcher.GroupSDF({
+        mapFuncName: "g1",
+        sdfVarName: "d0",
+      });
+      mar.addGroup(group);
+      layer.addPrimitive(group);
+
       // 球内
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d1",
         materialId: BLACK_MAT,
       });
-      layer.addPrimitive(sphere);
+      group.addPrimitive(sphere);
 
       // 按钮
       const button = new marcher.CylinderSDF({
@@ -43,7 +51,7 @@ class Sketch extends kokomi.Base {
         height: 0.54,
       });
       button.rotate(90, "x");
-      layer.addPrimitive(button);
+      group.addPrimitive(button);
 
       // 球壳（上）
       const shellUpper = new marcher.SphereSDF({
@@ -61,8 +69,8 @@ class Sketch extends kokomi.Base {
       clipBoxUpper.hide();
       clipBoxUpper.translate(0, -0.6, 0);
 
-      layer.addPrimitive(clipBoxUpper);
-      layer.addPrimitive(shellUpper);
+      group.addPrimitive(clipBoxUpper);
+      group.addPrimitive(shellUpper);
 
       shellUpper.intersect(clipBoxUpper);
 
@@ -82,8 +90,8 @@ class Sketch extends kokomi.Base {
       clipBoxLower.hide();
       clipBoxLower.translate(0, 0.6, 0);
 
-      layer.addPrimitive(clipBoxLower);
-      layer.addPrimitive(shellLower);
+      group.addPrimitive(clipBoxLower);
+      group.addPrimitive(shellLower);
 
       shellLower.intersect(clipBoxLower);
 
@@ -96,7 +104,7 @@ class Sketch extends kokomi.Base {
       });
       clipCylinderCenter1.rotate(90, "x");
 
-      layer.addPrimitive(clipCylinderCenter1);
+      group.addPrimitive(clipCylinderCenter1);
 
       clipCylinderCenter1.subtract(shellUpper);
 
@@ -111,7 +119,7 @@ class Sketch extends kokomi.Base {
       });
       clipCylinderCenter2.rotate(90, "x");
 
-      layer.addPrimitive(clipCylinderCenter2);
+      group.addPrimitive(clipCylinderCenter2);
 
       clipCylinderCenter2.subtract(shellLower);
 
@@ -231,6 +239,8 @@ class Sketch extends kokomi.Base {
     `;
 
     mar.setLighting(lin);
+
+    console.log(mar.fragmentShader);
 
     // 渲染
     const rayMarchingQuad = new kokomi.RayMarchingQuad(this, mar);
