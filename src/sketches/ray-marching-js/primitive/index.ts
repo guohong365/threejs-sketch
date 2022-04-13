@@ -66,8 +66,6 @@ class Sketch extends kokomi.Base {
 
     map.addLayer(layer1);
 
-    console.log(map.shader);
-
     mar.setMapFunction(map);
 
     const rayMarchingQuad = new kokomi.RayMarchingQuad(this, mar);
