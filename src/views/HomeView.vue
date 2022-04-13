@@ -142,6 +142,11 @@ import { RouterLink } from "vue-router";
             RayMarchingJs Primitive
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingJsBoolean' }">
+            RayMarchingJs Boolean
+          </router-link>
+        </li>
       </ul>
     </section>
   </main>
