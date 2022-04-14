@@ -50,7 +50,7 @@ class Sketch extends kokomi.Base {
         radius: 0.1,
         height: 0.54,
       });
-      button.rotate(90, "x");
+      button.rotateX(90);
       group.addPrimitive(button);
 
       // 球壳（上）
@@ -67,7 +67,7 @@ class Sketch extends kokomi.Base {
         depth: 0.55,
       });
       clipBoxUpper.hide();
-      clipBoxUpper.translate(0, -0.6, 0);
+      clipBoxUpper.translateY(-0.6);
 
       group.addPrimitive(clipBoxUpper);
       group.addPrimitive(shellUpper);
@@ -88,7 +88,7 @@ class Sketch extends kokomi.Base {
         depth: 0.55,
       });
       clipBoxLower.hide();
-      clipBoxLower.translate(0, 0.6, 0);
+      clipBoxLower.translateY(0.6);
 
       group.addPrimitive(clipBoxLower);
       group.addPrimitive(shellLower);
@@ -102,7 +102,7 @@ class Sketch extends kokomi.Base {
         height: 0.6,
         materialId: RED_MAT,
       });
-      clipCylinderCenter1.rotate(90, "x");
+      clipCylinderCenter1.rotateX(90);
 
       group.addPrimitive(clipCylinderCenter1);
 
@@ -117,7 +117,7 @@ class Sketch extends kokomi.Base {
         height: 0.6,
         materialId: WHITE_MAT,
       });
-      clipCylinderCenter2.rotate(90, "x");
+      clipCylinderCenter2.rotateX(90);
 
       group.addPrimitive(clipCylinderCenter2);
 
