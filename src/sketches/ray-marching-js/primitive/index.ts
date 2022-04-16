@@ -65,6 +65,13 @@ class Sketch extends kokomi.Base {
       joint.translate(-4, 0, 3);
       layer.addPrimitive(joint);
 
+      const bezier = new marcher.BezierSDF({
+        sdfVarName: "d8",
+      });
+      bezier.round(0.1);
+      bezier.translate(-6, 0, 3);
+      layer.addPrimitive(bezier);
+
       map.addLayer(layer);
     }
 
