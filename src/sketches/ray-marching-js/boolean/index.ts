@@ -19,16 +19,14 @@ class Sketch extends kokomi.Base {
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      box.round(0.1);
-      box.translate(3, 0, 2);
       layer.addPrimitive(box);
+      box.round(0.1).translate(3, 0, 2);
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      sphere.translate(3, -0.75, 2);
       layer.addPrimitive(sphere);
-      box.hide();
-      sphere.union(box);
+      sphere.translate(3, -0.75, 2);
+      const r = sphere.union(box);
 
       map.addLayer(layer);
     }
@@ -40,16 +38,14 @@ class Sketch extends kokomi.Base {
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      box.round(0.1);
-      box.translate(0, 0, 2);
       layer.addPrimitive(box);
+      box.round(0.1).translate(0, 0, 2);
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      sphere.translate(0, -0.75, 2);
       layer.addPrimitive(sphere);
-      box.hide();
-      sphere.intersect(box);
+      sphere.translate(0, -0.75, 2);
+      const r = sphere.intersect(box);
 
       map.addLayer(layer);
     }
@@ -61,16 +57,14 @@ class Sketch extends kokomi.Base {
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      box.round(0.1);
-      box.translate(-3, 0, 2);
       layer.addPrimitive(box);
+      box.round(0.1).translate(-3, 0, 2);
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      sphere.translate(-3, -0.75, 2);
       layer.addPrimitive(sphere);
-      box.hide();
-      sphere.subtract(box);
+      sphere.translate(-3, -0.75, 2);
+      const r = sphere.subtract(box);
 
       map.addLayer(layer);
     }
@@ -82,16 +76,14 @@ class Sketch extends kokomi.Base {
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      box.round(0.1);
-      box.translate(3, 0, -2);
       layer.addPrimitive(box);
+      box.round(0.1).translate(3, 0, -2);
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      sphere.translate(3, -0.75, -2);
       layer.addPrimitive(sphere);
-      box.hide();
-      sphere.smoothUnion(box);
+      sphere.translate(3, -0.75, -2);
+      const r = sphere.smoothUnion(box);
 
       map.addLayer(layer);
     }
@@ -103,16 +95,14 @@ class Sketch extends kokomi.Base {
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      box.round(0.1);
-      box.translate(0, 0, -2);
       layer.addPrimitive(box);
+      box.round(0.1).translate(0, 0, -2);
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      sphere.translate(0, -0.75, -2);
       layer.addPrimitive(sphere);
-      box.hide();
-      sphere.smoothIntersect(box);
+      sphere.translate(0, -0.75, -2);
+      const r = sphere.smoothIntersect(box);
 
       map.addLayer(layer);
     }
@@ -124,16 +114,14 @@ class Sketch extends kokomi.Base {
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      box.round(0.1);
-      box.translate(-3, 0, -2);
       layer.addPrimitive(box);
+      box.round(0.1).translate(-3, 0, -2);
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      sphere.translate(-3, -0.75, -2);
       layer.addPrimitive(sphere);
-      box.hide();
-      sphere.smoothSubtract(box);
+      sphere.translate(-3, -0.75, -2);
+      const r = sphere.smoothSubtract(box);
 
       map.addLayer(layer);
     }

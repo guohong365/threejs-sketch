@@ -150,6 +150,11 @@ import { RouterLink } from "vue-router";
             RayMarchingJs Boolean
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingJsCSG' }">
+            RayMarchingJs CSG
+          </router-link>
+        </li>
       </ul>
     </section>
   </main>

@@ -50,50 +50,46 @@ class Sketch extends kokomi.Base {
         radius: 0.1,
         height: 0.54,
       });
-      button.rotateX(90);
       group.addPrimitive(button);
+      button.rotateX(90);
 
       // 球壳（上）
-      const shellUpper = new marcher.SphereSDF({
-        sdfVarName: "d3",
-        materialId: "3",
-        radius: 0.55,
-      });
-
       const clipBoxUpper = new marcher.BoxSDF({
-        sdfVarName: "d4",
+        sdfVarName: "d3",
         width: 0.55,
         height: 0.55,
         depth: 0.55,
       });
-      clipBoxUpper.hide();
+      group.addPrimitive(clipBoxUpper);
       clipBoxUpper.translateY(-0.6);
 
-      group.addPrimitive(clipBoxUpper);
-      group.addPrimitive(shellUpper);
-
-      shellUpper.intersect(clipBoxUpper);
-
-      // 球壳（下）
-      const shellLower = new marcher.SphereSDF({
-        sdfVarName: "d6",
-        materialId: WHITE_MAT,
+      const shellUpper = new marcher.SphereSDF({
+        sdfVarName: "d4",
+        materialId: "3",
         radius: 0.55,
       });
+      group.addPrimitive(shellUpper);
 
+      const clipShellUpper = shellUpper.intersect(clipBoxUpper);
+
+      // 球壳（下）
       const clipBoxLower = new marcher.BoxSDF({
         sdfVarName: "d5",
         width: 0.55,
         height: 0.55,
         depth: 0.55,
       });
-      clipBoxLower.hide();
+      group.addPrimitive(clipBoxLower);
       clipBoxLower.translateY(0.6);
 
-      group.addPrimitive(clipBoxLower);
+      const shellLower = new marcher.SphereSDF({
+        sdfVarName: "d6",
+        materialId: WHITE_MAT,
+        radius: 0.55,
+      });
       group.addPrimitive(shellLower);
 
-      shellLower.intersect(clipBoxLower);
+      const clipShellLower = shellLower.intersect(clipBoxLower);
 
       // 球壳（上）：挖除中间镂空部分后
       const clipCylinderCenter1 = new marcher.CylinderSDF({
@@ -102,13 +98,10 @@ class Sketch extends kokomi.Base {
         height: 0.6,
         materialId: RED_MAT,
       });
+      group.addPrimitive(clipCylinderCenter1);
       clipCylinderCenter1.rotateX(90);
 
-      group.addPrimitive(clipCylinderCenter1);
-
-      clipCylinderCenter1.subtract(shellUpper);
-
-      shellUpper.hide();
+      const clipShellUpper2 = clipCylinderCenter1.subtract(clipShellUpper);
 
       // 球壳下：挖除中间镂空部分后
       const clipCylinderCenter2 = new marcher.CylinderSDF({
@@ -117,13 +110,10 @@ class Sketch extends kokomi.Base {
         height: 0.6,
         materialId: WHITE_MAT,
       });
+      group.addPrimitive(clipCylinderCenter2);
       clipCylinderCenter2.rotateX(90);
 
-      group.addPrimitive(clipCylinderCenter2);
-
-      clipCylinderCenter2.subtract(shellLower);
-
-      shellLower.hide();
+      const clipShellLower2 = clipCylinderCenter2.subtract(clipShellLower);
 
       map.addLayer(layer);
     }

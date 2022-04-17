@@ -22,8 +22,8 @@ class Sketch extends kokomi.Base {
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      box.round(0.1);
       layer.addPrimitive(box);
+      box.round(0.1);
 
       map.addLayer(layer);
     }
