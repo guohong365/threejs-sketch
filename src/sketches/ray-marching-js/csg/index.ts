@@ -19,18 +19,24 @@ class Sketch extends kokomi.Base {
     {
       const layer = new marcher.SDFLayer();
 
+      const g = new marcher.GroupSDF({
+        mapFuncName: "g1",
+      });
+      mar.addGroup(g);
+      layer.addPrimitive(g);
+
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
         width: 1.5,
         height: 1.5,
         depth: 1.5,
       });
-      layer.addPrimitive(box);
+      g.addPrimitive(box);
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
         radius: 1,
       });
-      layer.addPrimitive(sphere);
+      g.addPrimitive(sphere);
       const f = sphere.intersect(box);
 
       const c1 = new marcher.CylinderSDF({
@@ -38,7 +44,7 @@ class Sketch extends kokomi.Base {
         radius: 0.5,
         height: 2,
       });
-      layer.addPrimitive(c1);
+      g.addPrimitive(c1);
       const a = c1.subtract(f);
 
       const c2 = new marcher.CylinderSDF({
@@ -46,7 +52,7 @@ class Sketch extends kokomi.Base {
         radius: 0.5,
         height: 2,
       });
-      layer.addPrimitive(c2);
+      g.addPrimitive(c2);
       const b = c2.rotateX(90).subtract(a);
 
       const c3 = new marcher.CylinderSDF({
@@ -54,7 +60,7 @@ class Sketch extends kokomi.Base {
         radius: 0.5,
         height: 2,
       });
-      layer.addPrimitive(c3);
+      g.addPrimitive(c3);
       const c = c3.rotateZ(90).subtract(b);
 
       map.addLayer(layer);

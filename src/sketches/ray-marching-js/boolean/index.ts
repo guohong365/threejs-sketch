@@ -16,17 +16,25 @@ class Sketch extends kokomi.Base {
     {
       const layer = new marcher.SDFLayer();
 
+      const g = new marcher.GroupSDF({ mapFuncName: "g1" });
+      mar.addGroup(g);
+      layer.addPrimitive(g);
+
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      layer.addPrimitive(box);
-      box.round(0.1).translate(3, 0, 2);
+      g.addPrimitive(box);
+      box.round(0.1);
+
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      layer.addPrimitive(sphere);
-      sphere.translate(3, -0.75, 2);
+      g.addPrimitive(sphere);
+      sphere.translateY(-0.75);
+
       const r = sphere.union(box);
+
+      g.translate(3, 0, 2);
 
       map.addLayer(layer);
     }
@@ -35,17 +43,25 @@ class Sketch extends kokomi.Base {
     {
       const layer = new marcher.SDFLayer();
 
+      const g = new marcher.GroupSDF({ mapFuncName: "g2" });
+      mar.addGroup(g);
+      layer.addPrimitive(g);
+
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      layer.addPrimitive(box);
-      box.round(0.1).translate(0, 0, 2);
+      g.addPrimitive(box);
+      box.round(0.1);
+
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      layer.addPrimitive(sphere);
-      sphere.translate(0, -0.75, 2);
+      g.addPrimitive(sphere);
+      sphere.translateY(-0.75);
+
       const r = sphere.intersect(box);
+
+      g.translate(0, 0, 2);
 
       map.addLayer(layer);
     }
@@ -54,17 +70,25 @@ class Sketch extends kokomi.Base {
     {
       const layer = new marcher.SDFLayer();
 
+      const g = new marcher.GroupSDF({ mapFuncName: "g3" });
+      mar.addGroup(g);
+      layer.addPrimitive(g);
+
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      layer.addPrimitive(box);
-      box.round(0.1).translate(-3, 0, 2);
+      g.addPrimitive(box);
+      box.round(0.1);
+
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      layer.addPrimitive(sphere);
-      sphere.translate(-3, -0.75, 2);
+      g.addPrimitive(sphere);
+      sphere.translateY(-0.75);
+
       const r = sphere.subtract(box);
+
+      g.translate(-3, 0, 2);
 
       map.addLayer(layer);
     }
@@ -73,17 +97,25 @@ class Sketch extends kokomi.Base {
     {
       const layer = new marcher.SDFLayer();
 
+      const g = new marcher.GroupSDF({ mapFuncName: "g4" });
+      mar.addGroup(g);
+      layer.addPrimitive(g);
+
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      layer.addPrimitive(box);
-      box.round(0.1).translate(3, 0, -2);
+      g.addPrimitive(box);
+      box.round(0.1);
+
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      layer.addPrimitive(sphere);
-      sphere.translate(3, -0.75, -2);
+      g.addPrimitive(sphere);
+      sphere.translateY(-0.75);
+
       const r = sphere.smoothUnion(box);
+
+      g.translate(3, 0, -2);
 
       map.addLayer(layer);
     }
@@ -92,17 +124,25 @@ class Sketch extends kokomi.Base {
     {
       const layer = new marcher.SDFLayer();
 
+      const g = new marcher.GroupSDF({ mapFuncName: "g5" });
+      mar.addGroup(g);
+      layer.addPrimitive(g);
+
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      layer.addPrimitive(box);
-      box.round(0.1).translate(0, 0, -2);
+      g.addPrimitive(box);
+      box.round(0.1);
+
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      layer.addPrimitive(sphere);
-      sphere.translate(0, -0.75, -2);
+      g.addPrimitive(sphere);
+      sphere.translateY(-0.75);
+
       const r = sphere.smoothIntersect(box);
+
+      g.translate(0, 0, -2);
 
       map.addLayer(layer);
     }
@@ -111,17 +151,25 @@ class Sketch extends kokomi.Base {
     {
       const layer = new marcher.SDFLayer();
 
+      const g = new marcher.GroupSDF({ mapFuncName: "g6" });
+      mar.addGroup(g);
+      layer.addPrimitive(g);
+
       const box = new marcher.BoxSDF({
         sdfVarName: "d1",
       });
-      layer.addPrimitive(box);
-      box.round(0.1).translate(-3, 0, -2);
+      g.addPrimitive(box);
+      box.round(0.1);
+
       const sphere = new marcher.SphereSDF({
         sdfVarName: "d2",
       });
-      layer.addPrimitive(sphere);
-      sphere.translate(-3, -0.75, -2);
+      g.addPrimitive(sphere);
+      sphere.translateY(-0.75);
+
       const r = sphere.smoothSubtract(box);
+
+      g.translate(-3, 0, -2);
 
       map.addLayer(layer);
     }
