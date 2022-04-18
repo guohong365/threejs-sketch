@@ -32,6 +32,9 @@
 #pragma glslify:opTx=require(glsl-sdf/3d/positioning/opTx)
 #pragma glslify:opTwist=require(glsl-sdf/3d/deformations/opTwist)
 #pragma glslify:opCheapBend=require(glsl-sdf/3d/deformations/opCheapBend)
+#pragma glslify:opHalfX=require(glsl-sdf/extra/alterations/opHalfX)
+#pragma glslify:opHalfY=require(glsl-sdf/extra/alterations/opHalfY)
+#pragma glslify:opHalfZ=require(glsl-sdf/extra/alterations/opHalfZ)
 
 // ray
 #pragma glslify:normalizeScreenCoords=require(glsl-takara/vector/normalizeScreenCoords)
