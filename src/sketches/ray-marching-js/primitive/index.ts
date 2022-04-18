@@ -39,27 +39,20 @@ class Sketch extends kokomi.Base {
       layer.addPrimitive(polygonHex);
       polygonHex.round(0.1).translate(0, 0, 3);
 
-      const polygonOct = new marcher.PolygonSDF({
-        sdfVarName: "d5",
-        edgeCount: 8,
-      });
-      layer.addPrimitive(polygonOct);
-      polygonOct.round(0.1).translate(0, 0, 0);
-
       const triangle = new marcher.TriangleSDF({
-        sdfVarName: "d6",
+        sdfVarName: "d5",
       });
       layer.addPrimitive(triangle);
       triangle.round(0.1).translate(-2, 0, 3);
 
       const joint = new marcher.JointSDF({
-        sdfVarName: "d7",
+        sdfVarName: "d6",
       });
       layer.addPrimitive(joint);
       joint.round(0.1).translate(-4, 0, 3);
 
       const bezier = new marcher.BezierSDF({
-        sdfVarName: "d8",
+        sdfVarName: "d7",
       });
       layer.addPrimitive(bezier);
       bezier.round(0.1).translate(-6, 0, 3);
