@@ -12,6 +12,7 @@ class Sketch extends kokomi.Base {
 
     const map = new marcher.SDFMapFunction();
 
+    // origin
     {
       const layer = new marcher.SDFLayer();
 
@@ -63,6 +64,62 @@ class Sketch extends kokomi.Base {
       });
       g.addPrimitive(bezier);
       bezier.round(0.1).translateX(-6);
+
+      map.addLayer(layer);
+    }
+
+    // onion
+    {
+      const layer = new marcher.SDFLayer();
+
+      const g = new marcher.GroupSDF({
+        mapFuncName: "g2",
+      });
+      mar.addGroup(g);
+      layer.addPrimitive(g);
+      g.translateZ(1);
+
+      const box = new marcher.BoxSDF({
+        sdfVarName: "d1",
+      });
+      g.addPrimitive(box);
+      box.round(0.1).onion(0.05).halfY().translateX(6);
+
+      const sphere = new marcher.SphereSDF({
+        sdfVarName: "d2",
+      });
+      g.addPrimitive(sphere);
+      sphere.round(0.1).onion(0.05).halfY().translateX(4);
+
+      const cylinder = new marcher.CylinderSDF({
+        sdfVarName: "d3",
+      });
+      g.addPrimitive(cylinder);
+      cylinder.round(0.1).onion(0.05).halfY().translateX(2);
+
+      const polygonHex = new marcher.PolygonSDF({
+        sdfVarName: "d4",
+      });
+      g.addPrimitive(polygonHex);
+      polygonHex.round(0.1).onion(0.05).halfY().translateX(0);
+
+      const triangle = new marcher.TriangleSDF({
+        sdfVarName: "d5",
+      });
+      g.addPrimitive(triangle);
+      triangle.round(0.1).onion(0.05).halfY().translateX(-2);
+
+      const joint = new marcher.JointSDF({
+        sdfVarName: "d6",
+      });
+      g.addPrimitive(joint);
+      joint.round(0.1).onion(0.05).halfY().translateX(-4);
+
+      const bezier = new marcher.BezierSDF({
+        sdfVarName: "d7",
+      });
+      g.addPrimitive(bezier);
+      bezier.round(0.1).onion(0.05).halfY().translateX(-6);
 
       map.addLayer(layer);
     }
