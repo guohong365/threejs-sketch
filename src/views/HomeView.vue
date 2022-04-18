@@ -87,9 +87,6 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'Juejin' }">Juejin</router-link>
         </li>
-        <li>
-          <router-link :to="{ name: 'PokeBall' }">PokeBall</router-link>
-        </li>
       </ul>
     </section>
     <section>
@@ -137,28 +134,29 @@ import { RouterLink } from "vue-router";
       <ul>
         <li>
           <router-link :to="{ name: 'RayMarchingJsBasic' }">
-            RayMarchingJs Basic
+            Basic
           </router-link>
         </li>
         <li>
           <router-link :to="{ name: 'RayMarchingJsPrimitive' }">
-            RayMarchingJs Primitive
+            Primitive
           </router-link>
         </li>
         <li>
           <router-link :to="{ name: 'RayMarchingJsBoolean' }">
-            RayMarchingJs Boolean
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'RayMarchingJsCSG' }">
-            RayMarchingJs CSG
+            Boolean
           </router-link>
         </li>
         <li>
           <router-link :to="{ name: 'RayMarchingJsBezier' }">
-            RayMarchingJs Bezier
+            Bezier
           </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingJsCSG' }"> CSG </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'PokeBall' }">PokeBall</router-link>
         </li>
       </ul>
     </section>

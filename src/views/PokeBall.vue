@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/entries/pokeBall";
+import createSketch from "@/sketches/ray-marching-js/pokeBall";
 
 import { onMounted } from "vue";
 
