@@ -19,11 +19,11 @@ class Sketch extends kokomi.Base {
     {
       const layer = new marcher.SDFLayer();
 
-      const box = new marcher.BoxSDF({
+      const bezier = new marcher.BezierSDF({
         sdfVarName: "d1",
       });
-      layer.addPrimitive(box);
-      box.round(0.1);
+      layer.addPrimitive(bezier);
+      bezier.round(0.1);
 
       map.addLayer(layer);
     }

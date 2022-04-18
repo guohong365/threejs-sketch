@@ -155,6 +155,11 @@ import { RouterLink } from "vue-router";
             RayMarchingJs CSG
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingJsBezier' }">
+            RayMarchingJs Bezier
+          </router-link>
+        </li>
       </ul>
     </section>
   </main>
