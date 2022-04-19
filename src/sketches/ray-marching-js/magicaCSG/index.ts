@@ -1,3 +1,5 @@
+import * as THREE from "three";
+
 import * as marcher from "marcher.js";
 
 import * as kokomi from "kokomi.js";
@@ -27,6 +29,7 @@ class Sketch extends kokomi.Base {
       halfX: false,
       halfY: false,
       halfZ: false,
+      cone: 0,
     };
 
     const uberprim = new marcher.UberprimSDF({
@@ -76,7 +79,7 @@ class Sketch extends kokomi.Base {
           widthDebug.setValue(0);
           heightDebug.setValue(0);
           depthDebug.setValue(0.5);
-          thicknessDebug.setValue(0.5);
+          thicknessDebug.setValue(0.25);
           xCornerRadiusDebug.setValue(0);
           yCornerRadiusDebug.setValue(0);
           zCornerRadiusDebug.setValue(0.5);
@@ -253,6 +256,20 @@ class Sketch extends kokomi.Base {
           (e) => !e.includes("opRound")
         );
         uberprim.round(value);
+        customShape();
+      });
+    magicaCSGFolder
+      .add(params, "cone")
+      .min(0)
+      .max(1)
+      .step(0.01)
+      .onChange((value: number) => {
+        const width = THREE.MathUtils.lerp(0.5, 0, value);
+        widthDebug.setValue(width);
+        const height = THREE.MathUtils.lerp(0.5, 0, value);
+        heightDebug.setValue(height);
+        const zCornerRadius = THREE.MathUtils.lerp(0, 0.5, value);
+        zCornerRadiusDebug.setValue(zCornerRadius);
         customShape();
       });
   }

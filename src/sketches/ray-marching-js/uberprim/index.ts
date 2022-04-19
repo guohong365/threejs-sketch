@@ -71,7 +71,7 @@ class Sketch extends kokomi.Base {
           widthDebug.setValue(0);
           heightDebug.setValue(0);
           depthDebug.setValue(0.5);
-          thicknessDebug.setValue(0.5);
+          thicknessDebug.setValue(0.25);
           xCornerRadiusDebug.setValue(0);
           yCornerRadiusDebug.setValue(0);
           zCornerRadiusDebug.setValue(0.5);
