@@ -22,6 +22,11 @@ class Sketch extends kokomi.Base {
 
     const params = {
       shape: "cube",
+      round: 0.1,
+      onion: 0,
+      halfX: false,
+      halfY: false,
+      halfZ: false,
     };
 
     const uberprim = new marcher.UberprimSDF({
@@ -35,7 +40,7 @@ class Sketch extends kokomi.Base {
       zCornerRadius: 0,
     });
     layer.addPrimitive(uberprim);
-    uberprim.round(0.1).rotateX(90);
+    uberprim.round(params.round).rotateX(90);
 
     map.addLayer(layer);
 
@@ -100,6 +105,7 @@ class Sketch extends kokomi.Base {
     };
 
     const basicFolder = gui.addFolder("Basic");
+    basicFolder.hide();
 
     const widthDebug = basicFolder
       .add(uberprim, "width")
@@ -162,6 +168,91 @@ class Sketch extends kokomi.Base {
       .step(0.01)
       .name("z Corner Radius")
       .onChange(() => {
+        customShape();
+      });
+
+    const magicaCSGFolder = gui.addFolder("Magica CSG");
+    magicaCSGFolder
+      .add(params, "halfX")
+      .name("HalfX")
+      .onChange((value: boolean) => {
+        if (value) {
+          uberprim.halfX();
+        } else {
+          uberprim.operationsAfter = uberprim.operationsAfter.filter(
+            (e) => !e.includes("opHalfX")
+          );
+        }
+        customShape();
+      });
+    magicaCSGFolder
+      .add(params, "halfY")
+      .name("HalfY")
+      .onChange((value: boolean) => {
+        if (value) {
+          uberprim.halfY();
+        } else {
+          uberprim.operationsAfter = uberprim.operationsAfter.filter(
+            (e) => !e.includes("opHalfY")
+          );
+        }
+        customShape();
+      });
+    magicaCSGFolder
+      .add(params, "halfZ")
+      .name("HalfZ")
+      .onChange((value: boolean) => {
+        if (value) {
+          uberprim.halfZ();
+        } else {
+          uberprim.operationsAfter = uberprim.operationsAfter.filter(
+            (e) => !e.includes("opHalfZ")
+          );
+        }
+        customShape();
+      });
+    magicaCSGFolder
+      .add(params, "onion")
+      .min(0)
+      .max(0.1)
+      .step(0.0001)
+      .name("Shell")
+      .onChange((value: number) => {
+        uberprim.operationsAfter = uberprim.operationsAfter.filter(
+          (e) => !e.includes("opOnion")
+        );
+        uberprim.onion(value);
+        customShape();
+      });
+    magicaCSGFolder
+      .add(uberprim, "thickness")
+      .min(0)
+      .max(0.25)
+      .step(0.01)
+      .name("Hole")
+      .onChange(() => {
+        customShape();
+      });
+    magicaCSGFolder
+      .add(uberprim, "xCornerRadius")
+      .min(0)
+      .max(0.5)
+      .step(0.01)
+      .name("Bevel")
+      .onChange(() => {
+        customShape();
+      });
+    magicaCSGFolder
+      .add(params, "round")
+      .min(0)
+      .max(0.5)
+      .step(0.01)
+      .name("Round")
+      .onChange((value: number) => {
+        uberprim.operationsAfter = uberprim.operationsAfter.filter(
+          (e) => !e.includes("opRound")
+        );
+        uberprim.round(value);
         customShape();
       });
   }

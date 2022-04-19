@@ -163,6 +163,11 @@ import { RouterLink } from "vue-router";
             Uberprim
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingJsMagicaCSG' }">
+            MagicaCSG
+          </router-link>
+        </li>
       </ul>
     </section>
   </main>
