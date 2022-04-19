@@ -54,6 +54,13 @@ class Sketch extends kokomi.Base {
       button.rotateX(90);
 
       // 球壳（上）
+      const shellUpper = new marcher.SphereSDF({
+        sdfVarName: "d4",
+        materialId: "3",
+        radius: 0.55,
+      });
+      // group.addPrimitive(shellUpper);
+
       const clipBoxUpper = new marcher.BoxSDF({
         sdfVarName: "d3",
         width: 0.55,
@@ -63,16 +70,17 @@ class Sketch extends kokomi.Base {
       group.addPrimitive(clipBoxUpper);
       clipBoxUpper.translateY(-0.6);
 
-      const shellUpper = new marcher.SphereSDF({
-        sdfVarName: "d4",
-        materialId: "3",
-        radius: 0.55,
-      });
-      group.addPrimitive(shellUpper);
-
       const clipShellUpper = shellUpper.intersect(clipBoxUpper);
+      // group.addPrimitive(clipShellUpper);
 
       // 球壳（下）
+      const shellLower = new marcher.SphereSDF({
+        sdfVarName: "d6",
+        materialId: WHITE_MAT,
+        radius: 0.55,
+      });
+      // group.addPrimitive(shellLower);
+
       const clipBoxLower = new marcher.BoxSDF({
         sdfVarName: "d5",
         width: 0.55,
@@ -82,14 +90,8 @@ class Sketch extends kokomi.Base {
       group.addPrimitive(clipBoxLower);
       clipBoxLower.translateY(0.6);
 
-      const shellLower = new marcher.SphereSDF({
-        sdfVarName: "d6",
-        materialId: WHITE_MAT,
-        radius: 0.55,
-      });
-      group.addPrimitive(shellLower);
-
       const clipShellLower = shellLower.intersect(clipBoxLower);
+      // group.addPrimitive(clipShellLower);
 
       // 球壳（上）：挖除中间镂空部分后
       const clipCylinderCenter1 = new marcher.CylinderSDF({
@@ -101,7 +103,8 @@ class Sketch extends kokomi.Base {
       group.addPrimitive(clipCylinderCenter1);
       clipCylinderCenter1.rotateX(90);
 
-      const clipShellUpper2 = clipCylinderCenter1.subtract(clipShellUpper);
+      const clipShellUpper2 = clipShellUpper.subtract(clipCylinderCenter1);
+      group.addPrimitive(clipShellUpper2);
 
       // 球壳下：挖除中间镂空部分后
       const clipCylinderCenter2 = new marcher.CylinderSDF({
@@ -113,7 +116,8 @@ class Sketch extends kokomi.Base {
       group.addPrimitive(clipCylinderCenter2);
       clipCylinderCenter2.rotateX(90);
 
-      const clipShellLower2 = clipCylinderCenter2.subtract(clipShellLower);
+      const clipShellLower2 = clipShellLower.subtract(clipCylinderCenter2);
+      group.addPrimitive(clipShellLower2);
 
       map.addLayer(layer);
     }

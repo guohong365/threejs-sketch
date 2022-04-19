@@ -7,6 +7,7 @@
 #pragma glslify:sdTriPrism=require(glsl-sdf/3d/primitives/sdTriPrism)
 #pragma glslify:sdCapsule=require(glsl-sdf/3d/primitives/sdCapsule)
 #pragma glslify:sdBezier3D=require(glsl-sdf/extra/primitives/sdBezier3D)
+#pragma glslify:sdUberprim=require(glsl-sdf/extra/primitives/sdUberprim)
 
 // sdf ops
 #pragma glslify:opElongate=require(glsl-sdf/3d/alterations/opElongate)
