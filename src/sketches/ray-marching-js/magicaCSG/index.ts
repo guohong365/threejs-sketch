@@ -263,6 +263,7 @@ class Sketch extends kokomi.Base {
       .min(0)
       .max(1)
       .step(0.01)
+      .name("Cone")
       .onChange((value: number) => {
         const width = THREE.MathUtils.lerp(0.5, 0, value);
         widthDebug.setValue(width);
