@@ -18,18 +18,14 @@ class Sketch extends kokomi.Base {
 
     const map = new marcher.SDFMapFunction();
 
-    const params = {
-      x2: 0,
-      xMax: 1.3,
-      yMax: 0.9,
-      zMax: 0.1,
-    };
-
     const layer = new marcher.SDFLayer();
 
     const bezier = new marcher.BezierSDF({
       sdfVarName: "d1",
-      ...params,
+      x2: 0,
+      xMax: 1.3,
+      yMax: 0.9,
+      zMax: 0.1,
     });
     layer.addPrimitive(bezier);
     bezier.round(0.1);
@@ -45,46 +41,42 @@ class Sketch extends kokomi.Base {
 
     const gui = new dat.GUI();
     gui
-      .add(params, "x2")
+      .add(bezier, "x2")
       .min(0)
       .max(1)
       .step(0.01)
       .name("Top Vertex")
-      .onChange((value: number) => {
-        bezier.x2 = value;
+      .onChange(() => {
         rayMarchingQuad.render();
       });
 
     const size = gui.addFolder("Size");
 
     size
-      .add(params, "xMax")
+      .add(bezier, "xMax")
       .min(0)
       .max(5)
       .step(0.01)
       .name("x")
-      .onChange((value: number) => {
-        bezier.xMax = value;
+      .onChange(() => {
         rayMarchingQuad.render();
       });
     size
-      .add(params, "yMax")
+      .add(bezier, "yMax")
       .min(0)
       .max(5)
       .step(0.01)
       .name("y")
-      .onChange((value: number) => {
-        bezier.yMax = value;
+      .onChange(() => {
         rayMarchingQuad.render();
       });
     size
-      .add(params, "zMax")
+      .add(bezier, "zMax")
       .min(0)
       .max(2)
       .step(0.01)
       .name("z")
-      .onChange((value: number) => {
-        bezier.zMax = value;
+      .onChange(() => {
         rayMarchingQuad.render();
       });
   }
