@@ -158,6 +158,11 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'PokeBall' }">PokeBall</router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingJsUberprim' }">
+            Uberprim
+          </router-link>
+        </li>
       </ul>
     </section>
   </main>

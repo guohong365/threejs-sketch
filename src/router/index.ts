@@ -38,6 +38,7 @@ import RayMarchingJsPrimitive from "../views/RayMarchingJsPrimitive.vue";
 import RayMarchingJsBoolean from "../views/RayMarchingJsBoolean.vue";
 import RayMarchingJsCSG from "../views/RayMarchingJsCSG.vue";
 import RayMarchingJsBezier from "../views/RayMarchingJsBezier.vue";
+import RayMarchingJsUberprim from "../views/RayMarchingJsUberprim.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -201,6 +202,11 @@ const router = createRouter({
       path: "/ray-marching/js/bezier",
       name: "RayMarchingJsBezier",
       component: RayMarchingJsBezier,
+    },
+    {
+      path: "/ray-marching/js/uberprim",
+      name: "RayMarchingJsUberprim",
+      component: RayMarchingJsUberprim,
     },
   ],
 });
