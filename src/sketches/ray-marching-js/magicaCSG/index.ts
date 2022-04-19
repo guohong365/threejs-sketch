@@ -182,9 +182,7 @@ class Sketch extends kokomi.Base {
         if (value) {
           uberprim.halfX();
         } else {
-          uberprim.operationsAfter = uberprim.operationsAfter.filter(
-            (e) => !e.includes("opHalfX")
-          );
+          uberprim.removeOperation("opHalfX");
         }
         customShape();
       });
@@ -195,9 +193,7 @@ class Sketch extends kokomi.Base {
         if (value) {
           uberprim.halfY();
         } else {
-          uberprim.operationsAfter = uberprim.operationsAfter.filter(
-            (e) => !e.includes("opHalfY")
-          );
+          uberprim.removeOperation("opHalfY");
         }
         customShape();
       });
@@ -208,9 +204,7 @@ class Sketch extends kokomi.Base {
         if (value) {
           uberprim.halfZ();
         } else {
-          uberprim.operationsAfter = uberprim.operationsAfter.filter(
-            (e) => !e.includes("opHalfZ")
-          );
+          uberprim.removeOperation("opHalfZ");
         }
         customShape();
       });
@@ -221,9 +215,7 @@ class Sketch extends kokomi.Base {
       .step(0.0001)
       .name("Shell")
       .onChange((value: number) => {
-        uberprim.operationsAfter = uberprim.operationsAfter.filter(
-          (e) => !e.includes("opOnion")
-        );
+        uberprim.removeOperation("opOnion");
         uberprim.onion(value);
         customShape();
       });
@@ -252,9 +244,7 @@ class Sketch extends kokomi.Base {
       .step(0.01)
       .name("Round")
       .onChange((value: number) => {
-        uberprim.operationsAfter = uberprim.operationsAfter.filter(
-          (e) => !e.includes("opRound")
-        );
+        uberprim.removeOperation("opRound");
         uberprim.round(value);
         customShape();
       });
