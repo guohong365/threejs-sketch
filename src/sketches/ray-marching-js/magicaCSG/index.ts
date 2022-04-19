@@ -108,7 +108,7 @@ class Sketch extends kokomi.Base {
     };
 
     const basicFolder = gui.addFolder("Basic");
-    basicFolder.hide();
+    basicFolder.close();
 
     const widthDebug = basicFolder
       .add(uberprim, "width")
