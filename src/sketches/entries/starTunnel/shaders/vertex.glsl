@@ -11,7 +11,7 @@ void main(){
     vec3 p=position;
     
     float t=iTime*1000.;
-    float v=.02;
+    float v=.01;
     float s=v*t;
     // p.z=p.z+s;
     p.z=mod(p.z+s,2000.);

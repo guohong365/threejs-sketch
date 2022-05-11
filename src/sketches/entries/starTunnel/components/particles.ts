@@ -27,7 +27,7 @@ class Particles extends kokomi.Component {
       count = 10000,
       pointColor1 = "#ff6030",
       pointColor2 = "#1b3984",
-      pointSize = 4,
+      pointSize = 3,
     } = config;
 
     this.count = count;
@@ -38,6 +38,8 @@ class Particles extends kokomi.Component {
     this.geometry = null;
     this.material = null;
     this.points = null;
+
+    this.create();
   }
   create() {
     const { base, count } = this;
@@ -101,9 +103,15 @@ class Particles extends kokomi.Component {
     const points = new THREE.Points(geometry, material);
     this.points = points;
 
-    scene.add(points);
-
     this.changePos();
+  }
+  addExisting(): void {
+    const { base, points } = this;
+    const { scene } = base;
+
+    if (points) {
+      scene.add(points);
+    }
   }
   update(time: number): void {
     const elapsedTime = time / 1000;

@@ -16,10 +16,18 @@ class Sketch extends kokomi.Base {
     this.interactionManager.camera = camera;
     camera.position.z = 1000;
 
-    new kokomi.OrbitControls(this);
+    // new kokomi.OrbitControls(this);
 
-    const particles = new Particles(this);
-    particles.create();
+    const particles = new Particles(this, {
+      pointColor1: "#2155CD",
+      pointColor2: "#FF4949",
+    });
+    particles.addExisting();
+
+    const persistenceEffect = new kokomi.PersistenceEffect(this, {
+      fadeColor: new THREE.Color("#191919"),
+    });
+    persistenceEffect.addExisting();
   }
 }
 
