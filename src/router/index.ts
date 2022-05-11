@@ -7,6 +7,7 @@ import AssetManage from "../views/AssetManage.vue";
 import Image from "../views/Image.vue";
 import ScreenQuad from "../views/ScreenQuad.vue";
 import RayMarching from "../views/RayMarching.vue";
+import Particle from '../views/Particle.vue'
 
 import Physics from "../views/Physics.vue";
 
@@ -83,6 +84,11 @@ const router = createRouter({
       path: "/ray-marching",
       name: "RayMarching",
       component: RayMarching,
+    },
+    {
+      path: "/particle",
+      name: "Particle",
+      component: Particle,
     },
     {
       path: "/panorama-image",
