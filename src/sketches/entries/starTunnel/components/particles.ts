@@ -45,17 +45,7 @@ class Particles extends kokomi.Component {
     const { base, count } = this;
     const { scene } = base;
 
-    if (this.geometry) {
-      this.geometry.dispose();
-    }
-
-    if (this.material) {
-      this.material.dispose();
-    }
-
-    if (this.points) {
-      scene.remove(this.points);
-    }
+    this.dispose();
 
     const geometry = new THREE.BufferGeometry();
     this.geometry = geometry;
@@ -140,6 +130,22 @@ class Particles extends kokomi.Component {
           arr[axis.z] = z;
         }
       );
+    }
+  }
+  dispose() {
+    const { base } = this;
+    const { scene } = base;
+
+    if (this.geometry) {
+      this.geometry.dispose();
+    }
+
+    if (this.material) {
+      this.material.dispose();
+    }
+
+    if (this.points) {
+      scene.remove(this.points);
     }
   }
 }
