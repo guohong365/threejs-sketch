@@ -7,7 +7,7 @@ import AssetManage from "../views/AssetManage.vue";
 import Image from "../views/Image.vue";
 import ScreenQuad from "../views/ScreenQuad.vue";
 import RayMarching from "../views/RayMarching.vue";
-import Particle from '../views/Particle.vue'
+import Particle from "../views/Particle.vue";
 
 import Physics from "../views/Physics.vue";
 
@@ -23,6 +23,7 @@ import RayMarchingPrimitives from "../views/RayMarchingPrimitives.vue";
 import House from "../views/House.vue";
 import Juejin from "../views/Juejin.vue";
 import PokeBall from "../views/PokeBall.vue";
+import StarTunnel from "../views/StarTunnel.vue";
 
 import SmashHit1 from "../views/SmashHit1.vue";
 import SmashHit2 from "../views/SmashHit2.vue";
@@ -144,6 +145,11 @@ const router = createRouter({
       path: "/poke-ball",
       name: "PokeBall",
       component: PokeBall,
+    },
+    {
+      path: "/star-tunnel",
+      name: "StarTunnel",
+      component: StarTunnel,
     },
     {
       path: "/smash-hit/1",

@@ -24,4 +24,7 @@ export default defineConfig({
     assetsInlineLimit: 0,
   },
   assetsInclude: ["**/*.gltf", "**/*.glb"],
+  server: {
+    open: true,
+  },
 });

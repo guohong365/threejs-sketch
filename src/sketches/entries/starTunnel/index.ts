@@ -14,9 +14,7 @@ class Sketch extends kokomi.Base {
     );
     this.camera = camera;
     this.interactionManager.camera = camera;
-    camera.position.x = 50;
-    camera.position.y = 50;
-    camera.position.z = 50;
+    camera.position.z = 1000;
 
     new kokomi.OrbitControls(this);
 

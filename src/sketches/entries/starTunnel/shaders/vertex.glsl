@@ -10,6 +10,12 @@ varying float vRandColor;
 void main(){
     vec3 p=position;
     
+    float t=iTime*1000.;
+    float v=.02;
+    float s=v*t;
+    // p.z=p.z+s;
+    p.z=mod(p.z+s,2000.);
+    
     vec4 mvPosition=modelViewMatrix*vec4(p,1.);
     gl_Position=projectionMatrix*mvPosition;
     

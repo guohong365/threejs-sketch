@@ -27,7 +27,7 @@ class Particles extends kokomi.Component {
       count = 10000,
       pointColor1 = "#ff6030",
       pointColor2 = "#1b3984",
-      pointSize = 1,
+      pointSize = 4,
     } = config;
 
     this.count = count;
@@ -122,7 +122,14 @@ class Particles extends kokomi.Component {
         positionAttrib.array,
         count,
         (arr: number[], axis: THREE.Vector3) => {
-          arr[axis.y] = Math.sin(arr[axis.x]);
+          const theta = THREE.MathUtils.randFloat(0, 360);
+          const r = THREE.MathUtils.randFloat(10, 50);
+          const x = r * Math.cos(theta);
+          const y = r * Math.sin(theta);
+          const z = THREE.MathUtils.randFloat(0, 2000);
+          arr[axis.x] = x;
+          arr[axis.y] = y;
+          arr[axis.z] = z;
         }
       );
     }
