@@ -4,6 +4,14 @@ import * as kokomi from "kokomi.js";
 
 import Particles from "./components/particles";
 
+import * as dat from "lil-gui";
+
+const params = {
+  count: 10000,
+  pointColor1: "#2155CD",
+  pointColor2: "#FF4949",
+};
+
 class Sketch extends kokomi.Base {
   particles: Particles | null;
   persistenceEffect: kokomi.PersistenceEffect | null;
@@ -23,6 +31,8 @@ class Sketch extends kokomi.Base {
     window.addEventListener("resize", () => {
       this.createParticles();
     });
+
+    this.createDebug();
   }
   createCamera() {
     const camera = new THREE.PerspectiveCamera(
@@ -45,8 +55,9 @@ class Sketch extends kokomi.Base {
     }
 
     const particles = new Particles(this, {
-      pointColor1: "#2155CD",
-      pointColor2: "#FF4949",
+      count: params.count,
+      pointColor1: params.pointColor1,
+      pointColor2: params.pointColor2,
     });
     particles.addExisting();
     this.particles = particles;
@@ -56,6 +67,25 @@ class Sketch extends kokomi.Base {
     });
     persistenceEffect.addExisting();
     this.persistenceEffect = persistenceEffect;
+  }
+  createDebug() {
+    const gui = new dat.GUI();
+
+    gui
+      .add(params, "count")
+      .min(0)
+      .max(50000)
+      .onChange(() => {
+        this.createParticles();
+      });
+
+    gui.addColor(params, "pointColor1").onChange(() => {
+      this.createParticles();
+    });
+
+    gui.addColor(params, "pointColor2").onChange(() => {
+      this.createParticles();
+    });
   }
 }
 
