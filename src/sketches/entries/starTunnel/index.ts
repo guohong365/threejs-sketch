@@ -10,6 +10,8 @@ const params = {
   count: 10000,
   pointColor1: "#2155CD",
   pointColor2: "#FF4949",
+  angularVelocity: 0,
+  fadeFactor: 0.2,
 };
 
 class Sketch extends kokomi.Base {
@@ -58,12 +60,14 @@ class Sketch extends kokomi.Base {
       count: params.count,
       pointColor1: params.pointColor1,
       pointColor2: params.pointColor2,
+      angularVelocity: params.angularVelocity,
     });
     particles.addExisting();
     this.particles = particles;
 
     const persistenceEffect = new kokomi.PersistenceEffect(this, {
       fadeColor: new THREE.Color("#191919"),
+      fadeFactor: params.fadeFactor,
     });
     persistenceEffect.addExisting();
     this.persistenceEffect = persistenceEffect;
@@ -75,6 +79,7 @@ class Sketch extends kokomi.Base {
       .add(params, "count")
       .min(0)
       .max(50000)
+      .step(1)
       .onChange(() => {
         this.createParticles();
       });
@@ -86,6 +91,24 @@ class Sketch extends kokomi.Base {
     gui.addColor(params, "pointColor2").onChange(() => {
       this.createParticles();
     });
+
+    gui
+      .add(params, "angularVelocity")
+      .min(0)
+      .max(1)
+      .step(0.001)
+      .onChange(() => {
+        this.createParticles();
+      });
+
+    gui
+      .add(params, "fadeFactor")
+      .min(0)
+      .max(1)
+      .step(0.001)
+      .onChange(() => {
+        this.createParticles();
+      });
   }
 }
 

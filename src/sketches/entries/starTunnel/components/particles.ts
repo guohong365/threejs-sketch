@@ -10,6 +10,7 @@ interface ParticlesConfig {
   pointColor1: string;
   pointColor2: string;
   pointSize: number;
+  angularVelocity: number;
 }
 
 class Particles extends kokomi.Component {
@@ -17,6 +18,7 @@ class Particles extends kokomi.Component {
   pointColor1: string;
   pointColor2: string;
   pointSize: number;
+  angularVelocity: number;
   geometry: THREE.BufferGeometry | null;
   material: THREE.ShaderMaterial | null;
   points: THREE.Points | null;
@@ -28,12 +30,14 @@ class Particles extends kokomi.Component {
       pointColor1 = "#ff6030",
       pointColor2 = "#1b3984",
       pointSize = 3,
+      angularVelocity = 0,
     } = config;
 
     this.count = count;
     this.pointColor1 = pointColor1;
     this.pointColor2 = pointColor2;
     this.pointSize = pointSize;
+    this.angularVelocity = angularVelocity;
 
     this.geometry = null;
     this.material = null;
@@ -109,6 +113,10 @@ class Particles extends kokomi.Component {
     if (this.material) {
       const uniforms = this.material.uniforms;
       uniforms.iTime.value = elapsedTime;
+    }
+
+    if (this.points) {
+      this.points.rotation.z += this.angularVelocity * 0.01;
     }
   }
   changePos() {
