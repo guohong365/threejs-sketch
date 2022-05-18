@@ -12,6 +12,7 @@ const params = {
   pointColor2: "#FF4949",
   angularVelocity: 0,
   fadeFactor: 0.2,
+  velocity: 0.01,
 };
 
 class Sketch extends kokomi.Base {
@@ -61,6 +62,7 @@ class Sketch extends kokomi.Base {
       pointColor1: params.pointColor1,
       pointColor2: params.pointColor2,
       angularVelocity: params.angularVelocity,
+      velocity: params.velocity,
     });
     particles.addExisting();
     this.particles = particles;
@@ -75,6 +77,10 @@ class Sketch extends kokomi.Base {
   createDebug() {
     const gui = new dat.GUI();
 
+    const { particles, persistenceEffect } = this;
+
+    const uniforms = particles?.material?.uniforms;
+
     gui
       .add(params, "count")
       .min(0)
@@ -85,11 +91,15 @@ class Sketch extends kokomi.Base {
       });
 
     gui.addColor(params, "pointColor1").onChange(() => {
-      this.createParticles();
+      if (uniforms) {
+        uniforms.iColor1.value = new THREE.Color(params.pointColor1);
+      }
     });
 
     gui.addColor(params, "pointColor2").onChange(() => {
-      this.createParticles();
+      if (uniforms) {
+        uniforms.iColor2.value = new THREE.Color(params.pointColor2);
+      }
     });
 
     gui
@@ -98,7 +108,9 @@ class Sketch extends kokomi.Base {
       .max(1)
       .step(0.001)
       .onChange(() => {
-        this.createParticles();
+        if (particles) {
+          particles.angularVelocity = params.angularVelocity;
+        }
       });
 
     gui
@@ -107,7 +119,20 @@ class Sketch extends kokomi.Base {
       .max(1)
       .step(0.001)
       .onChange(() => {
-        this.createParticles();
+        if (persistenceEffect) {
+          persistenceEffect.fadeFactor = params.fadeFactor;
+        }
+      });
+
+    gui
+      .add(params, "velocity")
+      .min(0)
+      .max(0.1)
+      .step(0.001)
+      .onChange(() => {
+        if (uniforms) {
+          uniforms.iVelocity.value = params.velocity;
+        }
       });
   }
 }

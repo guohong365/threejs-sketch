@@ -1,6 +1,7 @@
 #pragma glslify:random=require(glsl-takara/noise/random)
 
 uniform float iTime;
+uniform float iVelocity;
 
 attribute vec2 aSeed;
 attribute float aSize;
@@ -11,7 +12,7 @@ void main(){
     vec3 p=position;
     
     float t=iTime*1000.;
-    float v=.01;
+    float v=iVelocity;
     float s=v*t;
     // p.z=p.z+s;
     p.z=mod(p.z+s,2000.);
