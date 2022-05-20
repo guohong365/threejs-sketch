@@ -57,7 +57,14 @@ class Sketch extends kokomi.Base {
     const gui = new dat.GUI();
 
     const shapeDebug = gui
-      .add(params, "shape", ["cube", "cylinder", "cone", "joint", "sphere"])
+      .add(params, "shape", [
+        "cube",
+        "sphere",
+        "torus",
+        "joint",
+        "cone",
+        "cylinder",
+      ])
       .onChange((value: string) => {
         if (value === "cube") {
           widthDebug.setValue(0.5);
@@ -67,13 +74,29 @@ class Sketch extends kokomi.Base {
           xCornerRadiusDebug.setValue(0);
           yCornerRadiusDebug.setValue(0);
           zCornerRadiusDebug.setValue(0);
-        } else if (value === "cylinder") {
+        } else if (value === "sphere") {
           widthDebug.setValue(0.5);
           heightDebug.setValue(0.5);
           depthDebug.setValue(0.5);
-          thicknessDebug.setValue(0.25);
+          thicknessDebug.setValue(0.5);
           xCornerRadiusDebug.setValue(0.5);
-          yCornerRadiusDebug.setValue(0);
+          yCornerRadiusDebug.setValue(0.5);
+          zCornerRadiusDebug.setValue(0);
+        } else if (value === "torus") {
+          widthDebug.setValue(0.5);
+          heightDebug.setValue(0.5);
+          depthDebug.setValue(0.125);
+          thicknessDebug.setValue(0.125);
+          xCornerRadiusDebug.setValue(0.5);
+          yCornerRadiusDebug.setValue(0.125);
+          zCornerRadiusDebug.setValue(0);
+        } else if (value === "joint") {
+          widthDebug.setValue(0.5);
+          heightDebug.setValue(0.5);
+          depthDebug.setValue(1);
+          thicknessDebug.setValue(0.5);
+          xCornerRadiusDebug.setValue(0.5);
+          yCornerRadiusDebug.setValue(0.5);
           zCornerRadiusDebug.setValue(0);
         } else if (value === "cone") {
           widthDebug.setValue(0);
@@ -83,21 +106,13 @@ class Sketch extends kokomi.Base {
           xCornerRadiusDebug.setValue(0);
           yCornerRadiusDebug.setValue(0);
           zCornerRadiusDebug.setValue(0.5);
-        } else if (value === "joint") {
-          widthDebug.setValue(0.5);
-          heightDebug.setValue(0.5);
-          depthDebug.setValue(1);
-          thicknessDebug.setValue(0.5);
-          xCornerRadiusDebug.setValue(0.5);
-          yCornerRadiusDebug.setValue(0.5);
-          zCornerRadiusDebug.setValue(0);
-        } else if (value === "sphere") {
+        } else if (value === "cylinder") {
           widthDebug.setValue(0.5);
           heightDebug.setValue(0.5);
           depthDebug.setValue(0.5);
-          thicknessDebug.setValue(0.5);
+          thicknessDebug.setValue(0.25);
           xCornerRadiusDebug.setValue(0.5);
-          yCornerRadiusDebug.setValue(0.5);
+          yCornerRadiusDebug.setValue(0);
           zCornerRadiusDebug.setValue(0);
         }
         rayMarchingQuad.render();
