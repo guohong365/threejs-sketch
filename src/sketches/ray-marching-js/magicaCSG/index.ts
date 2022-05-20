@@ -32,8 +32,7 @@ class Sketch extends kokomi.Base {
       cone: 0,
     };
 
-    const uberprim = new marcher.UberprimSDF({
-      sdfVarName: "d1",
+    const cubeParams = {
       width: 0.5,
       height: 0.5,
       depth: 0.5,
@@ -41,6 +40,61 @@ class Sketch extends kokomi.Base {
       xCornerRadius: 0,
       yCornerRadius: 0,
       zCornerRadius: 0,
+    };
+
+    const sphereParams = {
+      width: 0.5,
+      height: 0.5,
+      depth: 0.5,
+      thickness: 0.5,
+      xCornerRadius: 0.5,
+      yCornerRadius: 0.5,
+      zCornerRadius: 0,
+    };
+
+    const torusParams = {
+      width: 0.5,
+      height: 0.5,
+      depth: 0.125,
+      thickness: 0.125,
+      xCornerRadius: 0.5,
+      yCornerRadius: 0.125,
+      zCornerRadius: 0,
+    };
+
+    const jointParams = {
+      width: 0.5,
+      height: 0.5,
+      depth: 1,
+      thickness: 0.5,
+      xCornerRadius: 0.5,
+      yCornerRadius: 0.5,
+      zCornerRadius: 0,
+    };
+
+    const coneParams = {
+      width: 0,
+      height: 0,
+      depth: 0.5,
+      thickness: 0.25,
+      xCornerRadius: 0,
+      yCornerRadius: 0,
+      zCornerRadius: 0.5,
+    };
+
+    const cylinderParams = {
+      width: 0.5,
+      height: 0.5,
+      depth: 0.5,
+      thickness: 0.25,
+      xCornerRadius: 0.5,
+      yCornerRadius: 0,
+      zCornerRadius: 0,
+    };
+
+    const uberprim = new marcher.UberprimSDF({
+      sdfVarName: "d1",
+      ...cubeParams,
     });
     layer.addPrimitive(uberprim);
     uberprim.round(params.round).rotateX(90);
@@ -67,53 +121,53 @@ class Sketch extends kokomi.Base {
       ])
       .onChange((value: string) => {
         if (value === "cube") {
-          widthDebug.setValue(0.5);
-          heightDebug.setValue(0.5);
-          depthDebug.setValue(0.5);
-          thicknessDebug.setValue(0.25);
-          xCornerRadiusDebug.setValue(0);
-          yCornerRadiusDebug.setValue(0);
-          zCornerRadiusDebug.setValue(0);
+          widthDebug.setValue(cubeParams.width);
+          heightDebug.setValue(cubeParams.height);
+          depthDebug.setValue(cubeParams.depth);
+          thicknessDebug.setValue(cubeParams.thickness);
+          xCornerRadiusDebug.setValue(cubeParams.xCornerRadius);
+          yCornerRadiusDebug.setValue(cubeParams.yCornerRadius);
+          zCornerRadiusDebug.setValue(cubeParams.zCornerRadius);
         } else if (value === "sphere") {
-          widthDebug.setValue(0.5);
-          heightDebug.setValue(0.5);
-          depthDebug.setValue(0.5);
-          thicknessDebug.setValue(0.5);
-          xCornerRadiusDebug.setValue(0.5);
-          yCornerRadiusDebug.setValue(0.5);
-          zCornerRadiusDebug.setValue(0);
+          widthDebug.setValue(sphereParams.width);
+          heightDebug.setValue(sphereParams.height);
+          depthDebug.setValue(sphereParams.depth);
+          thicknessDebug.setValue(sphereParams.thickness);
+          xCornerRadiusDebug.setValue(sphereParams.xCornerRadius);
+          yCornerRadiusDebug.setValue(sphereParams.yCornerRadius);
+          zCornerRadiusDebug.setValue(sphereParams.zCornerRadius);
         } else if (value === "torus") {
-          widthDebug.setValue(0.5);
-          heightDebug.setValue(0.5);
-          depthDebug.setValue(0.125);
-          thicknessDebug.setValue(0.125);
-          xCornerRadiusDebug.setValue(0.5);
-          yCornerRadiusDebug.setValue(0.125);
-          zCornerRadiusDebug.setValue(0);
+          widthDebug.setValue(torusParams.width);
+          heightDebug.setValue(torusParams.height);
+          depthDebug.setValue(torusParams.depth);
+          thicknessDebug.setValue(torusParams.thickness);
+          xCornerRadiusDebug.setValue(torusParams.xCornerRadius);
+          yCornerRadiusDebug.setValue(torusParams.yCornerRadius);
+          zCornerRadiusDebug.setValue(torusParams.zCornerRadius);
         } else if (value === "joint") {
-          widthDebug.setValue(0.5);
-          heightDebug.setValue(0.5);
-          depthDebug.setValue(1);
-          thicknessDebug.setValue(0.5);
-          xCornerRadiusDebug.setValue(0.5);
-          yCornerRadiusDebug.setValue(0.5);
-          zCornerRadiusDebug.setValue(0);
+          widthDebug.setValue(jointParams.width);
+          heightDebug.setValue(jointParams.height);
+          depthDebug.setValue(jointParams.depth);
+          thicknessDebug.setValue(jointParams.thickness);
+          xCornerRadiusDebug.setValue(jointParams.xCornerRadius);
+          yCornerRadiusDebug.setValue(jointParams.yCornerRadius);
+          zCornerRadiusDebug.setValue(jointParams.zCornerRadius);
         } else if (value === "cone") {
-          widthDebug.setValue(0);
-          heightDebug.setValue(0);
-          depthDebug.setValue(0.5);
-          thicknessDebug.setValue(0.25);
-          xCornerRadiusDebug.setValue(0);
-          yCornerRadiusDebug.setValue(0);
-          zCornerRadiusDebug.setValue(0.5);
+          widthDebug.setValue(coneParams.width);
+          heightDebug.setValue(coneParams.height);
+          depthDebug.setValue(coneParams.depth);
+          thicknessDebug.setValue(coneParams.thickness);
+          xCornerRadiusDebug.setValue(coneParams.xCornerRadius);
+          yCornerRadiusDebug.setValue(coneParams.yCornerRadius);
+          zCornerRadiusDebug.setValue(coneParams.zCornerRadius);
         } else if (value === "cylinder") {
-          widthDebug.setValue(0.5);
-          heightDebug.setValue(0.5);
-          depthDebug.setValue(0.5);
-          thicknessDebug.setValue(0.25);
-          xCornerRadiusDebug.setValue(0.5);
-          yCornerRadiusDebug.setValue(0);
-          zCornerRadiusDebug.setValue(0);
+          widthDebug.setValue(cylinderParams.width);
+          heightDebug.setValue(cylinderParams.height);
+          depthDebug.setValue(cylinderParams.depth);
+          thicknessDebug.setValue(cylinderParams.thickness);
+          xCornerRadiusDebug.setValue(cylinderParams.xCornerRadius);
+          yCornerRadiusDebug.setValue(cylinderParams.yCornerRadius);
+          zCornerRadiusDebug.setValue(cylinderParams.zCornerRadius);
         }
         rayMarchingQuad.render();
       });
@@ -270,12 +324,66 @@ class Sketch extends kokomi.Base {
       .step(0.01)
       .name("Cone")
       .onChange((value: number) => {
-        const width = THREE.MathUtils.lerp(0.5, 0, value);
-        widthDebug.setValue(width);
-        const height = THREE.MathUtils.lerp(0.5, 0, value);
-        heightDebug.setValue(height);
-        const zCornerRadius = THREE.MathUtils.lerp(0, 0.5, value);
-        zCornerRadiusDebug.setValue(zCornerRadius);
+        if (params.shape === "cube") {
+          const width = THREE.MathUtils.lerp(cubeParams.depth, 0, value);
+          widthDebug.setValue(width);
+          const height = THREE.MathUtils.lerp(cubeParams.depth, 0, value);
+          heightDebug.setValue(height);
+          const zCornerRadius = THREE.MathUtils.lerp(
+            0,
+            cubeParams.depth,
+            value
+          );
+          zCornerRadiusDebug.setValue(zCornerRadius);
+        } else if (params.shape === "joint") {
+          const width = THREE.MathUtils.lerp(jointParams.depth / 2, 0, value);
+          widthDebug.setValue(width);
+          const height = THREE.MathUtils.lerp(jointParams.depth / 2, 0, value);
+          heightDebug.setValue(height);
+          const zCornerRadius = THREE.MathUtils.lerp(
+            0,
+            jointParams.depth,
+            value
+          );
+          zCornerRadiusDebug.setValue(zCornerRadius);
+
+          const thickness = THREE.MathUtils.lerp(
+            jointParams.thickness,
+            jointParams.thickness / 2,
+            value
+          );
+          thicknessDebug.setValue(thickness);
+          const xCornerRadius = THREE.MathUtils.lerp(
+            jointParams.xCornerRadius,
+            0,
+            value
+          );
+          xCornerRadiusDebug.setValue(xCornerRadius);
+          const yCornerRadius = THREE.MathUtils.lerp(
+            jointParams.yCornerRadius,
+            0,
+            value
+          );
+          yCornerRadiusDebug.setValue(yCornerRadius);
+        } else if (params.shape === "cylinder") {
+          const width = THREE.MathUtils.lerp(cylinderParams.depth, 0, value);
+          widthDebug.setValue(width);
+          const height = THREE.MathUtils.lerp(cylinderParams.depth, 0, value);
+          heightDebug.setValue(height);
+          const zCornerRadius = THREE.MathUtils.lerp(
+            0,
+            cylinderParams.depth,
+            value
+          );
+          zCornerRadiusDebug.setValue(zCornerRadius);
+
+          const xCornerRadius = THREE.MathUtils.lerp(
+            cylinderParams.xCornerRadius,
+            0,
+            value
+          );
+          xCornerRadiusDebug.setValue(xCornerRadius);
+        }
         customShape();
       });
   }
