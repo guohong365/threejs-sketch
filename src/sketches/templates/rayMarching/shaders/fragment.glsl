@@ -57,13 +57,18 @@
 // gamma
 #pragma glslify:toGamma=require(glsl-takara/gamma/out)
 
+// consts
+#pragma glslify:PI=require(glsl-takara/constants/PI)
+#pragma glslify:TWO_PI=require(glsl-takara/constants/TWO_PI)
+
 vec2 map(in vec3 pos)
 {
     vec2 res=vec2(1e10,0.);
     
     {
         vec3 q=pos;
-        float dt=sdSphere(q,.55);
+        float dt=sdBox(q,vec3(.5));
+        dt=opRound(dt,.1);
         res=opUnion(res,vec2(dt,26.9));
     }
     
@@ -153,6 +158,11 @@ vec3 getSceneColor(vec2 fragCoord){
     vec3 ro=vec3(0.,4.,8.);
     vec3 ta=vec3(0.,0.,0.);
     const float fl=2.5;
+    
+    vec2 m=iMouse.xy/iResolution.xy;
+    ro.yz=rotate(ro.yz,-m.y*PI+1.);
+    ro.xz=rotate(ro.xz,-m.x*TWO_PI);
+    
     vec3 rd=getRayDirection(p,ro,ta,fl);
     
     // render
