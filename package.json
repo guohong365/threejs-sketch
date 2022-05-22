@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@alphardex/aqua.css": "^1.7.0",
-    "glsl-sdf": "^1.1.4",
+    "glsl-sdf": "^1.1.5",
     "glsl-takara": "^1.1.1",
     "kokomi.js": "^1.9.4",
     "kyouka": "^1.3.4",
