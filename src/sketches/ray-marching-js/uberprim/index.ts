@@ -35,7 +35,7 @@ class Sketch extends kokomi.Base {
       zCornerRadius: 0,
     });
     layer.addPrimitive(uberprim);
-    uberprim.round(0.1).rotateX(90);
+    uberprim.round(0.1);
 
     map.addLayer(layer);
 

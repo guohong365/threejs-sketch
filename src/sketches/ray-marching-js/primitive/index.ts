@@ -41,11 +41,11 @@ class Sketch extends kokomi.Base {
       g.addPrimitive(cylinder);
       cylinder.round(0.1).translateX(2);
 
-      const polygonHex = new marcher.PolygonSDF({
+      const polygon = new marcher.PolygonSDF({
         sdfVarName: "d4",
       });
-      g.addPrimitive(polygonHex);
-      polygonHex.round(0.1).translateX(0);
+      g.addPrimitive(polygon);
+      polygon.round(0.1).translateX(0);
 
       const triangle = new marcher.TriangleSDF({
         sdfVarName: "d5",
@@ -97,11 +97,11 @@ class Sketch extends kokomi.Base {
       g.addPrimitive(cylinder);
       cylinder.round(0.1).onion(0.05).halfY().translateX(2);
 
-      const polygonHex = new marcher.PolygonSDF({
+      const polygon = new marcher.PolygonSDF({
         sdfVarName: "d4",
       });
-      g.addPrimitive(polygonHex);
-      polygonHex.round(0.1).onion(0.05).halfY().translateX(0);
+      g.addPrimitive(polygon);
+      polygon.round(0.1).onion(0.05).halfY().translateX(0);
 
       const triangle = new marcher.TriangleSDF({
         sdfVarName: "d5",

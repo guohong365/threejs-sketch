@@ -97,7 +97,7 @@ class Sketch extends kokomi.Base {
       ...cubeParams,
     });
     layer.addPrimitive(uberprim);
-    uberprim.round(params.round).rotateX(90);
+    uberprim.round(params.round);
 
     map.addLayer(layer);
 
