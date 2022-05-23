@@ -77,43 +77,7 @@ class Sketch extends kokomi.Base {
 
     mar.setMapFunction(map);
 
-    // 定制相机
-    const gsc = `
-        vec3 getSceneColor(vec2 fragCoord){
-          // pixel coordinates
-          vec2 p=normalizeScreenCoords(fragCoord,iResolution.xy);
-          
-          // mouse
-          vec2 mo=iMouse.xy/iResolution.xy;
-          
-          // time
-          float time=32.+iTime*1.5;
-          
-          // camera
-          // look-at target
-          vec3 ta=vec3(0.,0.,0.);
-          
-          // ray origin
-          // vec3 ro=ta+vec3(4.5*cos(7.*mo.x),1.3+2.*mo.y,4.5*sin(7.*mo.x));
-          vec3 ro=ta+vec3(4.5,4.5,4.5);
-          
-          // focal length
-          const float fl=2.5;
-          
-          // ray direction
-          vec3 rd=getRayDirection(p,ro,ta,fl);
-          
-          // render
-          vec3 col=render(ro,rd);
-          
-          // gamma
-          col=toGamma(col);
-          
-          return col;
-      }
-        `;
-
-    mar.setGetSceneColor(gsc);
+    mar.enableOrbitControls();
 
     const rayMarchingQuad = new kokomi.RayMarchingQuad(this, mar);
     rayMarchingQuad.render();

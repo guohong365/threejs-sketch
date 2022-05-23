@@ -30,6 +30,8 @@ class Sketch extends kokomi.Base {
 
     mar.setMapFunction(map);
 
+    mar.enableOrbitControls();
+
     const rayMarchingQuad = new kokomi.RayMarchingQuad(this, mar);
     rayMarchingQuad.render();
 

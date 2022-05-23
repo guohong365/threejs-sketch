@@ -2,13 +2,12 @@
 #pragma glslify:sdBox=require(glsl-sdf/3d/primitives/sdBox)
 #pragma glslify:sdSphere=require(glsl-sdf/3d/primitives/sdSphere)
 #pragma glslify:sdCylinder=require(glsl-sdf/3d/primitives/sdCylinder)
-#pragma glslify:sdHexPrism=require(glsl-sdf/3d/primitives/sdHexPrism)
-#pragma glslify:sdOctogonPrism=require(glsl-sdf/3d/primitives/sdOctogonPrism)
-#pragma glslify:sdTriPrism=require(glsl-sdf/3d/primitives/sdTriPrism)
 #pragma glslify:sdCapsule=require(glsl-sdf/3d/primitives/sdCapsule)
 #pragma glslify:sdBezier3D=require(glsl-sdf/extra/primitives/sdBezier3D)
 #pragma glslify:sdUberprim=require(glsl-sdf/extra/primitives/sdUberprim)
 #pragma glslify:sdStar3D=require(glsl-sdf/extra/primitives/sdStar3D)
+#pragma glslify:sdTriangle3D=require(glsl-sdf/extra/primitives/sdTriangle3D)
+#pragma glslify:sdGyroid=require(glsl-sdf/extra/primitives/sdGyroid)
 
 // sdf ops
 #pragma glslify:opElongate=require(glsl-sdf/3d/alterations/opElongate)
