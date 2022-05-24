@@ -159,6 +159,11 @@ import { RouterLink } from "vue-router";
           </router-link>
         </li>
         <li>
+          <router-link :to="{ name: 'RayMarchingJsGyroid' }">
+            Gyroid
+          </router-link>
+        </li>
+        <li>
           <router-link :to="{ name: 'RayMarchingJsCSG' }"> CSG </router-link>
         </li>
         <li>

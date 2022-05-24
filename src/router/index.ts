@@ -44,6 +44,7 @@ import RayMarchingJsUberprim from "../views/RayMarchingJsUberprim.vue";
 import RayMarchingJsMagicaCSG from "../views/RayMarchingJsMagicaCSG.vue";
 import RayMarchingJsPolygon from "../views/RayMarchingJsPolygon.vue";
 import RayMarchingJsTriangle from "../views/RayMarchingJsTriangle.vue";
+import RayMarchingJsGyroid from "../views/RayMarchingJsGyroid.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -237,6 +238,11 @@ const router = createRouter({
       path: "/ray-marching/js/triangle",
       name: "RayMarchingJsTriangle",
       component: RayMarchingJsTriangle,
+    },
+    {
+      path: "/ray-marching/js/gyroid",
+      name: "RayMarchingJsGyroid",
+      component: RayMarchingJsGyroid,
     },
   ],
 });
