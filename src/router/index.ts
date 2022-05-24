@@ -42,6 +42,7 @@ import RayMarchingJsCSG from "../views/RayMarchingJsCSG.vue";
 import RayMarchingJsBezier from "../views/RayMarchingJsBezier.vue";
 import RayMarchingJsUberprim from "../views/RayMarchingJsUberprim.vue";
 import RayMarchingJsMagicaCSG from "../views/RayMarchingJsMagicaCSG.vue";
+import RayMarchingJsPolygon from "../views/RayMarchingJsPolygon.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -225,6 +226,11 @@ const router = createRouter({
       path: "/ray-marching/js/magicaCSG",
       name: "RayMarchingJsMagicaCSG",
       component: RayMarchingJsMagicaCSG,
+    },
+    {
+      path: "/ray-marching/js/polygon",
+      name: "RayMarchingJsPolygon",
+      component: RayMarchingJsPolygon,
     },
   ],
 });

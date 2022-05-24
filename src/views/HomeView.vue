@@ -154,6 +154,11 @@ import { RouterLink } from "vue-router";
             MagicaCSG
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingJsPolygon' }">
+            Polygon
+          </router-link>
+        </li>
       </ul>
     </section>
   </main>
