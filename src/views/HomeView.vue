@@ -139,6 +139,11 @@ import { RouterLink } from "vue-router";
           </router-link>
         </li>
         <li>
+          <router-link :to="{ name: 'RayMarchingJsTriangle' }">
+            Triangle
+          </router-link>
+        </li>
+        <li>
           <router-link :to="{ name: 'RayMarchingJsBezier' }">
             Bezier
           </router-link>
