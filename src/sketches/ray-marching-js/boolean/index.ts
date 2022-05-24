@@ -32,7 +32,7 @@ class Sketch extends kokomi.Base {
       g.addPrimitive(sphere);
       sphere.translateY(-0.75);
 
-      const r = sphere.union(box);
+      const result = box.union(sphere);
 
       g.translate(3, 0, 2);
 
@@ -59,7 +59,7 @@ class Sketch extends kokomi.Base {
       g.addPrimitive(sphere);
       sphere.translateY(-0.75);
 
-      const r = sphere.intersect(box);
+      const result = box.intersect(sphere);
 
       g.translate(0, 0, 2);
 
@@ -86,7 +86,7 @@ class Sketch extends kokomi.Base {
       g.addPrimitive(sphere);
       sphere.translateY(-0.75);
 
-      const r = sphere.subtract(box);
+      const result = box.subtract(sphere);
 
       g.translate(-3, 0, 2);
 
@@ -113,7 +113,7 @@ class Sketch extends kokomi.Base {
       g.addPrimitive(sphere);
       sphere.translateY(-0.75);
 
-      const r = sphere.smoothUnion(box);
+      const result = box.smoothUnion(sphere);
 
       g.translate(3, 0, -2);
 
@@ -140,7 +140,7 @@ class Sketch extends kokomi.Base {
       g.addPrimitive(sphere);
       sphere.translateY(-0.75);
 
-      const r = sphere.smoothIntersect(box);
+      const result = box.smoothIntersect(sphere);
 
       g.translate(0, 0, -2);
 
@@ -167,7 +167,7 @@ class Sketch extends kokomi.Base {
       g.addPrimitive(sphere);
       sphere.translateY(-0.75);
 
-      const r = sphere.smoothSubtract(box);
+      const result = box.smoothSubtract(sphere);
 
       g.translate(-3, 0, -2);
 

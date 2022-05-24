@@ -25,6 +25,12 @@ class Sketch extends kokomi.Base {
       mar.addGroup(g);
       layer.addPrimitive(g);
 
+      const sphere = new marcher.SphereSDF({
+        sdfVarName: "d1",
+        radius: 1,
+      });
+      g.addPrimitive(sphere);
+
       const box = new marcher.BoxSDF({
         sdfVarName: "d2",
         width: 1.5,
@@ -32,13 +38,8 @@ class Sketch extends kokomi.Base {
         depth: 1.5,
       });
       g.addPrimitive(box);
-      const sphere = new marcher.SphereSDF({
-        sdfVarName: "d1",
-        radius: 1,
-      });
-      const f = sphere.intersect(box);
 
-      // g.addPrimitive(f);
+      const ball = sphere.intersect(box);
 
       const c1 = new marcher.CylinderSDF({
         sdfVarName: "d3",
@@ -46,31 +47,24 @@ class Sketch extends kokomi.Base {
         height: 2,
       });
       g.addPrimitive(c1);
-      const a = f.subtract(c1);
-
-      // g.addPrimitive(a);
 
       const c2 = new marcher.CylinderSDF({
         sdfVarName: "d4",
         radius: 0.5,
         height: 2,
       });
-      g.addPrimitive(c2);
       c2.rotateX(90);
-      const b = a.subtract(c2);
-
-      // g.addPrimitive(b);
+      g.addPrimitive(c2);
 
       const c3 = new marcher.CylinderSDF({
         sdfVarName: "d5",
         radius: 0.5,
         height: 2,
       });
-      g.addPrimitive(c3);
       c3.rotateZ(90);
-      const c = b.subtract(c3);
+      g.addPrimitive(c3);
 
-      g.addPrimitive(c);
+      const result = ball.subtract(c1).subtract(c2).subtract(c3);
 
       map.addLayer(layer);
     }

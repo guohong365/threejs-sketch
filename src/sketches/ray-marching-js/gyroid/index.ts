@@ -31,7 +31,7 @@ class Sketch extends kokomi.Base {
         sdfVarName: "d1",
         radius: 1,
       });
-      // group.addPrimitive(sphere);
+      group.addPrimitive(sphere);
 
       const gyroidTex = new marcher.GyroidSDF({
         sdfVarName: "d2",
@@ -40,7 +40,6 @@ class Sketch extends kokomi.Base {
       group.addPrimitive(gyroidTex);
 
       const gyroid = sphere.intersect(gyroidTex);
-      group.addPrimitive(gyroid);
 
       map.addLayer(layer);
     }

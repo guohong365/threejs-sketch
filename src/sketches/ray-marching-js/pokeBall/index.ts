@@ -59,7 +59,7 @@ class Sketch extends kokomi.Base {
         materialId: "3",
         radius: 0.55,
       });
-      // group.addPrimitive(shellUpper);
+      group.addPrimitive(shellUpper);
 
       const clipBoxUpper = new marcher.BoxSDF({
         sdfVarName: "d3",
@@ -71,7 +71,6 @@ class Sketch extends kokomi.Base {
       clipBoxUpper.translateY(-0.6);
 
       const clipShellUpper = shellUpper.intersect(clipBoxUpper);
-      // group.addPrimitive(clipShellUpper);
 
       // 球壳（下）
       const shellLower = new marcher.SphereSDF({
@@ -79,7 +78,7 @@ class Sketch extends kokomi.Base {
         materialId: WHITE_MAT,
         radius: 0.55,
       });
-      // group.addPrimitive(shellLower);
+      group.addPrimitive(shellLower);
 
       const clipBoxLower = new marcher.BoxSDF({
         sdfVarName: "d5",
@@ -91,7 +90,6 @@ class Sketch extends kokomi.Base {
       clipBoxLower.translateY(0.6);
 
       const clipShellLower = shellLower.intersect(clipBoxLower);
-      // group.addPrimitive(clipShellLower);
 
       // 球壳（上）：挖除中间镂空部分后
       const clipCylinderCenter1 = new marcher.CylinderSDF({
@@ -104,7 +102,6 @@ class Sketch extends kokomi.Base {
       clipCylinderCenter1.rotateX(90);
 
       const clipShellUpper2 = clipShellUpper.subtract(clipCylinderCenter1);
-      group.addPrimitive(clipShellUpper2);
 
       // 球壳下：挖除中间镂空部分后
       const clipCylinderCenter2 = new marcher.CylinderSDF({
@@ -117,7 +114,6 @@ class Sketch extends kokomi.Base {
       clipCylinderCenter2.rotateX(90);
 
       const clipShellLower2 = clipShellLower.subtract(clipCylinderCenter2);
-      group.addPrimitive(clipShellLower2);
 
       map.addLayer(layer);
     }
@@ -168,6 +164,8 @@ class Sketch extends kokomi.Base {
     // 渲染
     const rayMarchingQuad = new kokomi.RayMarchingQuad(this, mar);
     rayMarchingQuad.render();
+
+    console.log(mar.fragmentShader);
   }
 }
 
