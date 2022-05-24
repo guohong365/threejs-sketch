@@ -22,7 +22,6 @@ import SphereWordCloud from "../views/SphereWordCloud.vue";
 import RayMarchingPrimitives from "../views/RayMarchingPrimitives.vue";
 import House from "../views/House.vue";
 import Juejin from "../views/Juejin.vue";
-import PokeBall from "../views/PokeBall.vue";
 import StarTunnel from "../views/StarTunnel.vue";
 
 import SmashHit1 from "../views/SmashHit1.vue";
@@ -38,13 +37,15 @@ import RayMarchingBoolean from "../views/RayMarchingBoolean.vue";
 import RayMarchingJsBasic from "../views/RayMarchingJsBasic.vue";
 import RayMarchingJsPrimitive from "../views/RayMarchingJsPrimitive.vue";
 import RayMarchingJsBoolean from "../views/RayMarchingJsBoolean.vue";
-import RayMarchingJsCSG from "../views/RayMarchingJsCSG.vue";
 import RayMarchingJsBezier from "../views/RayMarchingJsBezier.vue";
 import RayMarchingJsUberprim from "../views/RayMarchingJsUberprim.vue";
 import RayMarchingJsMagicaCSG from "../views/RayMarchingJsMagicaCSG.vue";
 import RayMarchingJsPolygon from "../views/RayMarchingJsPolygon.vue";
 import RayMarchingJsTriangle from "../views/RayMarchingJsTriangle.vue";
 import RayMarchingJsGyroid from "../views/RayMarchingJsGyroid.vue";
+import CSG from "../views/CSG.vue";
+import PokeBall from "../views/PokeBall.vue";
+import MultiGyroid from "../views/MultiGyroid.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -145,11 +146,6 @@ const router = createRouter({
       component: Juejin,
     },
     {
-      path: "/poke-ball",
-      name: "PokeBall",
-      component: PokeBall,
-    },
-    {
       path: "/star-tunnel",
       name: "StarTunnel",
       component: StarTunnel,
@@ -210,11 +206,6 @@ const router = createRouter({
       component: RayMarchingJsBoolean,
     },
     {
-      path: "/ray-marching/js/csg",
-      name: "RayMarchingJsCSG",
-      component: RayMarchingJsCSG,
-    },
-    {
       path: "/ray-marching/js/bezier",
       name: "RayMarchingJsBezier",
       component: RayMarchingJsBezier,
@@ -243,6 +234,21 @@ const router = createRouter({
       path: "/ray-marching/js/gyroid",
       name: "RayMarchingJsGyroid",
       component: RayMarchingJsGyroid,
+    },
+    {
+      path: "/csg",
+      name: "CSG",
+      component: CSG,
+    },
+    {
+      path: "/poke-ball",
+      name: "PokeBall",
+      component: PokeBall,
+    },
+    {
+      path: "/multi-gyroid",
+      name: "MultiGyroid",
+      component: MultiGyroid,
     },
   ],
 });

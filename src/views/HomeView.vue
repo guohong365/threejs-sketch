@@ -164,7 +164,7 @@ import { RouterLink } from "vue-router";
           </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'RayMarchingJsCSG' }"> CSG </router-link>
+          <router-link :to="{ name: 'CSG' }"> CSG </router-link>
         </li>
         <li>
           <router-link :to="{ name: 'PokeBall' }">PokeBall</router-link>
