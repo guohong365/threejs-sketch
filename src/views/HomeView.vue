@@ -134,15 +134,14 @@ import { RouterLink } from "vue-router";
           </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'RayMarchingJsBezier' }">
-            Bezier
+          <router-link :to="{ name: 'RayMarchingJsPolygon' }">
+            Polygon
           </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'RayMarchingJsCSG' }"> CSG </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'PokeBall' }">PokeBall</router-link>
+          <router-link :to="{ name: 'RayMarchingJsBezier' }">
+            Bezier
+          </router-link>
         </li>
         <li>
           <router-link :to="{ name: 'RayMarchingJsUberprim' }">
@@ -155,9 +154,10 @@ import { RouterLink } from "vue-router";
           </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'RayMarchingJsPolygon' }">
-            Polygon
-          </router-link>
+          <router-link :to="{ name: 'RayMarchingJsCSG' }"> CSG </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'PokeBall' }">PokeBall</router-link>
         </li>
       </ul>
     </section>
