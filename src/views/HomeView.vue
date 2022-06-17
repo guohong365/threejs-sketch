@@ -36,6 +36,11 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'Particle' }"> Particle </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'ShaderToyScene' }">
+            ShaderToy Scene
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>

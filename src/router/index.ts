@@ -47,6 +47,8 @@ import CSG from "../views/CSG.vue";
 import PokeBall from "../views/PokeBall.vue";
 import MultiGyroid from "../views/MultiGyroid.vue";
 
+import ShaderToyScene from "../views/ShaderToyScene.vue";
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -249,6 +251,11 @@ const router = createRouter({
       path: "/multi-gyroid",
       name: "MultiGyroid",
       component: MultiGyroid,
+    },
+    {
+      path: "/shader-toy-scene",
+      name: "ShaderToyScene",
+      component: ShaderToyScene,
     },
   ],
 });
