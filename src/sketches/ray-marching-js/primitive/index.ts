@@ -115,6 +115,12 @@ class Sketch extends kokomi.Base {
       g.addPrimitive(joint);
       joint.round(0.1).onion(0.05).halfY().translateX(-4);
 
+      const rhombus = new marcher.RhombusSDF({
+        sdfVarName: "d7",
+      });
+      g.addPrimitive(rhombus);
+      rhombus.round(0.1).translateX(-6);
+
       map.addLayer(layer);
     }
 
