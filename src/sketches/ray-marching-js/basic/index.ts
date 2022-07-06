@@ -8,10 +8,11 @@ class Sketch extends kokomi.Base {
 
     const mar = new marcher.Marcher({
       antialias: false,
+      showIsoline: false,
     });
 
     const mat = new marcher.SDFMaterial();
-    mat.addColorMaterial("1.0", 0, 0, 0);
+    mat.addIsolineMaterial(marcher.DEFAULT_MATERIAL_ID, 1, 1, 0);
     mar.setMaterial(mat);
 
     const map = new marcher.SDFMapFunction();
