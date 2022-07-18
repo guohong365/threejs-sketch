@@ -119,7 +119,7 @@ class Sketch extends kokomi.Base {
         "cone",
         "cylinder",
       ])
-      .onChange((value: string) => {
+      .onChange((value) => {
         if (value === "cube") {
           widthDebug.setValue(cubeParams.width);
           heightDebug.setValue(cubeParams.height);
@@ -247,7 +247,7 @@ class Sketch extends kokomi.Base {
     magicaCSGFolder
       .add(params, "halfX")
       .name("HalfX")
-      .onChange((value: boolean) => {
+      .onChange((value) => {
         if (value) {
           uberprim.halfX();
         } else {
@@ -258,7 +258,7 @@ class Sketch extends kokomi.Base {
     magicaCSGFolder
       .add(params, "halfY")
       .name("HalfY")
-      .onChange((value: boolean) => {
+      .onChange((value) => {
         if (value) {
           uberprim.halfY();
         } else {
@@ -269,7 +269,7 @@ class Sketch extends kokomi.Base {
     magicaCSGFolder
       .add(params, "halfZ")
       .name("HalfZ")
-      .onChange((value: boolean) => {
+      .onChange((value) => {
         if (value) {
           uberprim.halfZ();
         } else {
@@ -283,7 +283,7 @@ class Sketch extends kokomi.Base {
       .max(0.1)
       .step(0.0001)
       .name("Shell")
-      .onChange((value: number) => {
+      .onChange((value) => {
         uberprim.removeOperation("opOnion");
         uberprim.onion(value);
         customShape();
@@ -312,7 +312,7 @@ class Sketch extends kokomi.Base {
       .max(0.5)
       .step(0.01)
       .name("Round")
-      .onChange((value: number) => {
+      .onChange((value) => {
         uberprim.removeOperation("opRound");
         uberprim.round(value);
         customShape();
@@ -323,7 +323,7 @@ class Sketch extends kokomi.Base {
       .max(1)
       .step(0.01)
       .name("Cone")
-      .onChange((value: number) => {
+      .onChange((value) => {
         if (params.shape === "cube") {
           const width = THREE.MathUtils.lerp(cubeParams.depth, 0, value);
           widthDebug.setValue(width);

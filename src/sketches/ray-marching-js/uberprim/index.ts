@@ -50,7 +50,7 @@ class Sketch extends kokomi.Base {
 
     const shapeDebug = gui
       .add(params, "shape", ["cube", "cylinder", "cone", "joint", "sphere"])
-      .onChange((value: string) => {
+      .onChange((value) => {
         if (value === "cube") {
           widthDebug.setValue(0.5);
           heightDebug.setValue(0.5);
