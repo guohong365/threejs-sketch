@@ -242,6 +242,7 @@ vec4 toGamma(vec4 v){
 }
 
 // sdf
+// uberprim
 float sdUnterprim(vec3 p,vec4 s,vec3 r,vec2 ba,float sz2){
     vec3 d=abs(p)-s.xyz;
     float q=length(max(d.xy,0.))+min(0.,max(d.x,d.y))-r.x;
@@ -293,6 +294,47 @@ float sdUberprim(vec3 p,vec4 s,vec3 r,vec3 scale,float zoom,float round_,float s
     return dt;
 }
 
+// star
+float sdStar(in vec2 p,in float r,in int n,in float m){
+    // next 4 lines can be precomputed for a given shape
+    float an=3.141593/float(n);
+    float en=3.141593/m;// m is between 2 and n
+    vec2 acs=vec2(cos(an),sin(an));
+    vec2 ecs=vec2(cos(en),sin(en));// ecs=vec2(0,1) for regular polygon
+    
+    float bn=mod(atan(p.x,p.y),2.*an)-an;
+    p=length(p)*vec2(cos(bn),abs(sin(bn)));
+    p-=r*acs;
+    p+=ecs*clamp(-dot(p,ecs),0.,r*acs.y/ecs.y);
+    return length(p)*sign(p.x);
+}
+
+float sdStar(in vec3 pos,in float radius,in int edge,in float divisor,in float height,in vec3 scale,in float zoom,in float round_,in float shell,in float hole){
+    if(hole>0.){
+        round_*=(1.-hole*4.);
+    }
+    float rs=zoom-min(round_,.99);
+    float sc=(scale.x+scale.y)/2.;
+    float dt=sdStar(pos.xy/rs/sc,radius,edge,divisor)*rs*sc;
+    if(round_>0.){
+        dt*=2.;
+        dt=opRound(dt,round_);
+        dt/=2.;
+    }
+    if(hole>0.){
+        float hp=radius;
+        float ho=(hp-hole*2.-.01)*sc;
+        dt=opShell(dt,ho);
+    }
+    dt=opExtrusion(pos,dt,height*scale.z);
+    if(shell>0.){
+        float sh=shell;
+        float ho2=(radius-sh*.5-.01)*sc;
+        dt=opShell(dt,ho2);
+    }
+    return dt;
+}
+
 vec2 map(in vec3 pos)
 {
     vec2 res=vec2(1e10,0.);
@@ -300,7 +342,9 @@ vec2 map(in vec3 pos)
     {
         vec3 d1p=pos;
         //float d1=sdUberprim(d1p,vec4(.5,.5,.5,.25),vec3(0.,0.,0.));
-        float d1=sdUberprim(d1p,vec4(.5,.5,.5,.125),vec3(0.,0.,0.),vec3(1.,1.,1.),1.,.2,0.,.125);
+        //float d1=sdUberprim(d1p,vec4(.5,.5,.5,.125),vec3(0.,0.,0.),vec3(1.,1.,1.),1.,.2,0.,.125);
+        float d1=sdStar(d1p,.5,6,2.,.5,vec3(1.,1.,1.),1.,0.,0.,0.);
+        //float d1=sdStar(d1p,.5,6,2.,.5,vec3(1.,1.,1.),1.,.5,0.,.125);
         res=opUnion(res,vec2(d1,114514.));
     }
     
