@@ -85,11 +85,6 @@ import { RouterLink } from "vue-router";
           </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'RayMarchingPrimitives' }">
-            RayMarching Primitives
-          </router-link>
-        </li>
-        <li>
           <router-link :to="{ name: 'House' }"> House </router-link>
         </li>
         <li>
@@ -117,6 +112,21 @@ import { RouterLink } from "vue-router";
         </li>
         <li>
           <router-link :to="{ name: 'SmashHit5' }"> 5 </router-link>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h3>RayMarching</h3>
+      <ul>
+        <li>
+          <router-link :to="{ name: 'RayMarchingPrimitives' }">
+            RayMarching Primitives
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingCubemap' }">
+            RayMarching Cubemap
+          </router-link>
         </li>
       </ul>
     </section>
