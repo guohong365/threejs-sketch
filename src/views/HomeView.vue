@@ -41,6 +41,11 @@ import { RouterLink } from "vue-router";
             ShaderToy Scene
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'VertexShader' }">
+            Vertex Shader
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>
