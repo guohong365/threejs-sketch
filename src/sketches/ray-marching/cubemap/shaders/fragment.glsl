@@ -1,8 +1,3 @@
-#define IS_IN_SHADERTOY 0
-#if IS_IN_SHADERTOY==1
-#define iChannel0Cube iChannel0
-#endif
-
 float sdCubemap(vec3 p){
     float d=texture(iChannel0Cube,p).w;
     d-=1.-length(p);

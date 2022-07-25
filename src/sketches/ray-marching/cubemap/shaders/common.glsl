@@ -1,3 +1,11 @@
+#define IS_IN_SHADERTOY 0
+#if IS_IN_SHADERTOY==1
+#define iChannel0Cube iChannel0
+#endif
+
+// 是否使用cubemap缓存
+#define USE_CUBEMAP_CACHE 0
+
 #define SHOW_ISOLINE 0
 
 // consts
