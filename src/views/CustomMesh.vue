@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/templates/vertexShader";
+import createSketch from "@/sketches/templates/customMesh";
 
 import { onMounted } from "vue";
 

@@ -8,7 +8,7 @@ import Image from "../views/Image.vue";
 import ScreenQuad from "../views/ScreenQuad.vue";
 import RayMarching from "../views/RayMarching.vue";
 import Particle from "../views/Particle.vue";
-import VertexShader from "../views/VertexShader.vue";
+import CustomMesh from "../views/CustomMesh.vue";
 
 import Physics from "../views/Physics.vue";
 
@@ -100,9 +100,9 @@ const router = createRouter({
       component: Particle,
     },
     {
-      path: "/vertex-shader",
-      name: "VertexShader",
-      component: VertexShader,
+      path: "/custom-mesh",
+      name: "CustomMesh",
+      component: CustomMesh,
     },
     {
       path: "/panorama-image",

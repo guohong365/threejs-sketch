@@ -42,9 +42,7 @@ import { RouterLink } from "vue-router";
           </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'VertexShader' }">
-            Vertex Shader
-          </router-link>
+          <router-link :to="{ name: 'CustomMesh' }"> Custom Mesh </router-link>
         </li>
       </ul>
     </section>
