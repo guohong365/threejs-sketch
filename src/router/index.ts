@@ -24,6 +24,7 @@ import RayMarchingPrimitives from "../views/RayMarchingPrimitives.vue";
 import House from "../views/House.vue";
 import Juejin from "../views/Juejin.vue";
 import StarTunnel from "../views/StarTunnel.vue";
+import GrainEffect from "../views/GrainEffect.vue";
 
 import SmashHit1 from "../views/SmashHit1.vue";
 import SmashHit2 from "../views/SmashHit2.vue";
@@ -158,6 +159,11 @@ const router = createRouter({
       path: "/star-tunnel",
       name: "StarTunnel",
       component: StarTunnel,
+    },
+    {
+      path: "/grain-effect",
+      name: "GrainEffect",
+      component: GrainEffect,
     },
     {
       path: "/smash-hit/1",

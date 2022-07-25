@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@alphardex/aqua.css": "^1.7.0",
+    "glsl-noise": "^0.0.0",
     "glsl-sdf": "^1.1.7",
     "glsl-takara": "^1.1.1",
     "kokomi.js": "^1.9.31",
