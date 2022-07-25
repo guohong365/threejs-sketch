@@ -18,6 +18,7 @@ class Sketch extends kokomi.Base {
     const cubeCamera = new THREE.CubeCamera(0.1, 10, cubeRt);
     const cubeScene = new THREE.Scene();
     const cubeShader = marcher.joinLine([commonShader, cubeAShader]);
+    // https://github.com/alphardex/kokomi.js/blob/main/src/shapes/cubemapQuad.ts
     const cubeScreenQuad = new kokomi.CubemapQuad(this, {
       fragmentShader: cubeShader,
     });
