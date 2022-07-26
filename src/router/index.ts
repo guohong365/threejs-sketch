@@ -37,6 +37,7 @@ import RayMarchingBasic from "../views/RayMarchingBasic.vue";
 import RayMarchingPrimitive from "../views/RayMarchingPrimitive.vue";
 import RayMarchingBoolean from "../views/RayMarchingBoolean.vue";
 import RaymarchingCubemap from "../views/RaymarchingCubemap.vue";
+import RayMarchingVoxelSampling from "../views/RayMarchingVoxelSampling.vue";
 
 import RayMarchingJsBasic from "../views/RayMarchingJsBasic.vue";
 import RayMarchingJsPrimitive from "../views/RayMarchingJsPrimitive.vue";
@@ -215,6 +216,11 @@ const router = createRouter({
       path: "/ray-marching/cubemap",
       name: "RayMarchingCubemap",
       component: RaymarchingCubemap,
+    },
+    {
+      path: "/ray-marching/voxel-sampling",
+      name: "RayMarchingVoxelSampling",
+      component: RayMarchingVoxelSampling,
     },
     {
       path: "/ray-marching/js/basic",

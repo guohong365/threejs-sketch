@@ -139,6 +139,11 @@ import { RouterLink } from "vue-router";
             RayMarching Cubemap
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingVoxelSampling' }">
+            RayMarching VoxelSampling
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>
