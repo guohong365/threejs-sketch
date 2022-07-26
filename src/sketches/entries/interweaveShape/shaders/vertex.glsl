@@ -1,17 +1,24 @@
 #pragma glslify:cnoise3=require(glsl-noise/classic/3d)
-#pragma glslify:PI=require(glsl-takara/constants/PI)
 
 uniform float iTime;
 uniform vec2 iResolution;
 uniform vec2 iMouse;
 
-varying vec2 vUv;
-varying vec3 vNormal;
+// varying vec2 vUv;
+// varying vec3 vNormal;
+varying float vNoise;
 
 vec3 distort(vec3 p){
-    float n=cnoise3(p*4.+iTime);
+    float n=cnoise3(p*1.+iTime);
     
-    vec3 result=p+normal*n*.1;
+    float noiseArea=sin(smoothstep(-1.,1.,p.y)*PI);
+    
+    vNoise=n*noiseArea;
+    
+    float amp=1.4;
+    
+    vec3 result=p+normal*n*amp*noiseArea;
+    
     return result;
 }
 
