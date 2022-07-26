@@ -144,6 +144,11 @@ import { RouterLink } from "vue-router";
             RayMarching VoxelSampling
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingVolumeMarcher' }">
+            RayMarching VolumeMarcher
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>
