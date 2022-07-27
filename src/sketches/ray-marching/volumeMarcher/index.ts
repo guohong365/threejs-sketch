@@ -4,7 +4,13 @@ import * as THREE from "three";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import VolumeMarcher from "volumemarcher";
+// import VolumeMarcher from "volumemarcher";
+
+import * as marcher from "marcher.js";
+
+import commonShader from "./shaders/common.glsl";
+import bufferAShader from "./shaders/bufferA.glsl";
+import fragmentShader from "./shaders/fragment.glsl";
 
 class Sketch extends kokomi.Base {
   create() {
@@ -12,37 +18,57 @@ class Sketch extends kokomi.Base {
 
     this.camera.position.set(0, 0, -2);
 
-    const size = 64;
-    const volume = new THREE.Data3DTexture(
-      new Uint8Array((size * 4) ** 3),
-      size,
-      size,
-      size
+    let isVolumeRendered = false;
+
+    const renderVoxel = (volume: THREE.Data3DTexture) => {
+      // const volumemarcher = new VolumeMarcher({
+      //   volume,
+      // });
+      // this.scene.add(volumemarcher);
+      const mainShader = marcher.joinLine([commonShader, fragmentShader]);
+      console.log({ volume });
+      const voxelQuad = new kokomi.ScreenQuad(this, {
+        shadertoyMode: true,
+        fragmentShader: mainShader,
+        uniforms: {
+          iChannel0Cube: {
+            value: volume,
+          },
+        },
+      });
+      voxelQuad.addExisting();
+      isVolumeRendered = true;
+    };
+
+    // buffer A
+    const rt = new THREE.WebGL3DRenderTarget(
+      window.innerWidth,
+      window.innerHeight,
+      1
     );
-    volume.minFilter = THREE.LinearFilter;
-    volume.magFilter = THREE.LinearFilter;
-    volume.unpackAlignment = 1;
-    volume.needsUpdate = true;
-
-    const { data, width, height, depth } = volume.image;
-    for (let i = 0, z = 0; z < depth; z++) {
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++, i += 4) {
-          const color = new THREE.Color();
-          color.setHSL(Math.random(), 0.5, 0.5).convertSRGBToLinear();
-          const normal = [color.r * 255, color.g * 255, color.b * 255];
-
-          const distance = 128;
-
-          data.set([...normal, distance], i);
-        }
-      }
-    }
-
-    const volumemarcher = new VolumeMarcher({
-      volume,
+    const camera = new THREE.PerspectiveCamera(
+      70,
+      window.innerWidth / window.innerHeight,
+      0.01,
+      100
+    );
+    camera.position.z = 1;
+    const scene = new THREE.Scene();
+    const bufferTotalShader = marcher.joinLine([commonShader, bufferAShader]);
+    const bufferQuadA = new kokomi.ScreenQuad(this, {
+      shadertoyMode: true,
+      fragmentShader: bufferTotalShader,
     });
-    this.scene.add(volumemarcher);
+    scene.add(bufferQuadA.mesh);
+    this.update(() => {
+      this.renderer.setRenderTarget(rt);
+      this.renderer.render(scene, camera);
+      this.renderer.setRenderTarget(null);
+
+      if (!isVolumeRendered) {
+        renderVoxel(rt.texture);
+      }
+    });
   }
 }
 
