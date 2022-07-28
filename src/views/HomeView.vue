@@ -149,6 +149,11 @@ import { RouterLink } from "vue-router";
             RayMarching VolumeMarcher
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingShadowbox' }">
+            RayMarching Shadowbox
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>
