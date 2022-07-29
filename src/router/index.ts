@@ -29,6 +29,7 @@ import InterweaveShape from "../views/InterweaveShape.vue";
 import MagicalCarpet from "../views/MagicalCarpet.vue";
 import NoiseBlob from "../views/NoiseBlob.vue";
 import GradientPlane from "../views/GradientPlane.vue";
+import BluePlanet from "../views/BluePlanet.vue";
 
 import SmashHit1 from "../views/SmashHit1.vue";
 import SmashHit2 from "../views/SmashHit2.vue";
@@ -191,6 +192,11 @@ const router = createRouter({
       path: "/gradient-plane",
       name: "GradientPlane",
       component: GradientPlane,
+    },
+    {
+      path: "/blue-planet",
+      name: "BluePlanet",
+      component: BluePlanet,
     },
     {
       path: "/smash-hit/1",

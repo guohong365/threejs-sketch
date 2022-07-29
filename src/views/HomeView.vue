@@ -117,6 +117,9 @@ import { RouterLink } from "vue-router";
             Gradient Plane
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'BluePlanet' }"> Blue Planet </router-link>
+        </li>
       </ul>
     </section>
     <section>
