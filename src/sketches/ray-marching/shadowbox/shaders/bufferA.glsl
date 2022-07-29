@@ -1,4 +1,4 @@
-float sdXFace(vec2 p,float scale)
+float sdXProfile(vec2 p,float scale)
 {
     p/=scale;
     
@@ -12,21 +12,22 @@ float sdXFace(vec2 p,float scale)
     
     d1=opSubtraction(d2,d1);
     
-    float dXFace=d1;
+    float dXProfile=d1;
     
-    dXFace*=scale;
+    dXProfile*=scale;
     
-    return dXFace;
+    return dXProfile;
 }
 
 void mainImage(out vec4 fragColor,in vec2 fragCoord)
 {
     vec2 uv=fragCoord/iResolution.xy;
     
-    // vec2 p=uv;
-    vec2 p=(2.*fragCoord-iResolution.xy)/iResolution.y;
+    vec2 p=uv;
+    p-=.5;
+    p*=iResolution.x/iResolution.y;
     
-    float d=sdXFace(p,1.);
+    float d=sdXProfile(p,1.);
     
     vec3 col=vec3(d);
     

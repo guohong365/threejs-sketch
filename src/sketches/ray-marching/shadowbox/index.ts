@@ -41,7 +41,7 @@ class Sketch extends kokomi.Base {
       return bufferScreenQuad;
     };
 
-    // Buffer A - X Face
+    // Buffer A - X Profile
     const {
       bufferRt: bufferARt,
       bufferScene: bufferAScene,
@@ -57,7 +57,7 @@ class Sketch extends kokomi.Base {
       this.renderer.setRenderTarget(null);
     });
 
-    // Buffer B - Y Face
+    // Buffer B - Y Profile
     const {
       bufferRt: bufferBRt,
       bufferScene: bufferBScene,
@@ -73,7 +73,7 @@ class Sketch extends kokomi.Base {
       this.renderer.setRenderTarget(null);
     });
 
-    // Buffer C - Z Face
+    // Buffer C - Z Profile
     const {
       bufferRt: bufferCRt,
       bufferScene: bufferCScene,

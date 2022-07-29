@@ -1,7 +1,7 @@
-float sdXFace(vec2 p,float scale)
+float sdXProfile(vec2 p,float scale)
 {
     #if USE_BUFFER_TEXTURE==1
-    float d=texture(iChannel0,p).x;
+    float d=texture(iChannel0,(p*.5+.5)).x;
     return d;
     #endif
     
@@ -17,17 +17,17 @@ float sdXFace(vec2 p,float scale)
     
     d1=opSubtraction(d2,d1);
     
-    float dXFace=d1;
+    float dXProfile=d1;
     
-    dXFace*=scale;
+    dXProfile*=scale;
     
-    return dXFace;
+    return dXProfile;
 }
 
-float sdYFace(vec2 p,float scale)
+float sdYProfile(vec2 p,float scale)
 {
     #if USE_BUFFER_TEXTURE==1
-    float d=texture(iChannel1,p).x;
+    float d=texture(iChannel1,p*.5+.5).x;
     return d;
     #endif
     
@@ -36,17 +36,17 @@ float sdYFace(vec2 p,float scale)
     vec2 d1p=p;
     float d1=sdBox(p,vec2(.2,.15));
     
-    float dYFace=d1;
+    float dYProfile=d1;
     
-    dYFace*=scale;
+    dYProfile*=scale;
     
-    return dYFace;
+    return dYProfile;
 }
 
-float sdZFace(vec2 p,float scale)
+float sdZProfile(vec2 p,float scale)
 {
     #if USE_BUFFER_TEXTURE==1
-    float d=texture(iChannel2,p).x;
+    float d=texture(iChannel2,p*.5+.5).x;
     return d;
     #endif
     
@@ -68,16 +68,16 @@ float sdZFace(vec2 p,float scale)
     
     d1=opSubtraction(d3,d1);
     
-    float dZFace=d1;
+    float dZProfile=d1;
     
-    dZFace*=scale;
+    dZProfile*=scale;
     
-    return dZFace;
+    return dZProfile;
 }
 
-float sdThreeFace(vec3 p,vec3 scale)
+float sdThreeProfile(vec3 p,vec3 scale)
 {
-    return opIntersection(sdZFace(p.xy,scale.z),opIntersection(sdYFace(p.xz,scale.y),sdXFace(p.zy,scale.x)));
+    return opIntersection(sdZProfile(p.xy,scale.z),opIntersection(sdYProfile(p.xz,scale.y),sdXProfile(p.zy,scale.x)));
 }
 
 vec2 map(in vec3 pos)
@@ -86,7 +86,7 @@ vec2 map(in vec3 pos)
     
     {
         vec3 d1p=pos;
-        float d1=sdThreeFace(d1p,vec3(1.));
+        float d1=sdThreeProfile(d1p,vec3(1.));
         res=opUnion(res,vec2(d1,114514.));
     }
     

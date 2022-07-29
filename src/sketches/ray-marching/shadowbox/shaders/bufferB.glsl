@@ -1,25 +1,26 @@
-float sdYFace(vec2 p,float scale)
+float sdYProfile(vec2 p,float scale)
 {
     p/=scale;
     
     vec2 d1p=p;
     float d1=sdBox(p,vec2(.2,.15));
     
-    float dYFace=d1;
+    float dYProfile=d1;
     
-    dYFace*=scale;
+    dYProfile*=scale;
     
-    return dYFace;
+    return dYProfile;
 }
 
 void mainImage(out vec4 fragColor,in vec2 fragCoord)
 {
     vec2 uv=fragCoord/iResolution.xy;
     
-    // vec2 p=uv;
-    vec2 p=(2.*fragCoord-iResolution.xy)/iResolution.y;
+    vec2 p=uv;
+    p-=.5;
+    p*=iResolution.x/iResolution.y;
     
-    float d=sdYFace(p,1.);
+    float d=sdYProfile(p,1.);
     
     vec3 col=vec3(d);
     

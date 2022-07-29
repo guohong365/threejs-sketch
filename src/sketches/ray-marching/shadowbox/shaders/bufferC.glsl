@@ -1,4 +1,4 @@
-float sdZFace(vec2 p,float scale)
+float sdZProfile(vec2 p,float scale)
 {
     p/=scale;
     
@@ -18,21 +18,22 @@ float sdZFace(vec2 p,float scale)
     
     d1=opSubtraction(d3,d1);
     
-    float dZFace=d1;
+    float dZProfile=d1;
     
-    dZFace*=scale;
+    dZProfile*=scale;
     
-    return dZFace;
+    return dZProfile;
 }
 
 void mainImage(out vec4 fragColor,in vec2 fragCoord)
 {
     vec2 uv=fragCoord/iResolution.xy;
     
-    // vec2 p=uv;
-    vec2 p=(2.*fragCoord-iResolution.xy)/iResolution.y;
+    vec2 p=uv;
+    p-=.5;
+    p*=iResolution.x/iResolution.y;
     
-    float d=sdZFace(p,1.);
+    float d=sdZProfile(p,1.);
     
     vec3 col=vec3(d);
     
