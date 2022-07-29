@@ -112,6 +112,11 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'NoiseBlob' }"> Noise Blob </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'GradientPlane' }">
+            Gradient Plane
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>

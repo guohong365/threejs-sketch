@@ -28,6 +28,7 @@ import GrainEffect from "../views/GrainEffect.vue";
 import InterweaveShape from "../views/InterweaveShape.vue";
 import MagicalCarpet from "../views/MagicalCarpet.vue";
 import NoiseBlob from "../views/NoiseBlob.vue";
+import GradientPlane from "../views/GradientPlane.vue";
 
 import SmashHit1 from "../views/SmashHit1.vue";
 import SmashHit2 from "../views/SmashHit2.vue";
@@ -185,6 +186,11 @@ const router = createRouter({
       path: "/noise-blob",
       name: "NoiseBlob",
       component: NoiseBlob,
+    },
+    {
+      path: "/gradient-plane",
+      name: "GradientPlane",
+      component: GradientPlane,
     },
     {
       path: "/smash-hit/1",
