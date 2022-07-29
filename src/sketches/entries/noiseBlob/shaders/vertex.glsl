@@ -5,17 +5,22 @@ uniform vec2 iResolution;
 uniform vec2 iMouse;
 
 uniform float uIntensity;
+uniform float uHover;
 
 varying vec2 vUv;
 
 varying float vNoise;
+varying float vIntensity;
 
 vec3 distort(vec3 p){
     float n=cnoise3(p+iTime);
     
     vNoise=n;
     
-    vec3 result=p+normal*n*uIntensity;
+    float intensity=mix(uIntensity,uIntensity*3.,uHover);
+    vIntensity=intensity;
+    
+    vec3 result=p+normal*n*intensity;
     
     return result;
 }
