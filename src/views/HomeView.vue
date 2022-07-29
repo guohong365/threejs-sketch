@@ -109,6 +109,9 @@ import { RouterLink } from "vue-router";
             Magical Carpet
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'NoiseBlob' }"> Noise Blob </router-link>
+        </li>
       </ul>
     </section>
     <section>
