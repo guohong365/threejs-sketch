@@ -6,6 +6,7 @@ varying vec2 vUv;
 
 void main(){
     vec2 p=vUv;
+    
     vec3 col=vec3(p,0.);
     
     csm_DiffuseColor=vec4(col,1.);

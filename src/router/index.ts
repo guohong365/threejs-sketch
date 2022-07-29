@@ -26,6 +26,7 @@ import Juejin from "../views/Juejin.vue";
 import StarTunnel from "../views/StarTunnel.vue";
 import GrainEffect from "../views/GrainEffect.vue";
 import InterweaveShape from "../views/InterweaveShape.vue";
+import MagicalCarpet from "../views/MagicalCarpet.vue";
 
 import SmashHit1 from "../views/SmashHit1.vue";
 import SmashHit2 from "../views/SmashHit2.vue";
@@ -173,6 +174,11 @@ const router = createRouter({
       path: "/interweave-shape",
       name: "InterweaveShape",
       component: InterweaveShape,
+    },
+    {
+      path: "/magical-carpet",
+      name: "MagicalCarpet",
+      component: MagicalCarpet,
     },
     {
       path: "/smash-hit/1",

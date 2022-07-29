@@ -104,6 +104,11 @@ import { RouterLink } from "vue-router";
             Interweave Shape
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'MagicalCarpet' }">
+            Magical Carpet
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>
