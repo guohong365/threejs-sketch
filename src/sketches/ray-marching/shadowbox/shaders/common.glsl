@@ -170,3 +170,13 @@ float sdBox(in vec2 p,in vec2 b)
     vec2 d=abs(p)-b;
     return length(max(d,0.))+min(max(d.x,d.y),0.);
 }
+
+vec3 opRotation(const in vec3 p,const in vec4 q){
+    return p+2.*cross(q.xyz,cross(q.xyz,p)+q.w*p);
+}
+
+vec3 distanceColourMap(float d)
+{
+    float lines=mix(.5,1.,smoothstep(-.5,.5,(min(fract(d*64.),1.-fract(d*64.))-.5)*3.)*2.);
+    return clamp(mix(vec3(lines)*vec3(.1),vec3(.5,.5,1.),step(d,0.))+d/3.+(1.-smoothstep(.00,.002,abs(d)-.002)),0.,1.);
+}

@@ -31,5 +31,7 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord)
     
     vec3 col=vec3(d);
     
-    fragColor=vec4(col,1.);
+    col=distanceColourMap(d);
+    
+    fragColor=vec4(col,d);
 }

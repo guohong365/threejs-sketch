@@ -1,7 +1,9 @@
+uniform vec4 cameraRotation;
+
 float sdXProfile(vec2 p,float scale)
 {
     #if USE_BUFFER_TEXTURE==1
-    float d=texture(iChannel0,(p*.5+.5)).x;
+    float d=texture(iChannel0,(p*.5+.5)).w;
     return d;
     #endif
     
@@ -27,7 +29,7 @@ float sdXProfile(vec2 p,float scale)
 float sdYProfile(vec2 p,float scale)
 {
     #if USE_BUFFER_TEXTURE==1
-    float d=texture(iChannel1,p*.5+.5).x;
+    float d=texture(iChannel1,p*.5+.5).w;
     return d;
     #endif
     
@@ -46,7 +48,7 @@ float sdYProfile(vec2 p,float scale)
 float sdZProfile(vec2 p,float scale)
 {
     #if USE_BUFFER_TEXTURE==1
-    float d=texture(iChannel2,p*.5+.5).x;
+    float d=texture(iChannel2,p*.5+.5).w;
     return d;
     #endif
     
@@ -181,13 +183,15 @@ vec3 render(in vec3 ro,in vec3 rd){
 vec3 getSceneColor(vec2 fragCoord){
     vec2 p=normalizeScreenCoords(fragCoord,iResolution.xy);
     
-    vec3 ro=vec3(0.,4.,8.);
+    // vec3 ro=vec3(0.,4.,8.);
+    vec3 ro=vec3(0.,0.,6.);
     vec3 ta=vec3(0.,0.,0.);
-    const float fl=8.;
+    const float fl=5.;
     
     vec2 m=iMouse.xy/iResolution.xy;
-    ro.yz=rotate(ro.yz,-m.y*PI+1.);
-    ro.xz=rotate(ro.xz,-m.x*TWO_PI);
+    // ro.yz=rotate(ro.yz,-m.y*PI+1.);
+    // ro.xz=rotate(ro.xz,-m.x*TWO_PI);
+    ro=opRotation(ro,normalize(cameraRotation));
     
     vec3 rd=getRayDirection(p,ro,ta,fl);
     
@@ -214,6 +218,11 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord){
         }
     }
     tot/=count;
+    
+    // transparentize bg
+    if(tot==vec3(0.)){
+        discard;
+    }
     
     fragColor=vec4(tot,1.);
 }
