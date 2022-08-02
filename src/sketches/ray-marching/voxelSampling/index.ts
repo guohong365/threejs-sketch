@@ -11,22 +11,6 @@ import fragmentShader from "./shaders/fragment.glsl";
 
 class Sketch extends kokomi.Base {
   create() {
-    const createBufferPass = () => {
-      const bufferRt = new THREE.WebGLRenderTarget(
-        window.innerWidth,
-        window.innerHeight
-      );
-      const bufferCamera = new THREE.PerspectiveCamera(
-        70,
-        window.innerWidth / window.innerHeight,
-        0.01,
-        100
-      );
-      bufferCamera.position.z = 1;
-      const bufferScene = new THREE.Scene();
-      return { bufferRt, bufferScene, bufferCamera };
-    };
-
     const createBufferScreenQuad = (
       bufferShader: string,
       uniforms: any = {}
@@ -41,45 +25,25 @@ class Sketch extends kokomi.Base {
     };
 
     // Buffer A
-    const {
-      bufferRt: bufferARt,
-      bufferScene: bufferAScene,
-      bufferCamera: bufferACamera,
-    } = createBufferPass();
+    const bufferA = new kokomi.RenderTexture(this);
     const bufferAScreenQuad = createBufferScreenQuad(bufferAShader, {
       iChannel0: {
-        value: bufferARt.texture,
+        value: bufferA.texture,
       },
     });
-    bufferAScene.add(bufferAScreenQuad.mesh);
-
-    this.update(async () => {
-      this.renderer.setRenderTarget(bufferARt);
-      this.renderer.render(bufferAScene, bufferACamera);
-      this.renderer.setRenderTarget(null);
-    });
+    bufferA.add(bufferAScreenQuad.mesh);
 
     // Buffer B
-    const {
-      bufferRt: bufferBRt,
-      bufferScene: bufferBScene,
-      bufferCamera: bufferBCamera,
-    } = createBufferPass();
+    const bufferB = new kokomi.RenderTexture(this);
     const bufferBScreenQuad = createBufferScreenQuad(bufferBShader, {
       iChannel0: {
-        value: bufferARt.texture,
+        value: bufferA.texture,
       },
       iChannel1: {
-        value: bufferBRt.texture,
+        value: bufferB.texture,
       },
     });
-    bufferBScene.add(bufferBScreenQuad.mesh);
-
-    this.update(() => {
-      this.renderer.setRenderTarget(bufferBRt);
-      this.renderer.render(bufferBScene, bufferBCamera);
-      this.renderer.setRenderTarget(null);
-    });
+    bufferB.add(bufferBScreenQuad.mesh);
 
     // Image
     const mainShader = marcher.joinLine([commonShader, fragmentShader]);
@@ -88,7 +52,7 @@ class Sketch extends kokomi.Base {
       fragmentShader: mainShader,
       uniforms: {
         iChannel0: {
-          value: bufferBRt.texture,
+          value: bufferB.texture,
         },
       },
     });

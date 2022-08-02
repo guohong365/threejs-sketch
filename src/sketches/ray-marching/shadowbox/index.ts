@@ -12,22 +12,6 @@ import fragmentShader from "./shaders/fragment.glsl";
 
 class Sketch extends kokomi.Base {
   create() {
-    const createBufferPass = () => {
-      const bufferRt = new THREE.WebGLRenderTarget(
-        window.innerWidth,
-        window.innerHeight
-      );
-      const bufferCamera = new THREE.PerspectiveCamera(
-        70,
-        window.innerWidth / window.innerHeight,
-        0.01,
-        100
-      );
-      bufferCamera.position.z = 1;
-      const bufferScene = new THREE.Scene();
-      return { bufferRt, bufferScene, bufferCamera };
-    };
-
     const createBufferScreenQuad = (
       bufferShader: string,
       uniforms: any = {}
@@ -42,52 +26,19 @@ class Sketch extends kokomi.Base {
     };
 
     // Buffer A - X Profile
-    const {
-      bufferRt: bufferARt,
-      bufferScene: bufferAScene,
-      bufferCamera: bufferACamera,
-    } = createBufferPass();
+    const bufferA = new kokomi.RenderTexture(this);
     const bufferAScreenQuad = createBufferScreenQuad(bufferAShader);
-    bufferAScene.add(bufferAScreenQuad.mesh);
-    // bufferAScreenQuad.addExisting();
-
-    this.update(async () => {
-      this.renderer.setRenderTarget(bufferARt);
-      this.renderer.render(bufferAScene, bufferACamera);
-      this.renderer.setRenderTarget(null);
-    });
+    bufferA.add(bufferAScreenQuad.mesh);
 
     // Buffer B - Y Profile
-    const {
-      bufferRt: bufferBRt,
-      bufferScene: bufferBScene,
-      bufferCamera: bufferBCamera,
-    } = createBufferPass();
+    const bufferB = new kokomi.RenderTexture(this);
     const bufferBScreenQuad = createBufferScreenQuad(bufferBShader);
-    bufferBScene.add(bufferBScreenQuad.mesh);
-    // bufferBScreenQuad.addExisting();
-
-    this.update(() => {
-      this.renderer.setRenderTarget(bufferBRt);
-      this.renderer.render(bufferBScene, bufferBCamera);
-      this.renderer.setRenderTarget(null);
-    });
+    bufferB.add(bufferBScreenQuad.mesh);
 
     // Buffer C - Z Profile
-    const {
-      bufferRt: bufferCRt,
-      bufferScene: bufferCScene,
-      bufferCamera: bufferCCamera,
-    } = createBufferPass();
+    const bufferC = new kokomi.RenderTexture(this);
     const bufferCScreenQuad = createBufferScreenQuad(bufferCShader);
-    bufferCScene.add(bufferCScreenQuad.mesh);
-    // bufferCScreenQuad.addExisting();
-
-    this.update(() => {
-      this.renderer.setRenderTarget(bufferCRt);
-      this.renderer.render(bufferCScene, bufferCCamera);
-      this.renderer.setRenderTarget(null);
-    });
+    bufferC.add(bufferCScreenQuad.mesh);
 
     // image
     const mainShader = marcher.joinLine([commonShader, fragmentShader]);
@@ -97,13 +48,13 @@ class Sketch extends kokomi.Base {
       // vertexShader,
       uniforms: {
         iChannel0: {
-          value: bufferARt.texture,
+          value: bufferA.texture,
         },
         iChannel1: {
-          value: bufferBRt.texture,
+          value: bufferB.texture,
         },
         iChannel2: {
-          value: bufferCRt.texture,
+          value: bufferC.texture,
         },
         cameraRotation: {
           value: new THREE.Vector4(0, 0, 0, 0),
@@ -140,7 +91,7 @@ class Sketch extends kokomi.Base {
     const xPlane = new THREE.Mesh(
       new THREE.PlaneGeometry(1, 1),
       new THREE.MeshBasicMaterial({
-        map: bufferARt.texture,
+        map: bufferA.texture,
         side: THREE.DoubleSide,
       })
     );
@@ -151,7 +102,7 @@ class Sketch extends kokomi.Base {
     const yPlane = new THREE.Mesh(
       new THREE.PlaneGeometry(1, 1),
       new THREE.MeshBasicMaterial({
-        map: bufferBRt.texture,
+        map: bufferB.texture,
         side: THREE.DoubleSide,
       })
     );
@@ -162,7 +113,7 @@ class Sketch extends kokomi.Base {
     const zPlane = new THREE.Mesh(
       new THREE.PlaneGeometry(1, 1),
       new THREE.MeshBasicMaterial({
-        map: bufferCRt.texture,
+        map: bufferC.texture,
         side: THREE.DoubleSide,
       })
     );
