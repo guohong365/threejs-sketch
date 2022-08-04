@@ -66,7 +66,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 img {
   opacity: 0;
 }

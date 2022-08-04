@@ -1,64 +1,65 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import Playground from "../views/Playground.vue";
+import HomeView from "@/views/HomeView.vue";
+import Playground from "@/views/Playground.vue";
 
-import Basic from "../views/Basic.vue";
-import AssetManage from "../views/AssetManage.vue";
-import Image from "../views/Image.vue";
-import ScreenQuad from "../views/ScreenQuad.vue";
-import RayMarching from "../views/RayMarching.vue";
-import Particle from "../views/Particle.vue";
-import CustomMesh from "../views/CustomMesh.vue";
+import Basic from "@/views/Basic.vue";
+import AssetManage from "@/views/AssetManage.vue";
+import Image from "@/views/Image.vue";
+import ScreenQuad from "@/views/ScreenQuad.vue";
+import RayMarching from "@/views/RayMarching.vue";
+import Particle from "@/views/Particle.vue";
+import CustomMesh from "@/views/CustomMesh.vue";
 
-import Physics from "../views/Physics.vue";
+import Physics from "@/views/Physics.vue";
 
-import PanoramaImage from "../views/PanoramaImage.vue";
-import PanoramaCube from "../views/PanoramaCube.vue";
-import PanoramaMultiple from "../views/PanoramaMultiple.vue";
-import PanoramaInfospot from "../views/PanoramaInfospot.vue";
-import PanoramaMultipleSpot from "../views/PanoramaMultipleSpot.vue";
-import FromConfig from "../views/FromConfig.vue";
+import PanoramaImage from "@/views/PanoramaImage.vue";
+import PanoramaCube from "@/views/PanoramaCube.vue";
+import PanoramaMultiple from "@/views/PanoramaMultiple.vue";
+import PanoramaInfospot from "@/views/PanoramaInfospot.vue";
+import PanoramaMultipleSpot from "@/views/PanoramaMultipleSpot.vue";
+import FromConfig from "@/views/FromConfig.vue";
 
-import SphereWordCloud from "../views/SphereWordCloud.vue";
-import RayMarchingPrimitives from "../views/RayMarchingPrimitives.vue";
-import House from "../views/House.vue";
-import Juejin from "../views/Juejin.vue";
-import StarTunnel from "../views/StarTunnel.vue";
-import GrainEffect from "../views/GrainEffect.vue";
-import InterweaveShape from "../views/InterweaveShape.vue";
-import MagicalCarpet from "../views/MagicalCarpet.vue";
-import NoiseBlob from "../views/NoiseBlob.vue";
-import GradientPlane from "../views/GradientPlane.vue";
-import BluePlanet from "../views/BluePlanet.vue";
+import SphereWordCloud from "@/views/SphereWordCloud.vue";
+import RayMarchingPrimitives from "@/views/RayMarchingPrimitives.vue";
+import House from "@/views/House.vue";
+import Juejin from "@/views/Juejin.vue";
+import StarTunnel from "@/views/StarTunnel.vue";
+import GrainEffect from "@/views/GrainEffect.vue";
+import InterweaveShape from "@/views/InterweaveShape.vue";
+import MagicalCarpet from "@/views/MagicalCarpet.vue";
+import NoiseBlob from "@/views/NoiseBlob.vue";
+import GradientPlane from "@/views/GradientPlane.vue";
+import BluePlanet from "@/views/BluePlanet.vue";
+import DistortHover from "@/views/DistortHover.vue";
 
-import SmashHit1 from "../views/SmashHit1.vue";
-import SmashHit2 from "../views/SmashHit2.vue";
-import SmashHit3 from "../views/SmashHit3.vue";
-import SmashHit4 from "../views/SmashHit4.vue";
-import SmashHit5 from "../views/SmashHit5.vue";
+import SmashHit1 from "@/views/SmashHit1.vue";
+import SmashHit2 from "@/views/SmashHit2.vue";
+import SmashHit3 from "@/views/SmashHit3.vue";
+import SmashHit4 from "@/views/SmashHit4.vue";
+import SmashHit5 from "@/views/SmashHit5.vue";
 
-import RayMarchingBasic from "../views/RayMarchingBasic.vue";
-import RayMarchingPrimitive from "../views/RayMarchingPrimitive.vue";
-import RayMarchingBoolean from "../views/RayMarchingBoolean.vue";
-import RaymarchingCubemap from "../views/RaymarchingCubemap.vue";
-import RayMarchingVoxelSampling from "../views/RayMarchingVoxelSampling.vue";
-import RayMarchingVolumeMarcher from "../views/RayMarchingVolumeMarcher.vue";
-import RayMarchingShadowbox from "../views/RayMarchingShadowbox.vue";
+import RayMarchingBasic from "@/views/RayMarchingBasic.vue";
+import RayMarchingPrimitive from "@/views/RayMarchingPrimitive.vue";
+import RayMarchingBoolean from "@/views/RayMarchingBoolean.vue";
+import RaymarchingCubemap from "@/views/RaymarchingCubemap.vue";
+import RayMarchingVoxelSampling from "@/views/RayMarchingVoxelSampling.vue";
+import RayMarchingVolumeMarcher from "@/views/RayMarchingVolumeMarcher.vue";
+import RayMarchingShadowbox from "@/views/RayMarchingShadowbox.vue";
 
-import RayMarchingJsBasic from "../views/RayMarchingJsBasic.vue";
-import RayMarchingJsPrimitive from "../views/RayMarchingJsPrimitive.vue";
-import RayMarchingJsBoolean from "../views/RayMarchingJsBoolean.vue";
-import RayMarchingJsBezier from "../views/RayMarchingJsBezier.vue";
-import RayMarchingJsUberprim from "../views/RayMarchingJsUberprim.vue";
-import RayMarchingJsMagicaCSG from "../views/RayMarchingJsMagicaCSG.vue";
-import RayMarchingJsPolygon from "../views/RayMarchingJsPolygon.vue";
-import RayMarchingJsTriangle from "../views/RayMarchingJsTriangle.vue";
-import RayMarchingJsGyroid from "../views/RayMarchingJsGyroid.vue";
-import CSG from "../views/CSG.vue";
-import PokeBall from "../views/PokeBall.vue";
-import MultiGyroid from "../views/MultiGyroid.vue";
+import RayMarchingJsBasic from "@/views/RayMarchingJsBasic.vue";
+import RayMarchingJsPrimitive from "@/views/RayMarchingJsPrimitive.vue";
+import RayMarchingJsBoolean from "@/views/RayMarchingJsBoolean.vue";
+import RayMarchingJsBezier from "@/views/RayMarchingJsBezier.vue";
+import RayMarchingJsUberprim from "@/views/RayMarchingJsUberprim.vue";
+import RayMarchingJsMagicaCSG from "@/views/RayMarchingJsMagicaCSG.vue";
+import RayMarchingJsPolygon from "@/views/RayMarchingJsPolygon.vue";
+import RayMarchingJsTriangle from "@/views/RayMarchingJsTriangle.vue";
+import RayMarchingJsGyroid from "@/views/RayMarchingJsGyroid.vue";
+import CSG from "@/views/CSG.vue";
+import PokeBall from "@/views/PokeBall.vue";
+import MultiGyroid from "@/views/MultiGyroid.vue";
 
-import ShaderToyScene from "../views/ShaderToyScene.vue";
+import ShaderToyScene from "@/views/ShaderToyScene.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -197,6 +198,11 @@ const router = createRouter({
       path: "/blue-planet",
       name: "BluePlanet",
       component: BluePlanet,
+    },
+    {
+      path: "/distort-hover",
+      name: "DistortHover",
+      component: DistortHover,
     },
     {
       path: "/smash-hit/1",

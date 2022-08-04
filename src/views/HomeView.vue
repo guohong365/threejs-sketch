@@ -120,6 +120,11 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'BluePlanet' }"> Blue Planet </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'DistortHover' }">
+            Distort Hover
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>
