@@ -12,6 +12,8 @@ import fragmentShader from "./shaders/fragment.glsl";
 
 class Sketch extends kokomi.Base {
   create() {
+    new kokomi.OrbitControls(this);
+
     const createBufferScreenQuad = (
       bufferShader: string,
       uniforms: any = {}
@@ -63,71 +65,73 @@ class Sketch extends kokomi.Base {
     });
     screenQuad.addExisting();
 
-    screenQuad.mesh.visible = false;
-
-    const box = new kokomi.Box(this, {
-      width: 1,
-      height: 1,
-      depth: 1,
-      material: new THREE.MeshBasicMaterial({ color: "red" }),
-    });
-    box.addExisting();
-
-    new kokomi.OrbitControls(this);
-
-    this.camera.position.z = 1.5;
-
-    const axesHelper = new THREE.AxesHelper();
-    this.scene.add(axesHelper);
-
-    const shadowBox = new THREE.Group();
-    shadowBox.add(screenQuad.mesh);
-    this.scene.add(shadowBox);
-
-    shadowBox.add(box.mesh);
-
-    const d = 0.5 + 0.0001;
-
-    const xPlane = new THREE.Mesh(
-      new THREE.PlaneGeometry(1, 1),
-      new THREE.MeshBasicMaterial({
-        map: bufferA.texture,
-        side: THREE.DoubleSide,
-      })
-    );
-    shadowBox.add(xPlane);
-    xPlane.rotation.y = THREE.MathUtils.degToRad(90);
-    xPlane.position.x = -d;
-
-    const yPlane = new THREE.Mesh(
-      new THREE.PlaneGeometry(1, 1),
-      new THREE.MeshBasicMaterial({
-        map: bufferB.texture,
-        side: THREE.DoubleSide,
-      })
-    );
-    shadowBox.add(yPlane);
-    yPlane.rotation.x = THREE.MathUtils.degToRad(-90);
-    yPlane.position.y = -d;
-
-    const zPlane = new THREE.Mesh(
-      new THREE.PlaneGeometry(1, 1),
-      new THREE.MeshBasicMaterial({
-        map: bufferC.texture,
-        side: THREE.DoubleSide,
-      })
-    );
-    shadowBox.add(zPlane);
-    zPlane.position.z = -d;
-
-    box.mesh.visible = false;
-
-    screenQuad.mesh.visible = true;
-
     this.update(() => {
       const quat = this.camera.quaternion.clone();
       screenQuad.material.uniforms.cameraRotation.value = quat;
     });
+
+    const createShadowBox = () => {
+      screenQuad.mesh.visible = false;
+
+      const box = new kokomi.Box(this, {
+        width: 1,
+        height: 1,
+        depth: 1,
+        material: new THREE.MeshBasicMaterial({ color: "red" }),
+      });
+      box.addExisting();
+
+      this.camera.position.z = 1.5;
+
+      const axesHelper = new THREE.AxesHelper();
+      this.scene.add(axesHelper);
+
+      const shadowBox = new THREE.Group();
+      shadowBox.add(screenQuad.mesh);
+      this.scene.add(shadowBox);
+
+      shadowBox.add(box.mesh);
+
+      const d = 0.5 + 0.0001;
+
+      const xPlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(1, 1),
+        new THREE.MeshBasicMaterial({
+          map: bufferA.texture,
+          side: THREE.DoubleSide,
+        })
+      );
+      shadowBox.add(xPlane);
+      xPlane.rotation.y = THREE.MathUtils.degToRad(90);
+      xPlane.position.x = -d;
+
+      const yPlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(1, 1),
+        new THREE.MeshBasicMaterial({
+          map: bufferB.texture,
+          side: THREE.DoubleSide,
+        })
+      );
+      shadowBox.add(yPlane);
+      yPlane.rotation.x = THREE.MathUtils.degToRad(-90);
+      yPlane.position.y = -d;
+
+      const zPlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(1, 1),
+        new THREE.MeshBasicMaterial({
+          map: bufferC.texture,
+          side: THREE.DoubleSide,
+        })
+      );
+      shadowBox.add(zPlane);
+      zPlane.position.z = -d;
+
+      box.mesh.visible = false;
+
+      screenQuad.mesh.visible = true;
+    };
+
+    createShadowBox();
   }
 }
 
