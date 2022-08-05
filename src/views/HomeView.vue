@@ -175,6 +175,11 @@ import { RouterLink } from "vue-router";
             RayMarching Shadowbox
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'RayMarchingSdfVolume' }">
+            RayMarching SdfVolume
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>

@@ -45,6 +45,7 @@ import RaymarchingCubemap from "@/views/RaymarchingCubemap.vue";
 import RayMarchingVoxelSampling from "@/views/RayMarchingVoxelSampling.vue";
 import RayMarchingVolumeMarcher from "@/views/RayMarchingVolumeMarcher.vue";
 import RayMarchingShadowbox from "@/views/RayMarchingShadowbox.vue";
+import RayMarchingSdfVolume from "@/views/RayMarchingSdfVolume.vue";
 
 import RayMarchingJsBasic from "@/views/RayMarchingJsBasic.vue";
 import RayMarchingJsPrimitive from "@/views/RayMarchingJsPrimitive.vue";
@@ -263,6 +264,11 @@ const router = createRouter({
       path: "/ray-marching/shadowbox",
       name: "RayMarchingShadowbox",
       component: RayMarchingShadowbox,
+    },
+    {
+      path: "/ray-marching/sdf-volume",
+      name: "RayMarchingSdfVolume",
+      component: RayMarchingSdfVolume,
     },
     {
       path: "/ray-marching/js/basic",
