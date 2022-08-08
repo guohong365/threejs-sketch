@@ -4,8 +4,8 @@ import * as THREE from "three";
 
 import gsap from "gsap";
 
-import mainVertexShader from "./shaders/main/vertex.glsl";
-import mainFragmentShader from "./shaders/main/fragment.glsl";
+import vertexShader from "./shaders/vertex.glsl";
+import fragmentShader from "./shaders/fragment.glsl";
 
 class Sketch extends kokomi.Base {
   async create() {
@@ -13,8 +13,8 @@ class Sketch extends kokomi.Base {
     screenCamera.addExisting();
 
     const gallary = new kokomi.Gallery(this, {
-      vertexShader: mainVertexShader,
-      fragmentShader: mainFragmentShader,
+      vertexShader,
+      fragmentShader,
       uniforms: {
         uOffset: {
           value: new THREE.Vector2(0, 0),
@@ -45,7 +45,7 @@ class Sketch extends kokomi.Base {
 
       if (gallary.makuGroup) {
         gallary.makuGroup.makus.forEach((maku) => {
-          const material = maku.mesh.material as THREE.ShaderMaterial;
+          const material = maku.mesh.material;
 
           material.uniforms.uOffset.value = new THREE.Vector2(
             (targetX - offsetX) * 0.5,
