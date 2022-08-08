@@ -16,11 +16,16 @@ class Sketch extends kokomi.Base {
 
     // Parameters to tweak
     const useBufferTexture = true;
-    const SDFGridI = 10;
-    const SDFGridJ = 10;
+    const SDFGridI = 3;
+    const SDFGridJ = 3;
+    const useMarcherAsMap = true;
+    const showBufferAImage = false;
+    const showStats = true;
 
     // Main Logic
-    new kokomi.Stats(this);
+    if (showStats) {
+      new kokomi.Stats(this);
+    }
 
     new kokomi.OrbitControls(this);
 
@@ -28,8 +33,13 @@ class Sketch extends kokomi.Base {
       useBufferTexture
     )}`;
 
+    const useMarcherAsMapDefine = `#define USE_MARCHER_AS_MAP ${Number(
+      useMarcherAsMap
+    )}`;
+
     const commonShaderTotal = marcher.joinLine([
       bufferTextureDefine,
+      useMarcherAsMapDefine,
       commonShader,
     ]);
 
@@ -92,7 +102,7 @@ class Sketch extends kokomi.Base {
     };
 
     // SDF Model Function Shader
-    const modelShader = getMapFunctionShader();
+    const modelShader = useMarcherAsMap ? getMapFunctionShader() : "";
 
     // Common Shader
     console.log("Common Shader");
@@ -106,7 +116,9 @@ class Sketch extends kokomi.Base {
     ]);
     const bufferAScreenQuad = createBufferScreenQuad(bufferAShaderTotal);
     bufferA.add(bufferAScreenQuad.mesh);
-    // bufferAScreenQuad.addExisting();
+    if (showBufferAImage) {
+      bufferAScreenQuad.addExisting();
+    }
 
     console.log("Buffer A Shader");
     console.log(bufferAShaderTotal);
@@ -126,7 +138,9 @@ class Sketch extends kokomi.Base {
         },
       },
     });
-    screenQuad.addExisting();
+    if (!showBufferAImage) {
+      screenQuad.addExisting();
+    }
 
     console.log("Image Shader");
     console.log(imageShaderTotal);
