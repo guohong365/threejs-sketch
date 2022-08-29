@@ -125,6 +125,11 @@ import { RouterLink } from "vue-router";
             Distort Hover
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'HandTracker' }">
+            Hand Tracker
+          </router-link>
+        </li>
       </ul>
     </section>
     <section>

@@ -31,6 +31,7 @@ import NoiseBlob from "@/views/NoiseBlob.vue";
 import GradientPlane from "@/views/GradientPlane.vue";
 import BluePlanet from "@/views/BluePlanet.vue";
 import DistortHover from "@/views/DistortHover.vue";
+import HandTracker from "@/views/HandTracker.vue";
 
 import SmashHit1 from "@/views/SmashHit1.vue";
 import SmashHit2 from "@/views/SmashHit2.vue";
@@ -205,6 +206,11 @@ const router = createRouter({
       path: "/distort-hover",
       name: "DistortHover",
       component: DistortHover,
+    },
+    {
+      path: "/hand-tracker",
+      name: "HandTracker",
+      component: HandTracker,
     },
     {
       path: "/smash-hit/1",
