@@ -91,9 +91,6 @@ import { RouterLink } from "vue-router";
           <router-link :to="{ name: 'House' }"> House </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'GrainEffect' }">Grain Effect</router-link>
-        </li>
-        <li>
           <router-link :to="{ name: 'BluePlanet' }"> Blue Planet </router-link>
         </li>
       </ul>

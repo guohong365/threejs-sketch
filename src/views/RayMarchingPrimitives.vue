@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import createSketch from "@/sketches/entries/rayMarchingPrimitives";
+import createSketch from "@/sketches/ray-marching/rayMarchingPrimitives";
 
 import { onMounted } from "vue";
 

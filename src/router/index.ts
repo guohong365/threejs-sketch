@@ -20,9 +20,7 @@ import PanoramaMultipleSpot from "@/views/PanoramaMultipleSpot.vue";
 import FromConfig from "@/views/FromConfig.vue";
 
 import SphereWordCloud from "@/views/SphereWordCloud.vue";
-import RayMarchingPrimitives from "@/views/RayMarchingPrimitives.vue";
 import House from "@/views/House.vue";
-import GrainEffect from "@/views/GrainEffect.vue";
 import BluePlanet from "@/views/BluePlanet.vue";
 
 import SmashHit1 from "@/views/SmashHit1.vue";
@@ -38,6 +36,7 @@ import RaymarchingCubemap from "@/views/RaymarchingCubemap.vue";
 import RayMarchingShadowbox from "@/views/RayMarchingShadowbox.vue";
 import RayMarchingSdfVolume from "@/views/RayMarchingSdfVolume.vue";
 import RayMarchingSdfVolumeCompare from "@/views/RayMarchingSdfVolumeCompare.vue";
+import RayMarchingPrimitives from "@/views/RayMarchingPrimitives.vue";
 
 import RayMarchingJsBasic from "@/views/RayMarchingJsBasic.vue";
 import RayMarchingJsPrimitive from "@/views/RayMarchingJsPrimitive.vue";
@@ -143,19 +142,9 @@ const router = createRouter({
       component: SphereWordCloud,
     },
     {
-      path: "/ray-marching-primitives",
-      name: "RayMarchingPrimitives",
-      component: RayMarchingPrimitives,
-    },
-    {
       path: "/house",
       name: "House",
       component: House,
-    },
-    {
-      path: "/grain-effect",
-      name: "GrainEffect",
-      component: GrainEffect,
     },
     {
       path: "/blue-planet",
@@ -221,6 +210,11 @@ const router = createRouter({
       path: "/ray-marching/sdf-volume-compare",
       name: "RayMarchingSdfVolumeCompare",
       component: RayMarchingSdfVolumeCompare,
+    },
+    {
+      path: "/ray-marching/primitives",
+      name: "RayMarchingPrimitives",
+      component: RayMarchingPrimitives,
     },
     {
       path: "/ray-marching/js/basic",
