@@ -91,44 +91,10 @@ import { RouterLink } from "vue-router";
           <router-link :to="{ name: 'House' }"> House </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'Juejin' }">Juejin</router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'StarTunnel' }">StarTunnel</router-link>
-        </li>
-        <li>
           <router-link :to="{ name: 'GrainEffect' }">Grain Effect</router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'InterweaveShape' }">
-            Interweave Shape
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'MagicalCarpet' }">
-            Magical Carpet
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'NoiseBlob' }"> Noise Blob </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'GradientPlane' }">
-            Gradient Plane
-          </router-link>
-        </li>
-        <li>
           <router-link :to="{ name: 'BluePlanet' }"> Blue Planet </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'DistortHover' }">
-            Distort Hover
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'HandTracker' }">
-            Hand Tracker
-          </router-link>
         </li>
       </ul>
     </section>
@@ -163,16 +129,6 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'RayMarchingCubemap' }">
             RayMarching Cubemap
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'RayMarchingVoxelSampling' }">
-            RayMarching VoxelSampling
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'RayMarchingVolumeMarcher' }">
-            RayMarching VolumeMarcher
           </router-link>
         </li>
         <li>

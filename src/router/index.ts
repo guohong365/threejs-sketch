@@ -22,16 +22,8 @@ import FromConfig from "@/views/FromConfig.vue";
 import SphereWordCloud from "@/views/SphereWordCloud.vue";
 import RayMarchingPrimitives from "@/views/RayMarchingPrimitives.vue";
 import House from "@/views/House.vue";
-import Juejin from "@/views/Juejin.vue";
-import StarTunnel from "@/views/StarTunnel.vue";
 import GrainEffect from "@/views/GrainEffect.vue";
-import InterweaveShape from "@/views/InterweaveShape.vue";
-import MagicalCarpet from "@/views/MagicalCarpet.vue";
-import NoiseBlob from "@/views/NoiseBlob.vue";
-import GradientPlane from "@/views/GradientPlane.vue";
 import BluePlanet from "@/views/BluePlanet.vue";
-import DistortHover from "@/views/DistortHover.vue";
-import HandTracker from "@/views/HandTracker.vue";
 
 import SmashHit1 from "@/views/SmashHit1.vue";
 import SmashHit2 from "@/views/SmashHit2.vue";
@@ -43,8 +35,6 @@ import RayMarchingBasic from "@/views/RayMarchingBasic.vue";
 import RayMarchingPrimitive from "@/views/RayMarchingPrimitive.vue";
 import RayMarchingBoolean from "@/views/RayMarchingBoolean.vue";
 import RaymarchingCubemap from "@/views/RaymarchingCubemap.vue";
-import RayMarchingVoxelSampling from "@/views/RayMarchingVoxelSampling.vue";
-import RayMarchingVolumeMarcher from "@/views/RayMarchingVolumeMarcher.vue";
 import RayMarchingShadowbox from "@/views/RayMarchingShadowbox.vue";
 import RayMarchingSdfVolume from "@/views/RayMarchingSdfVolume.vue";
 import RayMarchingSdfVolumeCompare from "@/views/RayMarchingSdfVolumeCompare.vue";
@@ -163,54 +153,14 @@ const router = createRouter({
       component: House,
     },
     {
-      path: "/juejin",
-      name: "Juejin",
-      component: Juejin,
-    },
-    {
-      path: "/star-tunnel",
-      name: "StarTunnel",
-      component: StarTunnel,
-    },
-    {
       path: "/grain-effect",
       name: "GrainEffect",
       component: GrainEffect,
     },
     {
-      path: "/interweave-shape",
-      name: "InterweaveShape",
-      component: InterweaveShape,
-    },
-    {
-      path: "/magical-carpet",
-      name: "MagicalCarpet",
-      component: MagicalCarpet,
-    },
-    {
-      path: "/noise-blob",
-      name: "NoiseBlob",
-      component: NoiseBlob,
-    },
-    {
-      path: "/gradient-plane",
-      name: "GradientPlane",
-      component: GradientPlane,
-    },
-    {
       path: "/blue-planet",
       name: "BluePlanet",
       component: BluePlanet,
-    },
-    {
-      path: "/distort-hover",
-      name: "DistortHover",
-      component: DistortHover,
-    },
-    {
-      path: "/hand-tracker",
-      name: "HandTracker",
-      component: HandTracker,
     },
     {
       path: "/smash-hit/1",
@@ -256,16 +206,6 @@ const router = createRouter({
       path: "/ray-marching/cubemap",
       name: "RayMarchingCubemap",
       component: RaymarchingCubemap,
-    },
-    {
-      path: "/ray-marching/voxel-sampling",
-      name: "RayMarchingVoxelSampling",
-      component: RayMarchingVoxelSampling,
-    },
-    {
-      path: "/ray-marching/volume-marcher",
-      name: "RayMarchingVolumeMarcher",
-      component: RayMarchingVolumeMarcher,
     },
     {
       path: "/ray-marching/shadowbox",
