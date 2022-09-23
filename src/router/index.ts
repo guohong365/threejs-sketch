@@ -1,5 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
+
+import SphereWordCloud from "@/views/SphereWordCloud.vue";
+import BluePlanet from "@/views/BluePlanet.vue";
+
 import Playground from "@/views/Playground.vue";
 
 import Basic from "@/views/Basic.vue";
@@ -18,10 +22,7 @@ import PanoramaMultiple from "@/views/PanoramaMultiple.vue";
 import PanoramaInfospot from "@/views/PanoramaInfospot.vue";
 import PanoramaMultipleSpot from "@/views/PanoramaMultipleSpot.vue";
 import FromConfig from "@/views/FromConfig.vue";
-
-import SphereWordCloud from "@/views/SphereWordCloud.vue";
 import House from "@/views/House.vue";
-import BluePlanet from "@/views/BluePlanet.vue";
 
 import SmashHit1 from "@/views/SmashHit1.vue";
 import SmashHit2 from "@/views/SmashHit2.vue";
@@ -60,6 +61,16 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+    },
+    {
+      path: "/sphere-word-cloud",
+      name: "SphereWordCloud",
+      component: SphereWordCloud,
+    },
+    {
+      path: "/blue-planet",
+      name: "BluePlanet",
+      component: BluePlanet,
     },
     {
       path: "/playground",
@@ -137,19 +148,9 @@ const router = createRouter({
       component: FromConfig,
     },
     {
-      path: "/sphere-word-cloud",
-      name: "SphereWordCloud",
-      component: SphereWordCloud,
-    },
-    {
       path: "/house",
       name: "House",
       component: House,
-    },
-    {
-      path: "/blue-planet",
-      name: "BluePlanet",
-      component: BluePlanet,
     },
     {
       path: "/smash-hit/1",

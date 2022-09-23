@@ -5,6 +5,19 @@ import { RouterLink } from "vue-router";
 <template>
   <main class="p-4 space-y-4">
     <section>
+      <h3>Entries</h3>
+      <ul>
+        <li>
+          <router-link :to="{ name: 'SphereWordCloud' }">
+            Sphere Word Cloud
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'BluePlanet' }"> Blue Planet </router-link>
+        </li>
+      </ul>
+    </section>
+    <section>
       <h3>Playground</h3>
       <ul>
         <li>
@@ -79,19 +92,6 @@ import { RouterLink } from "vue-router";
         </li>
         <li>
           <router-link :to="{ name: 'House' }"> House </router-link>
-        </li>
-      </ul>
-    </section>
-    <section>
-      <h3>Entries</h3>
-      <ul>
-        <li>
-          <router-link :to="{ name: 'SphereWordCloud' }">
-            Sphere Word Cloud
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'BluePlanet' }"> Blue Planet </router-link>
         </li>
       </ul>
     </section>
