@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import PanoramaScene from "@/components/PanoramaScene.vue";
-import createSketch from "@/sketches/entries/house";
-import dummyConfig from "@/sketches/entries/house/config";
+import createSketch from "@/sketches/panorama/house";
+import dummyConfig from "@/sketches/panorama/house/config";
 </script>
 
 <template>
