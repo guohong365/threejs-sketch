@@ -3,6 +3,7 @@ import HomeView from "@/views/HomeView.vue";
 
 import SphereWordCloud from "@/views/SphereWordCloud.vue";
 import BluePlanet from "@/views/BluePlanet.vue";
+import MappingTexture from "@/views/MappingTexture.vue";
 
 import Playground from "@/views/Playground.vue";
 
@@ -71,6 +72,11 @@ const router = createRouter({
       path: "/blue-planet",
       name: "BluePlanet",
       component: BluePlanet,
+    },
+    {
+      path: "/mapping-texture",
+      name: "MappingTexture",
+      component: MappingTexture,
     },
     {
       path: "/playground",
