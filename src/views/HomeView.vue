@@ -17,7 +17,12 @@ import { RouterLink } from "vue-router";
         </li>
         <li>
           <router-link :to="{ name: 'MappingTexture' }">
-            MappingTexture
+            Mapping Texture
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'FboParticles' }">
+            FBO Particles
           </router-link>
         </li>
       </ul>
