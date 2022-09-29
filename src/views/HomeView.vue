@@ -16,11 +16,6 @@ import { RouterLink } from "vue-router";
           <router-link :to="{ name: 'BluePlanet' }"> Blue Planet </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'MappingTexture' }">
-            Mapping Texture
-          </router-link>
-        </li>
-        <li>
           <router-link :to="{ name: 'FboParticles' }">
             FBO Particles
           </router-link>
