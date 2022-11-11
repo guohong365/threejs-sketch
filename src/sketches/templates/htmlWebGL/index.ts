@@ -8,7 +8,7 @@ import textFragmentShader from "./shaders/text/fragment.glsl";
 
 import type { HTMLIVCElement } from "maku.js/types/types";
 
-import fontUrl from "./assets/SourceHanSansCN-Regular.otf";
+import fontUrl from "@/assets/SourceHanSansCN-Regular.otf";
 
 class Sketch extends kokomi.Base {
   scroller!: InstanceType<typeof kokomi.NormalScroller>;

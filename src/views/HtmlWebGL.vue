@@ -5,6 +5,8 @@ import createSketch from "@/sketches/templates/htmlWebGL";
 
 import { onMounted, reactive, ref } from "vue";
 
+import { getImage } from "@/utils/vite";
+
 const state = reactive({
   loading: false,
   currentScroll: 0,
@@ -47,16 +49,16 @@ onMounted(async () => {
             <template v-for="n in 4" :key="n">
               <div class="space-y-4">
                 <img
-                  src="@/sketches/templates/htmlWebGL/assets/1.jpg"
+                  :src="getImage(`/src/assets/pic-${n}.jpg`)"
                   class="webgl-img w-full block"
                   alt=""
                 />
                 <div class="space-y-4">
-                  <div class="webgl-text text-xl">我是标题</div>
+                  <div class="webgl-text text-xl">我是标题{{ n }}</div>
                   <div class="space-y-2">
-                    <div class="webgl-text text-sm">我是段落1段落1段落1</div>
+                    <div class="webgl-text text-sm">我是段落1段落1</div>
                     <div class="webgl-text text-sm">
-                      我是段落2段落2段落2段落2段落2段落2
+                      我是段落2段落2段落2段落2
                     </div>
                   </div>
                   <div class="btn btn-primary text-center">我是按钮</div>
