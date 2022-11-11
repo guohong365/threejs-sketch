@@ -55,7 +55,9 @@ onMounted(async () => {
                   <div class="webgl-text text-xl">我是标题</div>
                   <div class="space-y-2">
                     <div class="webgl-text text-sm">我是段落1段落1段落1</div>
-                    <div class="webgl-text text-sm">我是段落2段落2段落2</div>
+                    <div class="webgl-text text-sm">
+                      我是段落2段落2段落2段落2段落2段落2
+                    </div>
                   </div>
                   <div class="btn btn-primary text-center">我是按钮</div>
                 </div>
