@@ -290,9 +290,7 @@ onMounted(async () => {
                     type="text"
                     class="form-control"
                     v-model="currentInfospot.name"
-                    @input="onEditPoint(
-                        currentInfospot!
-                      )"
+                    @input="onEditPoint(currentInfospot!)"
                   />
                 </div>
               </div>
@@ -309,9 +307,7 @@ onMounted(async () => {
                     type="text"
                     class="form-control"
                     v-model="currentInfospot.jump"
-                    @input="onEditPoint(
-                        currentInfospot!
-                      )"
+                    @input="onEditPoint(currentInfospot!)"
                   />
                 </div>
               </div>
@@ -319,11 +315,7 @@ onMounted(async () => {
             <div>
               <div
                 class="btn btn-danger btn-round text-center"
-                @click="
-                      onDeletePoint(
-                        currentInfospot!
-                      )
-                    "
+                @click="onDeletePoint(currentInfospot!)"
               >
                 删除
               </div>

@@ -57,6 +57,9 @@ import { RouterLink } from "vue-router";
         <li>
           <router-link :to="{ name: 'CustomMesh' }"> Custom Mesh </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'HTMLWebGL' }"> HTML WebGL </router-link>
+        </li>
       </ul>
     </section>
     <section>

@@ -13,6 +13,7 @@ import ScreenQuad from "@/views/ScreenQuad.vue";
 import RayMarching from "@/views/RayMarching.vue";
 import Particle from "@/views/Particle.vue";
 import CustomMesh from "@/views/CustomMesh.vue";
+import HtmlWebGL from "@/views/HtmlWebGL.vue";
 
 import Physics from "@/views/Physics.vue";
 
@@ -116,6 +117,11 @@ const router = createRouter({
       path: "/custom-mesh",
       name: "CustomMesh",
       component: CustomMesh,
+    },
+    {
+      path: "/html-webgl",
+      name: "HTMLWebGL",
+      component: HtmlWebGL,
     },
     {
       path: "/panorama-image",
