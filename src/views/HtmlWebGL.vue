@@ -6,6 +6,7 @@ import createSketch from "@/sketches/templates/htmlWebGL";
 import { onMounted, reactive, ref } from "vue";
 
 import { getImage } from "@/utils/vite";
+import { environ } from "@/consts";
 
 const state = reactive({
   loading: false,
@@ -21,6 +22,10 @@ onMounted(async () => {
   state.loading = true;
   sketch = await createSketch();
   state.loading = false;
+
+  if (environ.isIOS) {
+    sketch.scroller.scroll.ease = 0.5;
+  }
 
   if (scrollContainer.value) {
     state.scrollHeight = scrollContainer.value.scrollHeight;
