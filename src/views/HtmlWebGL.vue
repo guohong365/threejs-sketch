@@ -70,6 +70,12 @@ onMounted(async () => {
                 </div>
               </div>
             </template>
+            <div>
+              <video
+                src="@/assets/video.mp4"
+                class="webgl-video w-full"
+              ></video>
+            </div>
           </div>
         </div>
       </div>
@@ -83,6 +89,10 @@ onMounted(async () => {
 }
 
 .webgl-text {
+  opacity: 0;
+}
+
+.webgl-video {
   opacity: 0;
 }
 
