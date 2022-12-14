@@ -5,6 +5,8 @@ import imgVertexShader from "./shaders/img/vertex.glsl";
 import imgFragmentShader from "./shaders/img/fragment.glsl";
 import textVertexShader from "./shaders/text/vertex.glsl";
 import textFragmentShader from "./shaders/text/fragment.glsl";
+import videoVertexShader from "./shaders/video/vertex.glsl";
+import videoFragmentShader from "./shaders/video/fragment.glsl";
 
 import type { HTMLIVCElement } from "maku.js/types/types";
 
@@ -49,8 +51,8 @@ class Sketch extends kokomi.Base {
 
     // video
     const webglVideos = new kokomi.Gallery(this, {
-      vertexShader: imgVertexShader,
-      fragmentShader: imgFragmentShader,
+      vertexShader: videoVertexShader,
+      fragmentShader: videoFragmentShader,
       elList: [
         ...document.querySelectorAll(".webgl-video"),
       ] as HTMLIVCElement[],
