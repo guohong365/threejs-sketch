@@ -73,7 +73,8 @@ class Sketch extends kokomi.Base {
       this,
       {
         frequency: 0.9,
-        countLimit: 200,
+        countLimit: 180,
+        lineSpeed: 2,
         container: rtScene2,
         baseCamera: rtCamera2,
       },
