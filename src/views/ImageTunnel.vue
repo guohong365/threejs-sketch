@@ -11,6 +11,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="sketch" class="bg-black w-screen h-screen overflow-hidden"></div>
+  <div id="sketch" class="image-tunnel w-screen h-screen overflow-hidden"></div>
   <loading-blur></loading-blur>
 </template>
+
+<style lang="scss" scoped>
+.image-tunnel {
+  background: radial-gradient(at 50% 0%, #343299 0%, transparent 100%),
+    linear-gradient(#0e1242 0%, #0e1242 100%);
+}
+</style>
