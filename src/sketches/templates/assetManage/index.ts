@@ -28,7 +28,7 @@ class Sketch extends kokomi.Base {
     this.assetManager.emitter.on("ready", () => {
       const fox = new Fox(this, this.assetManager.items.foxModel);
       fox.addExisting();
-      fox.playAction("idle");
+      fox.playAction("Survey");
     });
   }
 }

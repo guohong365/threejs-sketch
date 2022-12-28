@@ -1,7 +1,6 @@
 // @ts-nocheck
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
-import ky from "kyouka";
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 
 class AnimatedMeshLine extends kokomi.Component {
@@ -224,7 +223,7 @@ class CustomLineGenerator extends LineGenerator {
       // visibleLength: 1,
       points,
       speed: THREE.MathUtils.randFloat(0.001, 0.005) * this.lineSpeed,
-      color: ky.sample(COLORS),
+      color: kokomi.sample(COLORS),
       width: THREE.MathUtils.randFloat(0.01, 0.06),
     });
   }
