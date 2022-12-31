@@ -13,7 +13,6 @@ class Sketch extends kokomi.Base {
     // new kokomi.OrbitControls(this);
 
     // Scene1
-    // document.querySelector(".loader-screen").classList.add("hollow");
     const rtScene1 = new THREE.Scene();
     const rtCamera1 = new THREE.PerspectiveCamera(
       60,
@@ -23,10 +22,6 @@ class Sketch extends kokomi.Base {
     );
     rtCamera1.position.z = -1000;
 
-    const pointLight = new THREE.PointLight(0xffffff, 1, 0, 2);
-    pointLight.position.set(10, 20, 30);
-    rtScene1.add(pointLight);
-
     const urls = [...Array(100).keys()].map((item, i) => {
       return `https://picsum.photos/id/${i}/100/100`;
       // return `https://s2.loli.net/2022/09/08/gGY4VloDAeUwWxt.jpg`;
@@ -34,8 +29,8 @@ class Sketch extends kokomi.Base {
 
     const at = new ImageTunnel(this, {
       urls,
-      container: rtScene1,
     });
+    at.container = rtScene1;
     at.on("ready", () => {
       document.querySelector(".loader-screen").classList.add("hollow");
     });
@@ -46,16 +41,7 @@ class Sketch extends kokomi.Base {
       rtCamera: rtCamera1,
     });
 
-    const quad1 = new kokomi.CustomMesh(this, {
-      vertexShader: "",
-      fragmentShader: "",
-      baseMaterial: new THREE.MeshBasicMaterial(),
-      geometry: new THREE.PlaneGeometry(window.innerWidth, window.innerHeight),
-      materialParams: {
-        map: rt1.texture,
-        transparent: true,
-      },
-    });
+    const quad1 = new kokomi.RenderQuad(this, rt1.texture);
     quad1.addExisting();
     quad1.mesh.position.z = -1;
 
@@ -75,11 +61,11 @@ class Sketch extends kokomi.Base {
         frequency: 0.9,
         countLimit: 180,
         lineSpeed: 2,
-        container: rtScene2,
         baseCamera: rtCamera2,
       },
       {}
     );
+    lineGenerator.container = rtScene2;
     lineGenerator.addExisting();
     lineGenerator.start();
 
@@ -88,16 +74,7 @@ class Sketch extends kokomi.Base {
       rtCamera: rtCamera2,
     });
 
-    const quad2 = new kokomi.CustomMesh(this, {
-      vertexShader: "",
-      fragmentShader: "",
-      baseMaterial: new THREE.MeshBasicMaterial(),
-      geometry: new THREE.PlaneGeometry(window.innerWidth, window.innerHeight),
-      materialParams: {
-        map: rt2.texture,
-        transparent: true,
-      },
-    });
+    const quad2 = new kokomi.RenderQuad(this, rt2.texture);
     quad2.addExisting();
     quad2.mesh.position.z = -2;
 

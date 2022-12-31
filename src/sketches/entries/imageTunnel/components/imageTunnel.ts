@@ -16,20 +16,13 @@ class ImageTunnel extends kokomi.Component {
   geo: THREE.CircleGeometry;
   meshs: THREE.Mesh[];
   isRunning: boolean;
-  container: THREE.Scene;
   constructor(base: kokomi.Base, config: Partial<ImageTunnelConfig> = {}) {
     super(base);
 
-    const {
-      urls = [],
-      speed = 1,
-      imageSize = 5,
-      container = this.base.scene,
-    } = config;
+    const { urls = [], speed = 1, imageSize = 5 } = config;
     this.urls = urls;
     this.speed = speed;
     this.imageSize = imageSize;
-    this.container = container;
 
     const mat = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,

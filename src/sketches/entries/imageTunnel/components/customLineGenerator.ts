@@ -117,7 +117,6 @@ class LineGenerator extends kokomi.Component {
 
     this.frequency = frequency;
     this.lineStaticProps = lineProps;
-    this.container = container || this.base.scene;
 
     this.isStarted = false;
 
