@@ -7,7 +7,7 @@ import glslify from "vite-plugin-glslify";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/",
+  base: "/4457223/",
   plugins: [
     vue({
       template: {
