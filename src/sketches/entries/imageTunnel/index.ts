@@ -41,7 +41,7 @@ class Sketch extends kokomi.Base {
 
     const quad1 = new kokomi.RenderQuad(this, rt1.texture);
     quad1.addExisting();
-    quad1.mesh.position.z = -1;
+    quad1.mesh.position.z = -0.1;
   }
   createLines() {
     const rtScene2 = new THREE.Scene();
@@ -71,7 +71,7 @@ class Sketch extends kokomi.Base {
     });
     const quad2 = new kokomi.RenderQuad(this, rt2.texture);
     quad2.addExisting();
-    quad2.mesh.position.z = -2;
+    quad2.mesh.position.z = -0.2;
   }
   createBgQuad() {
     // const bgQuad = new kokomi.CustomMesh(this, {
@@ -85,12 +85,12 @@ class Sketch extends kokomi.Base {
     //   },
     // });
     // bgQuad.addExisting();
-    // bgQuad.mesh.position.z = -3;
+    // bgQuad.mesh.position.z = -0.3;
     // this.bgQuad = bgQuad;
 
     const bgQuad = new kokomi.RenderQuad(this, this.am.items["bgVideoTexture"]);
     bgQuad.addExisting();
-    bgQuad.mesh.position.z = -3;
+    bgQuad.mesh.position.z = -0.3;
     this.bgQuad = bgQuad;
   }
   createPostprocessing() {
