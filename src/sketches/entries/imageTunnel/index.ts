@@ -5,43 +5,48 @@ import * as STDLIB from "three-stdlib";
 import ImageTunnel from "./components/imageTunnel";
 import CustomLineGenerator from "./components/customLineGenerator";
 
-import resourceList from "./resources";
+import bgVideoTexture from "/videos/bg.mp4";
 
 class Sketch extends kokomi.Base {
   am!: kokomi.AssetManager;
   bgQuad!: kokomi.RenderQuad;
-  async createImageTunnel() {
-    const rtScene1 = new THREE.Scene();
-    const rtCamera1 = new THREE.PerspectiveCamera(
-      60,
-      window.innerWidth / window.innerHeight,
-      0.01,
-      10000
-    );
-    rtCamera1.position.z = -1000;
+  show() {
+    document.querySelector(".loader-screen").classList.add("hollow");
+  }
+  createImageTunnel() {
+    return new Promise(async (resolve) => {
+      const rtScene1 = new THREE.Scene();
+      const rtCamera1 = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.01,
+        10000
+      );
+      rtCamera1.position.z = -1000;
 
-    const urls = [...Array(100).keys()].map((item, i) => {
-      return `https://picsum.photos/id/${i}/100/100`;
-      // return `https://s2.loli.net/2022/09/08/gGY4VloDAeUwWxt.jpg`;
-    });
+      const urls = [...Array(100).keys()].map((item, i) => {
+        return `https://picsum.photos/id/${i}/100/100`;
+        // return `https://s2.loli.net/2022/09/08/gGY4VloDAeUwWxt.jpg`;
+      });
 
-    const at = new ImageTunnel(this, {
-      urls,
-    });
-    at.container = rtScene1;
-    at.on("ready", () => {
-      document.querySelector(".loader-screen").classList.add("hollow");
-    });
-    await at.addExisting();
+      const at = new ImageTunnel(this, {
+        urls,
+      });
+      at.container = rtScene1;
+      at.on("ready", () => {
+        resolve(true);
+      });
+      await at.addExisting();
 
-    const rt1 = new kokomi.RenderTexture(this, {
-      rtScene: rtScene1,
-      rtCamera: rtCamera1,
-    });
+      const rt1 = new kokomi.RenderTexture(this, {
+        rtScene: rtScene1,
+        rtCamera: rtCamera1,
+      });
 
-    const quad1 = new kokomi.RenderQuad(this, rt1.texture);
-    quad1.addExisting();
-    quad1.mesh.position.z = -0.1;
+      const quad1 = new kokomi.RenderQuad(this, rt1.texture);
+      quad1.addExisting();
+      quad1.mesh.position.z = -0.1;
+    });
   }
   createLines() {
     const rtScene2 = new THREE.Scene();
@@ -73,7 +78,7 @@ class Sketch extends kokomi.Base {
     quad2.addExisting();
     quad2.mesh.position.z = -0.2;
   }
-  createBgQuad() {
+  async createBgQuad() {
     // const bgQuad = new kokomi.CustomMesh(this, {
     //   vertexShader: "",
     //   fragmentShader: "",
@@ -88,7 +93,8 @@ class Sketch extends kokomi.Base {
     // bgQuad.mesh.position.z = -0.3;
     // this.bgQuad = bgQuad;
 
-    const bgQuad = new kokomi.RenderQuad(this, this.am.items["bgVideoTexture"]);
+    const bgMap = await kokomi.loadVideoTexture(bgVideoTexture);
+    const bgQuad = new kokomi.RenderQuad(this, bgMap);
     bgQuad.addExisting();
     bgQuad.mesh.position.z = -0.3;
     this.bgQuad = bgQuad;
@@ -124,17 +130,15 @@ class Sketch extends kokomi.Base {
 
     // new kokomi.OrbitControls(this);
 
-    const am = new kokomi.AssetManager(this, resourceList);
-    this.am = am;
-    am.on("ready", async () => {
-      await this.createImageTunnel();
+    await this.createImageTunnel();
 
-      // this.createLines();
+    // this.createLines();
 
-      this.createBgQuad();
+    await this.createBgQuad();
 
-      // this.createPostprocessing();
-    });
+    // this.createPostprocessing();
+
+    this.show();
   }
 }
 
