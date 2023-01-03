@@ -5,14 +5,12 @@ import * as STDLIB from "three-stdlib";
 import ImageTunnel from "./components/imageTunnel";
 import CustomLineGenerator from "./components/customLineGenerator";
 
+import resourceList from "./resources";
+
 class Sketch extends kokomi.Base {
-  async create() {
-    const screenCamera = new kokomi.ScreenCamera(this);
-    screenCamera.addExisting();
-
-    // new kokomi.OrbitControls(this);
-
-    // Scene1
+  am!: kokomi.AssetManager;
+  bgQuad!: kokomi.RenderQuad;
+  async createImageTunnel() {
     const rtScene1 = new THREE.Scene();
     const rtCamera1 = new THREE.PerspectiveCamera(
       60,
@@ -44,8 +42,8 @@ class Sketch extends kokomi.Base {
     const quad1 = new kokomi.RenderQuad(this, rt1.texture);
     quad1.addExisting();
     quad1.mesh.position.z = -1;
-
-    // Scene2
+  }
+  createLines() {
     const rtScene2 = new THREE.Scene();
     const rtCamera2 = new THREE.PerspectiveCamera(
       70,
@@ -54,7 +52,6 @@ class Sketch extends kokomi.Base {
       10000
     );
     rtCamera2.position.z = 10;
-
     const lineGenerator = new CustomLineGenerator(
       this,
       {
@@ -68,31 +65,35 @@ class Sketch extends kokomi.Base {
     lineGenerator.container = rtScene2;
     lineGenerator.addExisting();
     lineGenerator.start();
-
     const rt2 = new kokomi.RenderTexture(this, {
       rtScene: rtScene2,
       rtCamera: rtCamera2,
     });
-
     const quad2 = new kokomi.RenderQuad(this, rt2.texture);
     quad2.addExisting();
     quad2.mesh.position.z = -2;
+  }
+  createBgQuad() {
+    // const bgQuad = new kokomi.CustomMesh(this, {
+    //   vertexShader: "",
+    //   fragmentShader: "",
+    //   baseMaterial: new THREE.MeshBasicMaterial(),
+    //   geometry: new THREE.PlaneGeometry(window.innerWidth, window.innerHeight),
+    //   materialParams: {
+    //     transparent: true,
+    //     color: new THREE.Color("#0e1242"),
+    //   },
+    // });
+    // bgQuad.addExisting();
+    // bgQuad.mesh.position.z = -3;
+    // this.bgQuad = bgQuad;
 
-    // bg
-    const bgQuad = new kokomi.CustomMesh(this, {
-      vertexShader: "",
-      fragmentShader: "",
-      baseMaterial: new THREE.MeshBasicMaterial(),
-      geometry: new THREE.PlaneGeometry(window.innerWidth, window.innerHeight),
-      materialParams: {
-        transparent: true,
-        color: new THREE.Color("#0e1242"),
-      },
-    });
+    const bgQuad = new kokomi.RenderQuad(this, this.am.items["bgVideoTexture"]);
     bgQuad.addExisting();
     bgQuad.mesh.position.z = -3;
-
-    // post
+    this.bgQuad = bgQuad;
+  }
+  createPostprocessing() {
     const composer = new STDLIB.EffectComposer(this.renderer);
     this.composer = composer;
 
@@ -115,7 +116,25 @@ class Sketch extends kokomi.Base {
     bloomPass.radius = bloomParams.bloomRadius;
     composer.addPass(bloomPass);
 
-    bgQuad.material.opacity = 0.2;
+    this.bgQuad.material.opacity = 0.2;
+  }
+  async create() {
+    const screenCamera = new kokomi.ScreenCamera(this);
+    screenCamera.addExisting();
+
+    // new kokomi.OrbitControls(this);
+
+    const am = new kokomi.AssetManager(this, resourceList);
+    this.am = am;
+    am.on("ready", async () => {
+      await this.createImageTunnel();
+
+      // this.createLines();
+
+      this.createBgQuad();
+
+      // this.createPostprocessing();
+    });
   }
 }
 
