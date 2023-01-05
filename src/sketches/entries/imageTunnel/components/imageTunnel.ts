@@ -5,7 +5,6 @@ export interface ImageTunnelConfig {
   urls: string[];
   speed: number;
   imageSize: number;
-  container: THREE.Scene;
 }
 
 class ImageTunnel extends kokomi.Component {
