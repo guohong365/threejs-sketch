@@ -26,7 +26,11 @@ class Sketch extends kokomi.Base {
           position: new THREE.Vector3(1450.64, -189.35, -4772.9),
           element: document.querySelector(".point-3") as HTMLElement,
         },
-      ].map((item) => new kokomi.Html(this, item.element, item.position));
+      ].map((item) => {
+        const html = new kokomi.Html(this, item.element, item.position);
+        html.addExisting();
+        return html;
+      });
       panorama.addGroup(points);
     });
   }

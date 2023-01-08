@@ -91,6 +91,7 @@ class SphereWordCloud extends kokomi.Component {
       const pointId = i + 1;
       const el = document.querySelector(`.point-${pointId}`) as HTMLElement;
       const html = new kokomi.Html(this.base, el, position);
+      html.addExisting();
       return html;
     });
     this.htmls = htmls;
