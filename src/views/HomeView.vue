@@ -8,17 +8,7 @@ import { RouterLink } from "vue-router";
       <h3>Entries</h3>
       <ul>
         <li>
-          <router-link :to="{ name: 'SphereWordCloud' }">
-            Sphere Word Cloud
-          </router-link>
-        </li>
-        <li>
           <router-link :to="{ name: 'BluePlanet' }"> Blue Planet </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'ImageTunnel' }">
-            Image Tunnel
-          </router-link>
         </li>
       </ul>
     </section>

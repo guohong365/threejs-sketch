@@ -1,9 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 
-import SphereWordCloud from "@/views/SphereWordCloud.vue";
 import BluePlanet from "@/views/BluePlanet.vue";
-import ImageTunnel from "@/views/ImageTunnel.vue";
 
 import Playground from "@/views/Playground.vue";
 
@@ -65,19 +63,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/sphere-word-cloud",
-      name: "SphereWordCloud",
-      component: SphereWordCloud,
-    },
-    {
       path: "/blue-planet",
       name: "BluePlanet",
       component: BluePlanet,
-    },
-    {
-      path: "/image-tunnel",
-      name: "ImageTunnel",
-      component: ImageTunnel,
     },
     {
       path: "/playground",
