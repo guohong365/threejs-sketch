@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 import type * as STDLIB from "three-stdlib";
+import * as CANNON from "cannon-es";
 
 import type createSketch from "@/sketches/entries/genshinDice";
 
@@ -27,16 +28,48 @@ interface Face {
   config: Partial<InnerMatConfig>;
 }
 
+interface DiceConfig {
+  position: CANNON.Vec3;
+  velocity: CANNON.Vec3;
+  angularVelocity: CANNON.Vec3;
+}
+
+let frameMat = new THREE.MeshStandardMaterial({
+  color: new THREE.Color("#795c30"),
+  metalness: 1,
+  roughness: 0.2,
+  side: THREE.DoubleSide,
+});
+
 class Dice extends kokomi.Component {
   declare base: ReturnType<typeof createSketch>;
   gltf: STDLIB.GLTF;
+  group: THREE.Group;
   faces: Face[];
-  constructor(base: kokomi.Base) {
+  body: CANNON.Body;
+  constructor(base: kokomi.Base, config: Partial<DiceConfig> = {}) {
     super(base);
 
+    const {
+      position = new CANNON.Vec3(0, 8, 0),
+      velocity = new CANNON.Vec3(0, -8, 0),
+      angularVelocity = new CANNON.Vec3(
+        Math.random(),
+        Math.random(),
+        Math.random()
+      ),
+    } = config;
+
+    // mesh
     this.gltf = this.base.assetManager.items["diceModel"];
 
-    const modelParts = kokomi.flatModel(this.gltf.scene);
+    this.group = this.gltf.scene.clone();
+
+    const modelParts = kokomi.flatModel(this.group);
+
+    modelParts.forEach((child) => {
+      child.castShadow = true;
+    });
 
     kokomi.printModel(modelParts);
 
@@ -64,11 +97,7 @@ class Dice extends kokomi.Component {
 
     // frame.visible = false;
 
-    const frameMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#795c30"),
-      metalness: 1,
-      roughness: 0.2,
-    });
+    frameMat.envMap = this.base.envMap;
 
     const createInnerMat = (config: Partial<InnerMatConfig> = {}) => {
       const {
@@ -86,13 +115,11 @@ class Dice extends kokomi.Component {
       elementTex.minFilter = THREE.NearestFilter;
       // elementTex.wrapS = elementTex.wrapT = THREE.RepeatWrapping;
 
-      const uj = new kokomi.UniformInjector(this.base);
       const innerMat = new kokomi.CustomShaderMaterial({
         baseMaterial: new THREE.MeshStandardMaterial(),
         vertexShader: diceVertexShader,
         fragmentShader: diceFragmentShader,
         uniforms: {
-          ...uj.shadertoyUniforms,
           uElementColor: {
             value: elementColor,
           },
@@ -122,6 +149,8 @@ class Dice extends kokomi.Component {
           },
         },
         transparent: true,
+        side: THREE.DoubleSide,
+        envMap: this.base.envMap,
         ...materialParams,
       });
       return innerMat;
@@ -199,9 +228,21 @@ class Dice extends kokomi.Component {
       });
     });
     this.faces = faces;
+
+    // physics
+    const shape = kokomi.convertGeometryToShape(frame.geometry);
+    const body = new CANNON.Body({
+      mass: 1,
+      shape,
+      position,
+    });
+    body.velocity = velocity;
+    body.angularVelocity = angularVelocity;
+    this.body = body;
   }
   addExisting(): void {
-    this.base.scene.add(this.gltf.scene);
+    this.base.scene.add(this.group);
+    this.base.physics.add({ mesh: this.group, body: this.body });
   }
   lightenElement(element: string) {
     const activeElement = this.faces.find((face) => face.element === element);

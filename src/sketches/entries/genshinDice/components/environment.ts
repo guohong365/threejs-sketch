@@ -10,19 +10,14 @@ class Environment extends kokomi.Component {
   constructor(base: kokomi.Base) {
     super(base);
 
-    const envMap = kokomi.getEnvmapFromHDRTexture(
-      this.base.renderer,
-      this.base.assetManager.items["envMap"]
-    );
-
-    this.base.scene.environment = envMap;
-
-    const ambiLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambiLight = new THREE.AmbientLight(0xffffff, 0.5);
     this.ambiLight = ambiLight;
 
     const dirLight = new THREE.DirectionalLight(0xffffff, 1);
     dirLight.position.copy(new THREE.Vector3(1, 2, 3));
     this.directionalLight = dirLight;
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.set(1024, 1024);
   }
   addExisting(): void {
     const scene = this.base.scene;
