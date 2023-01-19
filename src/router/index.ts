@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 
 import BluePlanet from "@/views/BluePlanet.vue";
+import GenshinDice from "@/views/GenshinDice.vue";
 
 import Playground from "@/views/Playground.vue";
 
@@ -66,6 +67,11 @@ const router = createRouter({
       path: "/blue-planet",
       name: "BluePlanet",
       component: BluePlanet,
+    },
+    {
+      path: "/genshin-dice",
+      name: "GenshinDice",
+      component: GenshinDice,
     },
     {
       path: "/playground",

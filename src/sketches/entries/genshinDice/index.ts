@@ -5,7 +5,7 @@ import * as kokomi from "kokomi.js";
 import resourceList from "./resources";
 
 import Environment from "./components/environment";
-import Fox from "./components/fox";
+import Dice from "./components/dice";
 
 class Sketch extends kokomi.Base {
   assetManager: kokomi.AssetManager;
@@ -20,15 +20,14 @@ class Sketch extends kokomi.Base {
 
     new kokomi.OrbitControls(this);
 
-    this.camera.position.copy(new THREE.Vector3(6, 4, 3));
-
-    const environment = new Environment(this);
-    environment.addExisting();
+    this.camera.position.copy(new THREE.Vector3(3, 1, 1.5));
 
     this.assetManager.on("ready", () => {
-      const fox = new Fox(this);
-      fox.addExisting();
-      fox.playAction("Survey");
+      const environment = new Environment(this);
+      environment.addExisting();
+
+      const dice = new Dice(this);
+      dice.addExisting();
     });
   }
 }

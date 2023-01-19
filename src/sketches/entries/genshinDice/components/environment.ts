@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 
-import type createSketch from "@/sketches/templates/assetManage";
+import type createSketch from "@/sketches/entries/genshinDice";
 
 class Environment extends kokomi.Component {
   declare base: ReturnType<typeof createSketch>;
@@ -10,10 +10,17 @@ class Environment extends kokomi.Component {
   constructor(base: kokomi.Base) {
     super(base);
 
-    const ambiLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const envMap = kokomi.getEnvmapFromHDRTexture(
+      this.base.renderer,
+      this.base.assetManager.items["envMap"]
+    );
+
+    this.base.scene.environment = envMap;
+
+    const ambiLight = new THREE.AmbientLight(0xffffff, 1);
     this.ambiLight = ambiLight;
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
     dirLight.position.copy(new THREE.Vector3(1, 2, 3));
     this.directionalLight = dirLight;
   }

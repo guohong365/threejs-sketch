@@ -1,15 +1,18 @@
-import * as THREE from "three";
+import type * as THREE from "three";
 import * as kokomi from "kokomi.js";
 import type * as STDLIB from "three-stdlib";
 
+import type createSketch from "@/sketches/templates/assetManage";
+
 class Fox extends kokomi.Component {
+  declare base: ReturnType<typeof createSketch>;
   gltf: STDLIB.GLTF;
   animations: kokomi.AnimationManager;
   currentAction: THREE.AnimationAction | null;
-  constructor(base: kokomi.Base, gltf: STDLIB.GLTF) {
+  constructor(base: kokomi.Base) {
     super(base);
 
-    this.gltf = gltf;
+    this.gltf = this.base.assetManager.items["foxModel"];
 
     this.animations = new kokomi.AnimationManager(
       this.base,

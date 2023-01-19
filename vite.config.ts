@@ -33,7 +33,7 @@ export default defineConfig({
     },
     assetsInlineLimit: 0,
   },
-  assetsInclude: ["**/*.gltf", "**/*.glb"],
+  assetsInclude: ["**/*.gltf", "**/*.glb", "**/*.hdr"],
   server: {
     open: true,
     headers: {
