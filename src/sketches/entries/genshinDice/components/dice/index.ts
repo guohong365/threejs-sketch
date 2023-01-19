@@ -73,8 +73,6 @@ class Dice extends kokomi.Component {
 
     kokomi.printModel(modelParts);
 
-    const dummyGeometry = new THREE.PlaneGeometry();
-
     const inner = modelParts[1] as THREE.Mesh;
     const frame = modelParts[2] as THREE.Mesh;
     const face1 = modelParts[3] as THREE.Mesh;
@@ -86,18 +84,11 @@ class Dice extends kokomi.Component {
     const face7 = modelParts[9] as THREE.Mesh;
     const face8 = modelParts[10] as THREE.Mesh;
 
-    face1.geometry.attributes.uv = dummyGeometry.attributes.uv;
-    face2.geometry.attributes.uv = dummyGeometry.attributes.uv;
-    face3.geometry.attributes.uv = dummyGeometry.attributes.uv;
-    face4.geometry.attributes.uv = dummyGeometry.attributes.uv;
-    face5.geometry.attributes.uv = dummyGeometry.attributes.uv;
-    face6.geometry.attributes.uv = dummyGeometry.attributes.uv;
-    face7.geometry.attributes.uv = dummyGeometry.attributes.uv;
-    face8.geometry.attributes.uv = dummyGeometry.attributes.uv;
-
     // frame.visible = false;
 
     frameMat.envMap = this.base.envMap;
+
+    const dummyGeometry = new THREE.PlaneGeometry();
 
     const createInnerMat = (config: Partial<InnerMatConfig> = {}) => {
       const {
@@ -221,6 +212,7 @@ class Dice extends kokomi.Component {
       },
     ];
     faces.forEach((face) => {
+      face.mesh.geometry.attributes.uv = dummyGeometry.attributes.uv;
       face.mesh.material = createInnerMat({
         elementColor: new THREE.Color(face.color),
         elementTex: this.base.assetManager.items[`${face.element}Tex`],
