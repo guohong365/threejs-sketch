@@ -34,7 +34,7 @@ interface DiceConfig {
   angularVelocity: CANNON.Vec3;
 }
 
-let frameMat = new THREE.MeshStandardMaterial({
+const frameMat = new THREE.MeshStandardMaterial({
   color: new THREE.Color("#795c30"),
   metalness: 1,
   roughness: 0.2,
