@@ -4,6 +4,10 @@ import * as kokomi from "kokomi.js";
 
 import * as CANNON from "cannon-es";
 
+import * as dat from "lil-gui";
+
+import ky from "kyouka";
+
 import resourceList from "./resources";
 
 import Environment from "./components/environment";
@@ -13,6 +17,8 @@ import Floor from "./components/floor";
 class Sketch extends kokomi.Base {
   assetManager: kokomi.AssetManager;
   envMap: THREE.Texture | null;
+  dicePositions: CANNON.Vec3[];
+  dices: Dice[];
   constructor(sel = "#sketch") {
     super(sel);
 
@@ -43,6 +49,9 @@ class Sketch extends kokomi.Base {
     this.envMap = null;
 
     // new kokomi.Stats(this);
+
+    this.dicePositions = [];
+    this.dices = [];
   }
   create() {
     this.assetManager.on("ready", async () => {
@@ -58,16 +67,26 @@ class Sketch extends kokomi.Base {
       const floor = new Floor(this);
       floor.addExisting();
 
-      const dicePositions = [...Array(8)].map((item, i) => {
-        return new CANNON.Vec3(-(i % 4) * 3 + 4, 10, i * 2 - 4);
-      });
-      const dices = dicePositions.map((item) => {
-        const dice = new Dice(this, {
-          position: item,
+      let dicePositions = [];
+      let dices: Dice[] = [];
+
+      const throwDice = () => {
+        if (!ky.isEmpty(dices)) {
+          dices.forEach((dice) => {
+            dice.destroy();
+          });
+        }
+        dicePositions = [...Array(8)].map((item, i) => {
+          return new CANNON.Vec3(-(i % 4) * 3 + 4, 10, i * 2 - 4);
         });
-        dice.addExisting();
-        return dice;
-      });
+        dices = dicePositions.map((item) => {
+          const dice = new Dice(this, {
+            position: item,
+          });
+          dice.addExisting();
+          return dice;
+        });
+      };
 
       this.update(() => {
         dices.forEach((dice) => {
@@ -76,6 +95,17 @@ class Sketch extends kokomi.Base {
           }
         });
       });
+
+      throwDice();
+
+      // debug
+      const gui = new dat.GUI();
+      const debugParams = {
+        throw: () => {
+          throwDice();
+        },
+      };
+      gui.add(debugParams, "throw");
     });
   }
 }
