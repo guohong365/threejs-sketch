@@ -244,15 +244,45 @@ class Dice extends kokomi.Component {
     this.base.scene.add(this.group);
     this.base.physics.add({ mesh: this.group, body: this.body });
   }
-  lightenElement(element: string) {
-    const activeElement = this.faces.find((face) => face.element === element);
-    const mat = activeElement?.mesh.material as THREE.ShaderMaterial;
+  lightenFace(mesh: THREE.Mesh) {
+    const mat = mesh.material as THREE.ShaderMaterial;
     mat.uniforms.uBrightness.value = 1;
   }
-  darkenElement(element: string) {
-    const activeElement = this.faces.find((face) => face.element === element);
-    const mat = activeElement?.mesh.material as THREE.ShaderMaterial;
+  darkenFace(mesh: THREE.Mesh) {
+    const mat = mesh.material as THREE.ShaderMaterial;
     mat.uniforms.uBrightness.value = 0.2;
+  }
+  get topFace() {
+    const raycastor = new THREE.Raycaster();
+    const rayOrigin = this.group.position;
+    const rayDirection = new THREE.Vector3(
+      this.group.position.x,
+      100,
+      this.group.position.z
+    );
+    rayDirection.normalize();
+    raycastor.set(rayOrigin, rayDirection);
+    const intersects = raycastor.intersectObjects(
+      this.faces.map((face) => face.mesh)
+    );
+    if (intersects) {
+      const firstIntersect = intersects[0];
+      return firstIntersect?.object as THREE.Mesh;
+    }
+    return null;
+  }
+  lightenTopFace() {
+    if (this.topFace) {
+      this.lightenFace(this.topFace);
+    }
+  }
+  get isIdle() {
+    return (
+      Math.abs(this.body.velocity.x) +
+        Math.abs(this.body.velocity.y) +
+        Math.abs(this.body.velocity.z) <
+      0.1
+    );
   }
 }
 

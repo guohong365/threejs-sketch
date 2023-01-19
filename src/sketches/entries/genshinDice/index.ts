@@ -45,7 +45,7 @@ class Sketch extends kokomi.Base {
     // new kokomi.Stats(this);
   }
   create() {
-    this.assetManager.on("ready", () => {
+    this.assetManager.on("ready", async () => {
       const envMap = kokomi.getEnvmapFromHDRTexture(
         this.renderer,
         this.assetManager.items["envMap"]
@@ -61,11 +61,20 @@ class Sketch extends kokomi.Base {
       const dicePositions = [...Array(8)].map((item, i) => {
         return new CANNON.Vec3(-(i % 4) * 3 + 4, 10, i * 2 - 4);
       });
-      dicePositions.forEach((item) => {
+      const dices = dicePositions.map((item) => {
         const dice = new Dice(this, {
           position: item,
         });
         dice.addExisting();
+        return dice;
+      });
+
+      this.update(() => {
+        dices.forEach((dice) => {
+          if (dice.isIdle) {
+            dice.lightenTopFace();
+          }
+        });
       });
     });
   }
