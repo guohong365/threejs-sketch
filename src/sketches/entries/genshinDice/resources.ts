@@ -11,7 +11,7 @@ import pyroTex from "./components/dice/assets/pyro.png";
 import cryoTex from "./components/dice/assets/cryo.png";
 import primogemTex from "./components/dice/assets/primogem.png";
 import diceRollSE from "./components/dice/assets/dice-roll.mp3";
-import diceLightenSE from "./components/dice/assets/dice-lighten.ogg";
+import diceLightenSE from "./components/dice/assets/dice-lighten.mp3";
 
 const resourceList: kokomi.ResourceItem[] = [
   {
