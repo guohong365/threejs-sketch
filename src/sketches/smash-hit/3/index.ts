@@ -54,12 +54,10 @@ class Sketch extends kokomi.Base {
 
       // 弹珠击中物体时
       breaker.emitter.on("hit", () => {
-        if (!glassBreakAudio.isPlaying) {
-          glassBreakAudio.play();
-        } else {
+        if (glassBreakAudio.isPlaying) {
           glassBreakAudio.stop();
-          glassBreakAudio.play();
         }
+        glassBreakAudio.play();
       });
     });
   }
