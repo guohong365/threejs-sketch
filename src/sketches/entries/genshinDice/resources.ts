@@ -10,6 +10,8 @@ import hydroTex from "./components/dice/assets/hydro.png";
 import pyroTex from "./components/dice/assets/pyro.png";
 import cryoTex from "./components/dice/assets/cryo.png";
 import primogemTex from "./components/dice/assets/primogem.png";
+import diceRollSE from "./components/dice/assets/dice-roll.mp3";
+import diceLightenSE from "./components/dice/assets/dice-lighten.ogg";
 
 const resourceList: kokomi.ResourceItem[] = [
   {
@@ -61,6 +63,16 @@ const resourceList: kokomi.ResourceItem[] = [
     name: "primogemTex",
     type: "texture",
     path: primogemTex,
+  },
+  {
+    name: "diceRollSE",
+    type: "audio",
+    path: diceRollSE,
+  },
+  {
+    name: "diceLightenSE",
+    type: "audio",
+    path: diceLightenSE,
   },
 ];
 

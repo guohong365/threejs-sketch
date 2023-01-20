@@ -277,6 +277,11 @@ class Dice extends kokomi.Component {
       0.1
     );
   }
+  checkIdle() {
+    if (this.isIdle) {
+      this.emit("idle");
+    }
+  }
   destroy() {
     this.base.physics.world.removeBody(this.body);
     this.base.scene.remove(this.group);

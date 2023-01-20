@@ -19,6 +19,7 @@ class Sketch extends kokomi.Base {
   envMap: THREE.Texture | null;
   dicePositions: CANNON.Vec3[];
   dices: Dice[];
+  listener: THREE.AudioListener;
   constructor(sel = "#sketch") {
     super(sel);
 
@@ -52,9 +53,19 @@ class Sketch extends kokomi.Base {
 
     this.dicePositions = [];
     this.dices = [];
+
+    const listener = new THREE.AudioListener();
+    this.listener = listener;
+    this.camera.add(listener);
   }
   create() {
     this.assetManager.on("ready", async () => {
+      const rollSE = new THREE.Audio(this.listener);
+      rollSE.setBuffer(this.assetManager.items["diceRollSE"]);
+
+      const lightenSE = new THREE.Audio(this.listener);
+      lightenSE.setBuffer(this.assetManager.items["diceLightenSE"]);
+
       const envMap = kokomi.getEnvmapFromHDRTexture(
         this.renderer,
         this.assetManager.items["envMap"]
@@ -70,7 +81,11 @@ class Sketch extends kokomi.Base {
       let dicePositions = [];
       let dices: Dice[] = [];
 
+      let isDiceFloorCollided = false;
+
       const throwDice = () => {
+        isDiceFloorCollided = false;
+
         if (!ky.isEmpty(dices)) {
           dices.forEach((dice) => {
             dice.destroy();
@@ -86,17 +101,29 @@ class Sketch extends kokomi.Base {
           dice.addExisting();
           return dice;
         });
+        dices.forEach((dice) => {
+          dice.body.addEventListener("collide", () => {
+            if (!isDiceFloorCollided) {
+              isDiceFloorCollided = true;
+              rollSE.play();
+            }
+          });
+
+          const onDiceIdle = () => {
+            dice.lightenTopFace();
+            lightenSE.play();
+            dice.off("idle", onDiceIdle);
+          };
+
+          dice.on("idle", onDiceIdle);
+        });
       };
 
       this.update(() => {
         dices.forEach((dice) => {
-          if (dice.isIdle) {
-            dice.lightenTopFace();
-          }
+          dice.checkIdle();
         });
       });
-
-      throwDice();
 
       // debug
       const gui = new dat.GUI();
