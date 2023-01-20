@@ -7,7 +7,7 @@ class Sketch extends kokomi.Base {
     const viewer = new kokomi.Viewer(this);
 
     const assetManager = new kokomi.AssetManager(this, resourceList);
-    assetManager.emitter.on("ready", () => {
+    assetManager.on("ready", () => {
       const panoramaImage = assetManager.items.panoramaImage;
       const panorama = new kokomi.ImagePanorama(this, panoramaImage);
       panorama.outputPosition();

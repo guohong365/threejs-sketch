@@ -11,7 +11,7 @@ import Game from "./components/game";
 class Sketch extends kokomi.Base {
   create() {
     const assetManager = new kokomi.AssetManager(this, resourceList);
-    assetManager.emitter.on("ready", () => {
+    assetManager.on("ready", () => {
       const listener = new THREE.AudioListener();
       this.camera.add(listener);
 
@@ -33,21 +33,21 @@ class Sketch extends kokomi.Base {
 
       const game = new Game(this);
 
-      game.emitter.on("create", (obj: any) => {
+      game.on("create", (obj: any) => {
         breaker.add(obj);
       });
 
       game.createBreakablesByInterval();
 
       // 当弹珠发射时监听碰撞，如果触发碰撞则粉碎撞到的物体
-      shooter.emitter.on("shoot", (ball: Ball) => {
+      shooter.on("shoot", (ball: Ball) => {
         ball.body.addEventListener("collide", (e: any) => {
           breaker.onCollide(e);
         });
       });
 
       // 弹珠击中物体时
-      breaker.emitter.on("hit", () => {
+      breaker.on("hit", () => {
         game.incScore();
         document.querySelector(".score")!.textContent = `${game.score}`;
         if (glassBreakAudio.isPlaying) {

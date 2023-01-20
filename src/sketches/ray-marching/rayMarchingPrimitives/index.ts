@@ -11,7 +11,7 @@ class Sketch extends kokomi.Base {
     new kokomi.Stats(this);
 
     const assetManager = new kokomi.AssetManager(this, resourceList);
-    assetManager.emitter.on("ready", () => {
+    assetManager.on("ready", () => {
       const colorTexture = assetManager.items.colorTexture as THREE.Texture;
 
       const screenQuad = new kokomi.ScreenQuad(this, {

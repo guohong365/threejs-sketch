@@ -57,16 +57,13 @@ const init = () => {
     const panoramaConfig = props.panoramaConfig;
     if (panoramaConfig) {
       generator.generateByConfig(panoramaConfig);
-      generator.emitter.on(
-        "generate",
-        (generator: kokomi.PanoramaGenerator) => {
-          state.infospotsConfig = generator.allInfospotConfig;
-          nextTick(() => {
-            generator.generateInfospotsWithSceneJump();
-            resolve(true);
-          });
-        }
-      );
+      generator.on("generate", (generator: kokomi.PanoramaGenerator) => {
+        state.infospotsConfig = generator.allInfospotConfig;
+        nextTick(() => {
+          generator.generateInfospotsWithSceneJump();
+          resolve(true);
+        });
+      });
     }
   });
 };
@@ -79,7 +76,7 @@ const listenForPointEditEvent = () => {
   }
 
   generator.outputCurrentScenePosition();
-  generator.emitter.on("click-scene", (point: THREE.Vector3) => {
+  generator.on("click-scene", (point: THREE.Vector3) => {
     if (!state.isEditEnabled) {
       return;
     }
