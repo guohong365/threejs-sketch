@@ -34,7 +34,7 @@ class Game extends kokomi.Component {
     const position = new CANNON.Vec3(x, 2, -10);
     obj.body.position.copy(position);
     this.breakables.push(obj);
-    this.emitter.emit("create", obj);
+    this.emit("create", obj);
   }
   // 创建锥体
   createCone(x = 0) {
@@ -43,7 +43,7 @@ class Game extends kokomi.Component {
     const position = new CANNON.Vec3(x, 2, -10);
     obj.body.position.copy(position);
     this.breakables.push(obj);
-    this.emitter.emit("create", obj);
+    this.emit("create", obj);
   }
   // 移动可破碎物
   moveBreakables(objs: any) {

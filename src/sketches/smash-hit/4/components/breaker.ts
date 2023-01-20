@@ -43,7 +43,7 @@ class Breaker extends kokomi.Component {
     const obj = this.getObjById(e.body.userData?.meshId);
     if (obj && obj.body.userData.splitCount < 2) {
       this.splitObj(e);
-      this.emitter.emit("hit");
+      this.emit("hit");
     }
   }
   // 分割物体

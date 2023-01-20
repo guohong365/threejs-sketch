@@ -32,7 +32,7 @@ class Shooter extends kokomi.Component {
     v.multiplyScalar(24);
     ball.body.velocity.set(v.x, v.y, v.z);
 
-    this.emitter.emit("shoot", ball);
+    this.emit("shoot", ball);
   }
 }
 

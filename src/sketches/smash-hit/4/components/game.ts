@@ -24,7 +24,7 @@ class Game extends kokomi.Component {
     const position = new CANNON.Vec3(x, 1, -10);
     box.body.position.copy(position);
     this.breakables.push(box);
-    this.emitter.emit("create", box);
+    this.emit("create", box);
   }
   // 移动可破碎物
   moveBreakables(objs: any) {
