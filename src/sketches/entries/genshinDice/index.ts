@@ -116,6 +116,9 @@ class Sketch extends kokomi.Base {
 
           const onDiceIdle = () => {
             dice.lightenTopFace();
+            if (lightenSE.isPlaying) {
+              lightenSE.stop();
+            }
             lightenSE.play();
             dice.off("idle", onDiceIdle);
           };
