@@ -1,19 +1,16 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 import * as CANNON from "cannon-es";
+
 import Box from "./box";
-import mitt, { type Emitter } from "mitt";
 
 class Game extends kokomi.Component {
   breakables: any[];
-  emitter: Emitter<any>;
   score: number;
   constructor(base: kokomi.Base) {
     super(base);
 
     this.breakables = [];
-
-    this.emitter = mitt();
 
     this.score = 0;
   }

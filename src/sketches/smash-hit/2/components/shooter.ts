@@ -1,14 +1,11 @@
 import * as THREE from "three";
 import * as kokomi from "kokomi.js";
+
 import Ball from "./ball";
-import mitt, { type Emitter } from "mitt";
 
 class Shooter extends kokomi.Component {
-  emitter: Emitter<any>;
   constructor(base: kokomi.Base) {
     super(base);
-
-    this.emitter = mitt();
   }
   addExisting(): void {
     window.addEventListener("click", () => {

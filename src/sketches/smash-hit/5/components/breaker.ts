@@ -2,12 +2,10 @@ import * as THREE from "three";
 import * as kokomi from "kokomi.js";
 import * as CANNON from "cannon-es";
 import * as STDLIB from "three-stdlib";
-import mitt, { type Emitter } from "mitt";
 
 class Breaker extends kokomi.Component {
   cob: STDLIB.ConvexObjectBreaker;
   objs: any[];
-  emitter: Emitter<any>;
   constructor(base: kokomi.Base) {
     super(base);
 
@@ -15,8 +13,6 @@ class Breaker extends kokomi.Component {
     this.cob = cob;
 
     this.objs = [];
-
-    this.emitter = mitt();
   }
   // 添加可粉碎物体
   add(obj: any, splitCount = 0) {
