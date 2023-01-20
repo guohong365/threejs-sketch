@@ -83,8 +83,13 @@ class Sketch extends kokomi.Base {
 
       let isDiceFloorCollided = false;
 
+      let doneListener: kokomi.Component | null = null;
+
+      let isDone = false;
+
       const throwDice = () => {
         isDiceFloorCollided = false;
+        isDone = false;
 
         if (!ky.isEmpty(dices)) {
           dices.forEach((dice) => {
@@ -117,12 +122,31 @@ class Sketch extends kokomi.Base {
 
           dice.on("idle", onDiceIdle);
         });
+
+        doneListener = new kokomi.Component(this);
+
+        const onDiceDone = () => {
+          console.log("done");
+          doneListener?.off("done", onDiceDone);
+        };
+
+        doneListener.on("done", onDiceDone);
       };
 
-      this.update(() => {
+      this.update(async () => {
         dices.forEach((dice) => {
           dice.checkIdle();
         });
+
+        if (
+          !isDone &&
+          isDiceFloorCollided &&
+          dices.every((dice) => dice.isIdle)
+        ) {
+          await ky.sleep(500);
+          doneListener?.emit("done");
+          isDone = true;
+        }
       });
 
       // debug
