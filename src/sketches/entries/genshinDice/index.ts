@@ -57,6 +57,8 @@ class Sketch extends kokomi.Base {
     const listener = new THREE.AudioListener();
     this.listener = listener;
     this.camera.add(listener);
+
+    this.physics.world.defaultContactMaterial.restitution = 0.1;
   }
   create() {
     this.assetManager.on("ready", async () => {
